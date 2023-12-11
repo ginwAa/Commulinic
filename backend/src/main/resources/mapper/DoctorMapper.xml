@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.commulinic.mapper.DoctorMapper">
+
+    <select id="page" resultType="com.commulinic.entity.Doctor">
+        select * from doctor
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id}
+            </if>
+            <if test="department != null and department = ''">
+                and department like concat ('%', #{department}, '%')
+            </if>
+            <if test="">
+            </if>
+        </where>
+    </select>
+    
+    <update id="update">
+    </update>
+</mapper>

@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.27.23.85:3306/commulinic?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+logging:
+  level:
+    com:
+      commulinic:
+        mapper: debug
+        service: info
+        controller: info
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
