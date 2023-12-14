@@ -23,7 +23,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
+    "src",
+    "node_modules/unplugin-auto-import/auto-imports.d.ts"
   ],
   "references": [
     {
