@@ -2,21 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.commulinic.mapper.DoctorMapper">
-
     <select id="page" resultType="com.commulinic.entity.Doctor">
         select * from doctor
         <where>
-            <if test="id != null and id != 0">
-                and id = #{id}
-            </if>
-            <if test="department != null and department = ''">
-                and department like concat ('%', #{department}, '%')
-            </if>
-            <if test="">
-            </if>
+            <if test="id != null and id != 0"> and id = #{id} </if>
+            <if test="userId != null and userId != 0"> and user_id = #{userId} </if>
+            <if test="department != null and department = ''"> and department like concat ('%', #{department}, '%')</if>
+            <if test="departmentId != null and departmentId != 0"> and department_id = #{departmentId}</if>
+            <if test="seniority != null and seniority != 0">and seniority &lt; #{seniority}</if>
+            <if test="status != null and status != 0">and status = #{status}</if>
         </where>
+        order by id asc LIMIT #{pageSize} OFFSET #{page}
     </select>
     
     <update id="update">
+        update doctor
+            <set>
+                <if test="id != null and id != 0"> id = #{id}, </if>
+                <if test="userId != null and userId != 0"> user_id = #{userId}, </if>
+                <if test="department != null and department = ''"> department = #{department},</if>
+                <if test="departmentId != null and departmentId != 0"> department_id = #{departmentId},</if>
+                <if test="seniority != null and seniority != 0">seniority = #{seniority},</if>
+                <if test="status != null and status != 0">status = #{status},</if>
+            </set>
+        where id = #{id}
     </update>
 </mapper>

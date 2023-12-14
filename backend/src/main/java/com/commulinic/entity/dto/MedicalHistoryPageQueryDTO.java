@@ -5,13 +5,13 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class DoctorPageQueryDTO implements Serializable {
+public class MedicalHistoryPageQueryDTO implements Serializable {
     private Long id;
     private Long userId;
-    private Long departmentId;
-    private String department;
-    private Integer seniority;
-    private Integer status;
+    private Long doctorId;
+    private Long beginDate;
+    private Long endDate;
+    private String description;
     private Integer page;
     private Integer pageSize;
 }

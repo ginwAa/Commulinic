@@ -6,10 +6,11 @@
     <select id="page" resultType="com.commulinic.entity.MedicalTip">
         select * from medical_tip
         <where>
+            <if test="id != null and id != 0">and id = #{id}</if>
             <if test="description != null and description != ''">
                 and description like concat('%', #{description}, '%')
             </if>
         </where>
-        ORDER BY id ASC
+        order by id asc LIMIT #{pageSize} OFFSET #{page}
     </select>
 </mapper>

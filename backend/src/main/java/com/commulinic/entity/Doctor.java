@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Doctor implements Serializable {
     private Long id;
     private Long userId;
+    private Long departmentId;
     private String department;
     private Integer seniority;
     private String position;
