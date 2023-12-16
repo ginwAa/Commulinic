@@ -18,6 +18,6 @@ public class MedicalTipController {
 
     @GetMapping("/page")
     private PageResult page(MedicalTipPageQueryDTO dto) {
-        return medicalTipService.
+        return medicalTipService.page(dto);
     }
 }

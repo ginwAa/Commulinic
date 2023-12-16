@@ -1,24 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import {
     CopyrightOutlined,
-    DesktopOutlined,
-    FileOutlined,
+    DeploymentUnitOutlined,
+    FileSearchOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
+    NotificationOutlined,
     PieChartOutlined,
     TeamOutlined,
-    UserOutlined,
 } from '@ant-design/icons';
 import type {MenuProps} from 'antd';
-import {Breadcrumb, Button, Layout, Menu, Space, Table, theme, Typography} from 'antd';
+import {Breadcrumb, Button, Layout, Menu, Pagination, Space, theme, Typography} from 'antd';
+import UserManagement from '../components/UserManagement';
 
-const {Title, Paragraph, Text, Link} = Typography;
-const {Column, ColumnGroup} = Table;
+const {Text} = Typography;
 const {Content, Sider} = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-function getItem(
+function siderItem(
     label: React.ReactNode,
     key: React.Key,
     icon?: React.ReactNode,
@@ -33,56 +33,59 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-    getItem('总览', 1, <PieChartOutlined/>),
-    getItem('部门管理', 2, <DesktopOutlined/>),
-    getItem('人员管理', -1, <UserOutlined/>, [
-        getItem('普通用户管理', 3),
-        getItem('内部员工管理', 4),
-        getItem('坐诊申请管理', 5),
+    siderItem('总览', 1, <PieChartOutlined/>),
+    siderItem('部门管理', 2, <DeploymentUnitOutlined/>),
+    siderItem('人员管理', -1, <TeamOutlined/>, [
+        siderItem('普通用户管理', 3),
+        siderItem('内部员工管理', 4),
+        siderItem('坐诊申请管理', 5),
     ]),
-    getItem('预约管理', 6, <TeamOutlined/>),
-    getItem('社区管理', -2, <FileOutlined/>, [
-        getItem('公告', 7),
-        getItem('医学知识', 8),
+    siderItem('预约管理', 6, <FileSearchOutlined/>),
+    siderItem('社区管理', -2, <NotificationOutlined/>, [
+        siderItem('公告', 7),
+        siderItem('医学知识', 8),
     ]),
 ];
 
-const NormalUserManagement = () => {
-    return (
-        <Table>
-
-        </Table>
-    );
-}
-
-interface TabProps {
+interface ContentProps {
     tabKey: number;
+    page: number;
+    pageSize: number;
+    total: number;
+    setPage: (page: number) => void;
+    setPageSize: (pageSize: number) => void;
+    setTotal: (total: number) => void;
 }
 
-const AdminContent = (props: TabProps) => {
+const AdminContent = (props: ContentProps) => {
     if (props.tabKey === 3) {
         return (
-            <NormalUserManagement></NormalUserManagement>
+            <UserManagement page={props.page} pageSize={props.pageSize} total={props.total} setPage={props.setPage}
+                            setPageSize={props.setPageSize} setTotal={props.setTotal}/>
         );
     } else if (props.tabKey < 9 && props.tabKey > 0) {
         return (
             <>
                 now tab key is: {props.tabKey}
             </>
-        )
+        );
     } else {
         return (
             <>
                 404 Not Found!
             </>
-        )
+        );
     }
 };
+
 
 const Admin: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
     const [tabKey, setTabKey] = useState<number>(1);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(50);
+    const [total, setTotal] = useState(500);
     const themeToken = theme.useToken();
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth);
@@ -96,12 +99,13 @@ const Admin: React.FC = () => {
     }, []);
     const onMenuClick: MenuProps['onClick'] = (e) => {
         setTabKey(Number(e.key));
+        setPage(1);
     };
 
     return (
-        <Layout style={{minHeight: '100vh', width: '100vw'}}>
+        <Layout style={{height: '100vh', width: '100vw'}}>
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}
-                   width='10rem' collapsedWidth={windowWidth <= 750 ? '0' : '4rem'} trigger={null} theme='light'
+                   width='12rem' collapsedWidth={windowWidth <= 750 ? '0' : '4rem'} trigger={null} theme='light'
             >
                 <Space direction="vertical" style={{display: 'flow'}} size='small'>
                     <div className="demo-logo-vertical" style={{textAlign: 'center'}}>
@@ -117,20 +121,26 @@ const Admin: React.FC = () => {
                 </Space>
             </Sider>
             <Layout>
-                <Content style={{margin: '0 16px'}}>
-                    <Space direction={'horizontal'}>
-                        <Button type="text" icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
-                                onClick={() => setCollapsed(!collapsed)}
-                                style={{fontSize: '1rem', width: '2rem', height: '2rem',}}
-                        />
-                        <Breadcrumb style={{margin: '16px 0'}}>
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                        </Breadcrumb>
+                <Content style={{padding: '1vh 1rem'}}>
+                    <Space direction={'horizontal'} style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <Space direction={'horizontal'}>
+                            <Button type="text" icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
+                                    onClick={() => setCollapsed(!collapsed)}/>
+                            <Breadcrumb>
+                                <Breadcrumb.Item>人员管理</Breadcrumb.Item>
+                                <Breadcrumb.Item>普通用户管理</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Space>
+                        <Pagination defaultCurrent={1} total={total} current={page} pageSize={pageSize} simple
+                                    style={{width: '50vw', textAlign: 'right'}}
+                                    onChange={(page, pageSize) => {
+                                        setPage(page);
+                                        setPageSize(pageSize)
+                                    }} responsive={true}/>
+
                     </Space>
-                    <div style={{padding: 12}}>
-                        <AdminContent tabKey={tabKey}></AdminContent>
-                    </div>
+                    <AdminContent tabKey={tabKey} page={page} pageSize={pageSize} total={total}
+                                  setPage={setPage} setPageSize={setPageSize} setTotal={setTotal}/>
                 </Content>
             </Layout>
         </Layout>

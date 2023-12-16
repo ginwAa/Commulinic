@@ -3,5 +3,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.commulinic.mapper.RegisterMapper">
 
+    <select id="page" resultType="com.commulinic.entity.Register">
+        select * from register
+        <where>
+            <if test="id != null and id != 0">and id = #{id}</if>
+            <if test="userId != null and userId != 0">and user_id = #{userId}</if>
+            <if test="doctorId != null and doctorId != 0">and doctor_id = #{doctorId}</if>
+            <if test="beginCreateTime != null and beginCreateTime != 0">and create_time &gt;= #{beginCreateTime}</if>
+            <if test="endCreateTime != null and endCreateTime != 0">and create_time &lt;= #{endCreateTime}</if>
+            <if test="beginDate != null and beginDate != 0">and date &gt;= #{beginDate}</if>
+            <if test="endDate != null and endDate != 0">and date &lt;= #{endDate}</if>
+            <if test="minPrice != null and minPrice != 0">and price &gt;= #{minPrice}</if>
+            <if test="maxPrice != null and maxPrice != 0">and price &lt;= #{maxPrice}</if>
+            <if test="status != null and status != 0">and status = #{status}</if>
+            <if test="section != null and section != 0">and section = #{section}</if>
+        </where>
+        order by id asc LIMIT #{pageSize} OFFSET #{page}
+    </select>
 
+    <update id="update">
+        update register
+        <set>
+            <if test="userId != null and userId != 0">user_id = #{userId},</if>
+            <if test="doctorId != null and doctorId != 0">doctor_id = #{doctorId},</if>
+            <if test="createTime != null and createTime != 0">create_time = #{createTime},</if>
+            <if test="date != null and date != 0">date = #{date},</if>
+            <if test="price != null and price != 0">price = #{price},</if>
+            <if test="status != null and status != 0">status = #{status},</if>
+            <if test="section != null and section != 0">section = #{section},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

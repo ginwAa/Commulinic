@@ -6,7 +6,7 @@
     <select id="page" resultType="com.commulinic.entity.User" parameterType="com.commulinic.entity.dto.UserPageQueryDTO">
         select * from user
         <where>
-            <if test="id != null">and id = #{id}</if>
+            <if test="id != null and id != 0">and id = #{id}</if>
             <if test="name != null and name != ''">and name like concat('%', #{name}, '%')</if>
             <if test="role != null and role != 0">and role = #{role}</if>
             <if test="status != null and status != 0">and status = #{status}</if>

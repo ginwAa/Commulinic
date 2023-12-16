@@ -11,5 +11,7 @@ public class Register implements Serializable {
     private Long doctorId;
     private Long createTime;
     private Long date;
+    private Integer status;
+    private Integer price;
     private Integer section;
 }

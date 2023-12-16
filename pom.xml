@@ -25,7 +25,7 @@
         <pagehelper>1.4.6</pagehelper>
         <fastjson2>2.0.38</fastjson2>
         <druid>1.2.16</druid>
-        <zookeeper>3.8.2</zookeeper>
+        <!--        <zookeeper>3.8.2</zookeeper>-->
         <dubbo>3.2.5</dubbo>
         <activemq>5.16.6</activemq>
     </properties>

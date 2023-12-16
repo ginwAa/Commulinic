@@ -1,24 +1,46 @@
-import {Card, Col, Layout, Menu, Row} from 'antd';
+import {Card, Col, Layout, Menu, MenuProps, Row, theme} from 'antd';
+import {CopyrightOutlined} from "@ant-design/icons";
+import React, {useState} from "react";
 
 const {Header, Content, Footer} = Layout;
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+    label: React.ReactNode,
+    key: React.Key,
+): MenuItem {
+    return {
+        key,
+        label,
+    } as MenuItem;
+}
+
+const items: MenuItem[] = [
+    getItem('首页', 1),
+    getItem('医生团队', 2),
+    getItem('科室导航', 3),
+    getItem('预约挂号', 4),
+    getItem('学习知识', 5),
+    getItem('联系我们', 6),
+];
 
 const Index = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const themeToken = theme.useToken();
+    const handleWindowResize = () => {
+        setWindowWidth(window.innerWidth);
+    };
     return (
         <Layout>
-            <Header style={{position: 'fixed', zIndex: 1, width: '100vw'}}>
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                    <img src="/logo.png" alt="Commulinic"
-                         style={{width: '4rem', height: "auto", background: 'black'}}></img>
-                    <Menu.Item key="1">首页</Menu.Item>
-                    <Menu.Item key="2">医生团队</Menu.Item>
-                    <Menu.Item key="3">科室导航</Menu.Item>
-                    <Menu.Item key="4">预约挂号</Menu.Item>
-                    <Menu.Item key="5">学习知识</Menu.Item>
-                    <Menu.Item key="6">联系我们</Menu.Item>
-                </Menu>
+            <Header style={{position: 'fixed', zIndex: 1, width: '100vw', alignItems: 'center', display: 'flex'}}>
+                <div className="logo" style={{alignItems: 'center', padding: '0 0.5rem'}}>
+                    <CopyrightOutlined
+                        style={{fontSize: '1.5rem', color: themeToken.theme.id === 0 ? "black" : "white"}}/>
+                </div>
+                <Menu mode="horizontal" defaultSelectedKeys={['1']} items={items}/>
             </Header>
-            <Content style={{padding: '0 5vw', marginTop: 64, height: '90vh', width: '100vw'}}>
-                <div className="site-layout-background" style={{padding: 24, height: '100%', width: '100%'}}>
+            <Content style={{padding: '0 2rem', marginTop: 64, width: '100vw', minHeight: '90vh'}}>
+                <div className="site-layout-background" style={{padding: 24}}>
                     <Row gutter={[16, 16]}>
                         <Col span={8}>
                             <Card title="最新公告" bordered={false}>
@@ -39,7 +61,7 @@ const Index = () => {
                     </Row>
                 </div>
             </Content>
-            <Footer style={{textAlign: 'center'}}>社区医院 ©2023 Created by Communlinic</Footer>
+            <Footer style={{textAlign: 'center', height: '1rem'}}>社区医院 ©2023 Created by Communlinic</Footer>
         </Layout>
     );
 };
