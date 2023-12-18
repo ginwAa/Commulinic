@@ -10,7 +10,7 @@ import {
     TeamOutlined,
 } from '@ant-design/icons';
 import type {MenuProps} from 'antd';
-import {Breadcrumb, Button, Layout, Menu, Pagination, Space, theme, Typography} from 'antd';
+import {Breadcrumb, Button, Layout, Menu, Space, theme, Typography} from 'antd';
 import UserManagement from '../components/UserManagement';
 
 const {Text} = Typography;
@@ -49,19 +49,12 @@ const items: MenuItem[] = [
 
 interface ContentProps {
     tabKey: number;
-    page: number;
-    pageSize: number;
-    total: number;
-    setPage: (page: number) => void;
-    setPageSize: (pageSize: number) => void;
-    setTotal: (total: number) => void;
 }
 
 const AdminContent = (props: ContentProps) => {
     if (props.tabKey === 3) {
         return (
-            <UserManagement page={props.page} pageSize={props.pageSize} total={props.total} setPage={props.setPage}
-                            setPageSize={props.setPageSize} setTotal={props.setTotal}/>
+            <UserManagement/>
         );
     } else if (props.tabKey < 9 && props.tabKey > 0) {
         return (
@@ -83,9 +76,7 @@ const Admin: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
     const [tabKey, setTabKey] = useState<number>(1);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(50);
-    const [total, setTotal] = useState(500);
+
     const themeToken = theme.useToken();
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth);
@@ -99,7 +90,6 @@ const Admin: React.FC = () => {
     }, []);
     const onMenuClick: MenuProps['onClick'] = (e) => {
         setTabKey(Number(e.key));
-        setPage(1);
     };
 
     return (
@@ -131,16 +121,12 @@ const Admin: React.FC = () => {
                                 <Breadcrumb.Item>普通用户管理</Breadcrumb.Item>
                             </Breadcrumb>
                         </Space>
-                        <Pagination defaultCurrent={1} total={total} current={page} pageSize={pageSize} simple
-                                    style={{width: '50vw', textAlign: 'right'}}
-                                    onChange={(page, pageSize) => {
-                                        setPage(page);
-                                        setPageSize(pageSize)
-                                    }} responsive={true}/>
-
                     </Space>
-                    <AdminContent tabKey={tabKey} page={page} pageSize={pageSize} total={total}
-                                  setPage={setPage} setPageSize={setPageSize} setTotal={setTotal}/>
+                    <div style={{padding: '0.5rem 0'}}>
+                        <AdminContent tabKey={tabKey}/>
+                    </div>
+
+
                 </Content>
             </Layout>
         </Layout>
