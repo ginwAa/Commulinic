@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService {
         userPageQueryDTO.setPage((userPageQueryDTO.getPage() - 1) * userPageQueryDTO.getPageSize());
         Page<User> res = userMapper.page(userPageQueryDTO);
         PageResult ret = new PageResult();
-        ret.setTotal(res.getTotal());
+        Long total = userMapper.count(userPageQueryDTO);
+        ret.setTotal(total);
         ret.setRecords(res.getResult());
         return ret;
     }

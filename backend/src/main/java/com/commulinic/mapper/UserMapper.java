@@ -17,4 +17,7 @@ public interface UserMapper {
     Long add(User user);
 
     Page<User> page(UserPageQueryDTO userPageQueryDTO);
+
+
+    Long count(UserPageQueryDTO userPageQueryDTO);
 }

@@ -10,4 +10,5 @@ public interface UserService {
     Long update(User user);
 
     PageResult pageByUser(UserPageQueryDTO userPageQueryDTO);
+
 }

@@ -1,8 +1,8 @@
 import {User} from "../utils/entity.ts";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Form, FormInstance, Input, InputNumber, message, Modal, Pagination, Radio, Space, Table,} from "antd";
-
+import {SearchOutlined} from "@ant-design/icons";
 
 const fetchData = async (page: number, pageSize: number) => {
     return axios.get("http://localhost:5173/api/user/page", {
@@ -12,7 +12,6 @@ const fetchData = async (page: number, pageSize: number) => {
         }
     });
 };
-
 
 interface EditProps {
     editOpen: boolean;
@@ -110,55 +109,74 @@ const EditModal = (props: EditProps) => {
     );
 };
 
+interface FilterSearchProps {
+    searchText: string;
+    onSearch: (value: string) => void;
+}
+
+const FilterSearch = (props: FilterSearchProps) => {
+    const [text, setText] = useState(props.searchText);
+    return (
+        <Space>
+            <Input size={"small"} placeholder="姓名" value={text} onChange={e => setText(e.target.value)}></Input>
+            <Button size={"small"} type="primary" onClick={() => props.onSearch(text)}>搜索</Button>
+            <Button size={"small"} type="primary" onClick={() => {
+                props.onSearch('');
+                setText('');
+            }}>重置</Button>
+        </Space>
+    );
+}
+
 
 const UserManagement = () => {
     const [messageApi, contextHolder] = message.useMessage();
-    // const [data, setData] = useState<User[]>([]);
-    const data: User[] = [];
+    const [data, setData] = useState<User[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(50);
     const [total, setTotal] = useState(500);
-    for (let i = 0; i < 500; i++) {
-        data.push({
-            id: BigInt(i),
-            name: 'user' + i,
-            address: 'addressADDRESSaddress' + i,
-            gender: (i % 2) + 1,
-            status: 1,
-            role: 1,
-            phone: '13456789' + i,
-            age: 18,
-            emergency: 'emergency' + i,
-            password: '',
-        });
-    }
-
-
-    // useEffect(() => {
-    //     fetchData(page, pageSize)
-    //         .then(res => {
-    //             setData(res.data.records);
-    //         }).catch(err => {
-    //         console.log(err);
+    const [nameSearchText, setNameSearchText] = useState('');
+    const [phoneSearchText, setPhoneSearchText] = useState('');
+    // for (let i = 0; i < 500; i++) {
+    //     data.push({
+    //         id: BigInt(i),
+    //         name: 'user' + i,
+    //         address: 'addressADDRESSaddress' + i,
+    //         gender: (i % 2) + 1,
+    //         status: 1,
+    //         role: 1,
+    //         phone: '13456789' + i,
+    //         age: 18,
+    //         emergency: 'emergency' + i,
+    //         password: '',
     //     });
-    // }, [page, pageSize]);
-    // fetchData(page, pageSize)
-    //     .then(res => {
-    //         setData(res.data.records);
-    //     }).catch(err => {
-    //     console.log(err);
-    // });
+    // }
+    // const data: User[] = [];
+    useEffect(() => {
+        fetchData(page, pageSize)
+            .then(res => {
+                console.log(res);
+                setData(res.data.records);
+                setTotal(res.data.total);
+            }).catch(err => {
+            console.log(err);
+        });
+    }, [page, pageSize, nameSearchText, phoneSearchText]);
     const [editOpen, setEditOpen] = useState(false);
     const [editInfo, setEditInfo] = useState<User | null>(null);
     const [adding, setAdding] = useState(false);
+
     const rowSelection = {
         onChange: (selectedRowKeys: React.Key[], selectedRows: User[]) => {
             setEditInfo(selectedRows[0]);
             console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
         },
     };
+
+
     return (
         <>
+            {contextHolder}
             <Space direction={"horizontal"} style={{display: 'flex', justifyContent: 'space-between'}}>
                 <Button.Group>
                     <Button size={"small"} type={'primary'} onClick={() => {
@@ -171,14 +189,15 @@ const UserManagement = () => {
                     }} disabled={editInfo === null}>编辑</Button>
                     <Button size={"small"} type={'primary'} onClick={() => {
                         fetchData(page, pageSize).then(res => {
-                            // setData(res.data.records);
-                            // setTotal(res.data.total);
+                            setData(res.data.records);
+                            setTotal(res.data.total);
                         }).catch(err => {
                             console.log(err);
                             messageApi.error("刷新失败，请检查网络连接");
                         });
                     }}>刷新</Button>
                 </Button.Group>
+                <></>
                 <Pagination defaultCurrent={1} total={total} current={page} pageSize={pageSize} simple
                             style={{width: '50vw', textAlign: 'right'}} responsive={true}
                             onChange={(page, pageSize) => {
@@ -195,18 +214,18 @@ const UserManagement = () => {
                     </Table.Summary.Row>
                 );
             }}>
-                <Table.Column title="ID" dataIndex="id" key="id" render={(id: bigint) => id.toString()}/>
-                <Table.Column title="姓名" dataIndex="name" key="name"/>
+                <Table.Column title="ID" dataIndex="id" key="id" render={(id: bigint) => id.toString()} width={'4rem'}/>
+                <Table.Column title="姓名" dataIndex="name" key="name" filterIcon={<SearchOutlined/>} width={'7rem'}
+                              filterDropdown={FilterSearch({searchText: nameSearchText, onSearch: setNameSearchText})}/>
                 <Table.Column title="性别" dataIndex="gender" key="gender"
-                              render={(gender: number) => gender === 1 ? '男' : '女'}
-                              width={'5rem'} filters={[
+                              render={(gender: number) => gender === 1 ? '男' : '女'} width={'5rem'} filters={[
                     {text: '男', value: 1},
                     {text: '女', value: 2},
                 ]
                 }/>
-                <Table.Column title="状态" dataIndex="status" key="status"
+                <Table.Column title="状态" dataIndex="status" key="status" width={'5rem'}
                               render={(status: number) => status === 1 ? '正常' : '禁用'}
-                              width={'5rem'} filters={
+                              filters={
                     [
                         {text: '正常', value: 1},
                         {text: '禁用', value: 2},
@@ -221,10 +240,12 @@ const UserManagement = () => {
                                       {text: '普通用户', value: 3},
                                   ]
                               }/>
-                <Table.Column title="地址" dataIndex="address" key="address"/>
-                <Table.Column title="手机号" dataIndex="phone" key="phone"/>
+                <Table.Column title="地址" dataIndex="address" key="address" width={'10rem'}/>
+                <Table.Column title="手机号" dataIndex="phone" key="phone" filterIcon={<SearchOutlined/>} width={'8rem'}
+                              filterDropdown={FilterSearch({searchText: phoneSearchText, onSearch: setPhoneSearchText})}
+                />
                 <Table.Column title="年龄" dataIndex="age" key="age" sorter={true} width={'5rem'}/>
-                <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency"/>
+                <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency" width={'8rem'}/>
             </Table>
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={editInfo} adding={adding}
                        setAdding={setAdding}/>
