@@ -33,11 +33,11 @@
     <dependencyManagement>
         <dependencies>
 
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.mybatis.spring.boot</groupId>-->
+            <!--                <artifactId>mybatis-spring-boot-starter</artifactId>-->
+            <!--                <version>${mybatis}</version>-->
+            <!--            </dependency>-->
 
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -63,40 +63,40 @@
                 <version>${fastjson2}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.zookeeper</groupId>
-                <artifactId>zookeeper</artifactId>
-                <version>${zookeeper}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.zookeeper</groupId>-->
+            <!--                <artifactId>zookeeper</artifactId>-->
+            <!--                <version>${zookeeper}</version>-->
+            <!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.dubbo</groupId>-->
+            <!--                <artifactId>dubbo-spring-boot-starter</artifactId>-->
+            <!--                <version>${dubbo}</version>-->
+            <!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-rpc-dubbo</artifactId>
-                <version>${dubbo}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.dubbo</groupId>-->
+            <!--                <artifactId>dubbo-rpc-dubbo</artifactId>-->
+            <!--                <version>${dubbo}</version>-->
+            <!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-registry-zookeeper</artifactId>
-                <version>${dubbo}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.apache.dubbo</groupId>-->
+            <!--                <artifactId>dubbo-registry-zookeeper</artifactId>-->
+            <!--                <version>${dubbo}</version>-->
+            <!--            </dependency>-->
 
             <dependency>
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-all</artifactId>
                 <version>${activemq}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>org.springframework.boot</groupId>-->
+            <!--                <artifactId>spring-boot-starter</artifactId>-->
+            <!--                <version>${spring-boot.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -121,37 +121,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <!--    <build>-->
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-    <!--                <version>3.8.1</version>-->
-    <!--                <configuration>-->
-    <!--                    <source>1.8</source>-->
-    <!--                    <target>1.8</target>-->
-    <!--                    <encoding>UTF-8</encoding>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.springframework.boot</groupId>-->
-    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-    <!--                <version>${spring-boot.version}</version>-->
-    <!--                <configuration>-->
-    <!--                    <mainClass>com.commulinic.BackendApplication</mainClass>-->
-    <!--                    <skip>true</skip>-->
-    <!--                </configuration>-->
-    <!--                <executions>-->
-    <!--                    <execution>-->
-    <!--                        <id>repackage</id>-->
-    <!--                        <goals>-->
-    <!--                            <goal>repackage</goal>-->
-    <!--                        </goals>-->
-    <!--                    </execution>-->
-    <!--                </executions>-->
-    <!--            </plugin>-->
-    <!--        </plugins>-->
-    <!--    </build>-->
     <build>
         <pluginManagement>
             <plugins>

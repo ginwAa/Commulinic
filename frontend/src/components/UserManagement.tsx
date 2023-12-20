@@ -1,17 +1,55 @@
 import {User} from "../utils/entity.ts";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import {Button, Form, FormInstance, Input, InputNumber, message, Modal, Pagination, Radio, Space, Table,} from "antd";
+import {
+    Button,
+    Form,
+    FormInstance,
+    Input,
+    InputNumber,
+    message,
+    Modal,
+    Pagination,
+    Radio,
+    Space,
+    Table,
+    TablePaginationConfig,
+} from "antd";
 import {SearchOutlined} from "@ant-design/icons";
+import {SorterResult} from "antd/es/table/interface";
 
-const fetchData = async (page: number, pageSize: number) => {
+interface PageProps {
+    name: string;
+    gender: Array<number> | null;
+    status: Array<number> | null;
+    role: Array<number> | null;
+    phone: string;
+    age: number;
+}
+
+const fetchData = async (page: number, pageSize: number, props: PageProps) => {
+    console.log('header params:', props);
     return axios.get("http://localhost:5173/api/user/page", {
         params: {
             page: page,
             pageSize: pageSize,
+            status: props.status?.join(','),
+            gender: props.gender?.join(','),
+            age: props.age,
+            name: props.name,
+            role: props.role?.join(','),
+            phone: props.phone
         }
     });
 };
+
+const addUser = async (user: User) => {
+    return axios.post("http://localhost:5173/api/user/add", user);
+};
+
+const updateUser = async (user: User) => {
+    return axios.post("http://localhost:5173/api/user/update", user);
+}
 
 interface EditProps {
     editOpen: boolean;
@@ -21,6 +59,10 @@ interface EditProps {
     setAdding: (adding: boolean) => void;
 }
 
+interface RadioFormItemProps {
+    value: number;
+    onChange: (value: number) => void;
+}
 const EditModal = (props: EditProps) => {
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm<FormInstance>();
@@ -31,18 +73,49 @@ const EditModal = (props: EditProps) => {
             props.setAdding(false);
             return;
         }
+        const formData: User = {
+            id: props.record?.id ? props.record.id : -1,
+            name: form.getFieldValue("name"),
+            password: form.getFieldValue("password"),
+            role: form.getFieldValue("role"),
+            status: form.getFieldValue("status"),
+            gender: form.getFieldValue("gender"),
+            phone: form.getFieldValue("phone"),
+            age: form.getFieldValue("age"),
+            address: form.getFieldValue("address"),
+            emergency: form.getFieldValue("emergency"),
+        }
         form.validateFields().then(() => {
-            console.log(form.getFieldValue("name"));
             // TODO send post request
-            props.setEditOpen(false);
-            props.setAdding(false);
+            if (props.adding) {
+                addUser(formData).then(res => {
+                    messageApi.success("添加成功!");
+                    props.setEditOpen(false);
+                    props.setAdding(false);
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                    messageApi.error("请检查网络连接");
+                });
+            } else {
+                updateUser(formData).then(res => {
+                    messageApi.success("修改成功!");
+                    props.setEditOpen(false);
+                    props.setAdding(false);
+                    console.log(res);
+                }).catch(err => {
+                    console.log(err);
+                    messageApi.error("请检查网络连接");
+                });
+            }
         }).catch(err => {
             console.log(err);
             messageApi.error("请检查用户信息");
         });
     };
 
-    const SexualRadioGroup = (props) => {
+
+    const SexualRadioGroup = (props: RadioFormItemProps) => {
         return (
             <Radio.Group value={props.value} onChange={props.onChange} optionType={'button'}>
                 <Radio value={1} key={1}>男</Radio>
@@ -50,7 +123,7 @@ const EditModal = (props: EditProps) => {
             </Radio.Group>
         );
     };
-    const StatusRadioGroup = (props) => {
+    const StatusRadioGroup = (props: RadioFormItemProps) => {
         return (
             <Radio.Group value={props.value} onChange={props.onChange} optionType={'button'}>
                 <Radio value={1} key={1}>正常</Radio>
@@ -58,7 +131,7 @@ const EditModal = (props: EditProps) => {
             </Radio.Group>
         );
     };
-    const RoleRadioGroup = (props) => {
+    const RoleRadioGroup = (props: RadioFormItemProps) => {
         return (
             <Radio.Group value={props.value} onChange={props.onChange} optionType={'button'}>
                 <Radio value={1} key={1}>管理员</Radio>
@@ -135,44 +208,43 @@ const UserManagement = () => {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(50);
     const [total, setTotal] = useState(500);
-    const [nameSearchText, setNameSearchText] = useState('');
-    const [phoneSearchText, setPhoneSearchText] = useState('');
-    // for (let i = 0; i < 500; i++) {
-    //     data.push({
-    //         id: BigInt(i),
-    //         name: 'user' + i,
-    //         address: 'addressADDRESSaddress' + i,
-    //         gender: (i % 2) + 1,
-    //         status: 1,
-    //         role: 1,
-    //         phone: '13456789' + i,
-    //         age: 18,
-    //         emergency: 'emergency' + i,
-    //         password: '',
-    //     });
-    // }
-    // const data: User[] = [];
+    const [tableLoading, setTableLoading] = useState(false);
+    const [pageProps, setPageProps] = useState<PageProps>({
+        name: '',
+        phone: '',
+        gender: null,
+        status: null,
+        role: null,
+        age: 0,
+    });
     useEffect(() => {
-        fetchData(page, pageSize)
+        setTableLoading(true);
+        setSelectedRow(null);
+        setSelectedRowKeys([]);
+        fetchData(page, pageSize, pageProps)
             .then(res => {
                 console.log(res);
                 setData(res.data.records);
                 setTotal(res.data.total);
             }).catch(err => {
             console.log(err);
+        }).finally(() => {
+            setTableLoading(false);
         });
-    }, [page, pageSize, nameSearchText, phoneSearchText]);
+    }, [page, pageSize, pageProps]);
     const [editOpen, setEditOpen] = useState(false);
-    const [editInfo, setEditInfo] = useState<User | null>(null);
+    const [selectedRow, setSelectedRow] = useState<User | null>(null);
     const [adding, setAdding] = useState(false);
 
+    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
     const rowSelection = {
+        selectedRowKeys: selectedRowKeys,
         onChange: (selectedRowKeys: React.Key[], selectedRows: User[]) => {
-            setEditInfo(selectedRows[0]);
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            setSelectedRowKeys(selectedRowKeys);
+            setSelectedRow(selectedRows[0]);
         },
-    };
 
+    };
 
     return (
         <>
@@ -186,9 +258,11 @@ const UserManagement = () => {
                     <Button size={"small"} type={'primary'} onClick={() => {
                         setAdding(false);
                         setEditOpen(true);
-                    }} disabled={editInfo === null}>编辑</Button>
+                    }} disabled={selectedRow === null}>编辑</Button>
                     <Button size={"small"} type={'primary'} onClick={() => {
-                        fetchData(page, pageSize).then(res => {
+                        setSelectedRow(null);
+                        setSelectedRowKeys([]);
+                        fetchData(page, pageSize, pageProps).then(res => {
                             setData(res.data.records);
                             setTotal(res.data.total);
                         }).catch(err => {
@@ -200,12 +274,13 @@ const UserManagement = () => {
                 <></>
                 <Pagination defaultCurrent={1} total={total} current={page} pageSize={pageSize} simple
                             style={{width: '50vw', textAlign: 'right'}} responsive={true}
+                            disabled={tableLoading || total === 0}
                             onChange={(page, pageSize) => {
                                 setPage(page);
                                 setPageSize(pageSize)
                             }}/>
             </Space>
-            <Table dataSource={data} scroll={{x: 'max-content', y: '80vh'}} size={"small"}
+            <Table dataSource={data} scroll={{x: 'max-content', y: '80vh'}} size={"small"} loading={tableLoading}
                    pagination={{position: ['none'], pageSize: pageSize, current: page, total: total}}
                    rowSelection={{type: 'radio', ...rowSelection}} rowKey={'id'} summary={() => {
                 return (
@@ -213,12 +288,29 @@ const UserManagement = () => {
                         <Table.Summary.Cell index={0} colSpan={5}>总计{total}条</Table.Summary.Cell>
                     </Table.Summary.Row>
                 );
-            }}>
-                <Table.Column title="ID" dataIndex="id" key="id" render={(id: bigint) => id.toString()} width={'4rem'}/>
+            }}
+                   onChange={(pagination: TablePaginationConfig, filters: Record<string, number>, sorter: SorterResult<User> | SorterResult<User>[]) => {
+                       console.log('params', filters, sorter, pagination);
+                       setPageProps({
+                           ...pageProps,
+                           age: sorter?.order !== undefined ? sorter.order === 'ascend' ? 1 : 2 : 0,
+                           gender: filters?.gender ? filters?.gender : null,
+                           role: filters?.role ? filters?.role : null,
+                           status: filters?.status ? filters?.status : null,
+                       });
+                   }}
+            >
+                <Table.Column title="ID" dataIndex="id" key="id" width={'4rem'}/>
                 <Table.Column title="姓名" dataIndex="name" key="name" filterIcon={<SearchOutlined/>} width={'7rem'}
-                              filterDropdown={FilterSearch({searchText: nameSearchText, onSearch: setNameSearchText})}/>
-                <Table.Column title="性别" dataIndex="gender" key="gender"
-                              render={(gender: number) => gender === 1 ? '男' : '女'} width={'5rem'} filters={[
+                              filterDropdown={FilterSearch({
+                                  searchText: pageProps.name, onSearch:
+                                      (value: string) => {
+                                          setPageProps({...pageProps, name: value});
+                                      }
+                              })}/>
+                <Table.Column title="性别" dataIndex="gender" key="gender" width={'5rem'}
+                              render={(gender: number) => gender === 1 ? '男' : '女'}
+                              filters={[
                     {text: '男', value: 1},
                     {text: '女', value: 2},
                 ]
@@ -242,12 +334,17 @@ const UserManagement = () => {
                               }/>
                 <Table.Column title="地址" dataIndex="address" key="address" width={'10rem'}/>
                 <Table.Column title="手机号" dataIndex="phone" key="phone" filterIcon={<SearchOutlined/>} width={'8rem'}
-                              filterDropdown={FilterSearch({searchText: phoneSearchText, onSearch: setPhoneSearchText})}
+                              filterDropdown={FilterSearch({
+                                  searchText: pageProps.phone, onSearch:
+                                      (value: string) => {
+                                          setPageProps({...pageProps, phone: value});
+                                      }
+                              })}
                 />
                 <Table.Column title="年龄" dataIndex="age" key="age" sorter={true} width={'5rem'}/>
                 <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency" width={'8rem'}/>
             </Table>
-            <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={editInfo} adding={adding}
+            <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow} adding={adding}
                        setAdding={setAdding}/>
         </>
 

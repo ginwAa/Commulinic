@@ -4,19 +4,38 @@
 <mapper namespace="com.commulinic.mapper.UserMapper">
 
     <select id="page" resultType="com.commulinic.entity.User" parameterType="com.commulinic.entity.dto.UserPageQueryDTO">
-        select (id, name, role, status, gender, phone, age, address, emergency) from user
+        select id, name, role, status, gender, phone, age, address, emergency from user
         <where>
             <if test="id != null and id != 0">and id = #{id}</if>
             <if test="name != null and name != ''">and name like concat('%', #{name}, '%')</if>
-            <if test="role != null and role != 0">and role = #{role}</if>
-            <if test="status != null and status != 0">and status = #{status}</if>
-            <if test="gender != null and gender != 0">and gender = #{gender}</if>
+            <if test="role != null">and role IN
+                <foreach collection="role" item="role" open="(" close=")" separator=","> #{role}</foreach>
+            </if>
+            <if test="status != null">and status IN
+                <foreach collection="status" item="status" open="(" close=")" separator=","> #{status}</foreach>
+            </if>
+            <if test="gender != null">and gender IN
+                <foreach collection="gender" item="gender" open="(" close=")" separator=","> #{gender}</foreach>
+            </if>
             <if test="phone != null and phone != ''">and phone like concat('%', #{phone}, '%')</if>
-            <if test="age != null and age != 0">and age = #{age}</if>
+<!--            <if test="age != null and age != 0">and age = #{age}</if>-->
             <if test="address != null and address != ''">and address like concat('%', #{address}, '%')</if>
             <if test="emergency != null and emergency != ''">and emergency like concat('%', #{emergency}, '%')</if>
         </where>
-        order by id asc LIMIT #{pageSize} OFFSET #{page}
+        <choose>
+            <when test="age != null and age != 0">
+                <if test="age == 1">
+                    order by age asc
+                </if>
+                <if test="age == 2">
+                    order by age desc
+                </if>
+            </when>
+            <otherwise>
+                order by id asc
+            </otherwise>
+        </choose>
+        LIMIT #{pageSize} OFFSET #{page}
     </select>
 
     <update id="update" parameterType="com.commulinic.entity.User">
@@ -40,11 +59,17 @@
         <where>
             <if test="id != null and id != 0">and id = #{id}</if>
             <if test="name != null and name != ''">and name like concat('%', #{name}, '%')</if>
-            <if test="role != null and role != 0">and role = #{role}</if>
-            <if test="status != null and status != 0">and status = #{status}</if>
-            <if test="gender != null and gender != 0">and gender = #{gender}</if>
+            <if test="role != null">and role IN
+                <foreach collection="role" item="role" open="(" close=")" separator=","> #{role}</foreach>
+            </if>
+            <if test="status != null">and status IN
+                <foreach collection="status" item="status" open="(" close=")" separator=","> #{status}</foreach>
+            </if>
+            <if test="gender != null">and gender IN
+                <foreach collection="gender" item="gender" open="(" close=")" separator=","> #{gender}</foreach>
+            </if>
             <if test="phone != null and phone != ''">and phone like concat('%', #{phone}, '%')</if>
-            <if test="age != null and age != 0">and age = #{age}</if>
+<!--            <if test="age != null and age != 0">and age = #{age}</if>-->
             <if test="address != null and address != ''">and address like concat('%', #{address}, '%')</if>
             <if test="emergency != null and emergency != ''">and emergency like concat('%', #{emergency}, '%')</if>
         </where>

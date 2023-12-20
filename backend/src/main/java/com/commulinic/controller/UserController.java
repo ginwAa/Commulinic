@@ -16,9 +16,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public Integer register(@RequestBody User user) {
+    public Long register(@RequestBody User user) {
+        //TODO check duplicate
         log.info("register {}", user.toString());
-        return 1;
+        return userService.add(user);
     }
 
     @GetMapping("/page")
@@ -26,5 +27,17 @@ public class UserController {
         log.info("page {}", userPageQueryDTO.toString());
         PageResult result = userService.pageByUser(userPageQueryDTO);
         return result;
+    }
+
+    @PostMapping("/update")
+    public Long update(@RequestBody User user) {
+        log.info("update {}", user.toString());
+        return userService.update(user);
+    }
+
+    @PostMapping("/add")
+    public Long add(@RequestBody User user) {
+        log.info("add {}", user.toString());
+        return userService.add(user);
     }
 }
