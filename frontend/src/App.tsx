@@ -1,12 +1,20 @@
 import Index from './pages/index.tsx';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Admin from "./pages/admin.tsx";
 import About from "./pages/about.tsx";
 import User from "./pages/user.tsx";
 import {ColorPicker, ConfigProvider, FloatButton, theme} from "antd";
-import {FormatPainterOutlined, MessageOutlined, SkinOutlined, SyncOutlined, UserOutlined} from "@ant-design/icons";
+import {FormatPainterOutlined, MessageOutlined, SkinOutlined, UserOutlined} from "@ant-design/icons";
 import {useState} from "react";
 import {Color} from "antd/lib/color-picker";
+import UserManagementPage from "./pages/admin/UserManagementPage.tsx";
+import OverviewPage from "./pages/admin/OverviewPage.tsx";
+import TipManagementPage from "./pages/admin/TipManagementPage.tsx";
+import StaffManagementPage from "./pages/admin/StaffManagementPage.tsx";
+import ApplyManagementPage from "./pages/admin/ApplyManagementPage.tsx";
+import NoticeManagementPage from "./pages/admin/NoticeManagementPage.tsx";
+import RegisterManagementPage from "./pages/admin/RegisterManagementPage.tsx";
+import DepartmentManagementPage from "./pages/admin/DepartmentManagementPage.tsx";
+import Login from "./pages/login.tsx";
 
 const App = () => {
     const [curTheme, setCurTheme] = useState(0);
@@ -27,10 +35,19 @@ const App = () => {
         >
             <Router>
                 <Routes>
-                    <Route path="/" element={<Index/>} key="index"></Route>
-                    <Route path="/admin" element={<Admin/>} key="admin"></Route>
-                    <Route path="/about" element={<About/>} key="about"></Route>
-                    <Route path="/user" element={<User/>} key="user"></Route>
+                    <Route path="/" element={<Index/>} key="/index"></Route>
+                    <Route path="/login" element={<Login/>} key="/login"></Route>
+                    <Route path="/admin" element={<OverviewPage/>} key="/admin"></Route>
+                    <Route path="/about" element={<About/>} key="/about"></Route>
+                    <Route path="/user" element={<User/>} key="/user"></Route>
+                    <Route path="/admin/departments" element={<DepartmentManagementPage/>}
+                           key="/admin/departments"></Route>
+                    <Route path="/admin/users" element={<UserManagementPage/>} key="/admin/users"></Route>
+                    <Route path="/admin/staff" element={<StaffManagementPage/>} key="/admin/staff"></Route>
+                    <Route path="/admin/applies" element={<ApplyManagementPage/>} key="/admin/applies"></Route>
+                    <Route path="/admin/register" element={<RegisterManagementPage/>} key="/admin/register"></Route>
+                    <Route path="/admin/notice" element={<NoticeManagementPage/>} key="/admin/notice"></Route>
+                    <Route path="/admin/tips" element={<TipManagementPage/>} key="/admin/tips"></Route>
                 </Routes>
             </Router>
             <FloatButton.Group shape="square" style={{right: '1rem', bottom: '1rem',}}>
@@ -42,7 +59,7 @@ const App = () => {
                 <ColorPicker value={curColor} onChange={setCurColor}>
                     <FloatButton icon={<FormatPainterOutlined/>} tooltip={'主题配色'}/>
                 </ColorPicker>
-                <FloatButton icon={<SyncOutlined/>} tooltip={'刷新页面'}/>
+                {/*<FloatButton icon={<SyncOutlined/>} tooltip={'刷新页面'}/>*/}
                 <FloatButton.BackTop visibilityHeight={1}/>
             </FloatButton.Group>
         </ConfigProvider>

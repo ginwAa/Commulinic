@@ -1,6 +1,6 @@
 import {User} from "../utils/entity.ts";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Button,
     Form,
@@ -11,6 +11,7 @@ import {
     Modal,
     Pagination,
     Radio,
+    RadioChangeEvent,
     Space,
     Table,
     TablePaginationConfig,
@@ -57,11 +58,12 @@ interface EditProps {
     record: User | null;
     adding: boolean;
     setAdding: (adding: boolean) => void;
+    onSuccess: () => void;
 }
 
 interface RadioFormItemProps {
-    value: number;
-    onChange: (value: number) => void;
+    value?: number;
+    onChange?: (e: RadioChangeEvent) => void;
 }
 const EditModal = (props: EditProps) => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -86,30 +88,28 @@ const EditModal = (props: EditProps) => {
             emergency: form.getFieldValue("emergency"),
         }
         form.validateFields().then(() => {
-            // TODO send post request
             if (props.adding) {
-                addUser(formData).then(res => {
+                addUser(formData).then(() => {
                     messageApi.success("添加成功!");
+                    props.onSuccess();
                     props.setEditOpen(false);
                     props.setAdding(false);
-                    console.log(res);
                 }).catch(err => {
                     console.log(err);
                     messageApi.error("请检查网络连接");
                 });
             } else {
-                updateUser(formData).then(res => {
+                updateUser(formData).then(() => {
                     messageApi.success("修改成功!");
+                    props.onSuccess();
                     props.setEditOpen(false);
-                    props.setAdding(false);
-                    console.log(res);
                 }).catch(err => {
                     console.log(err);
                     messageApi.error("请检查网络连接");
                 });
             }
-        }).catch(err => {
-            console.log(err);
+
+        }).catch(() => {
             messageApi.error("请检查用户信息");
         });
     };
@@ -146,7 +146,8 @@ const EditModal = (props: EditProps) => {
             {contextHolder}
             <Modal open={props.editOpen} onCancel={() => closeEditModal(false)} onOk={() => closeEditModal(true)}
                    title={'编辑用户'} centered={true} destroyOnClose={true}>
-                <Form initialValues={props.adding ? null : props.record} form={form} preserve={false} size={"small"}
+                <Form initialValues={props.adding ? undefined : props.record} form={form} preserve={false}
+                      size={"small"}
                       layout={'horizontal'}>
                     <Form.Item label="姓名" name="name" rules={[{required: true, message: '请输入姓名'}]}>
                         <Input/>
@@ -207,8 +208,9 @@ const UserManagement = () => {
     const [data, setData] = useState<User[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(50);
-    const [total, setTotal] = useState(500);
+    const [total, setTotal] = useState(0);
     const [tableLoading, setTableLoading] = useState(false);
+    const [editSuccess, setEditSuccess] = useState(false);
     const [pageProps, setPageProps] = useState<PageProps>({
         name: '',
         phone: '',
@@ -228,14 +230,14 @@ const UserManagement = () => {
                 setTotal(res.data.total);
             }).catch(err => {
             console.log(err);
+            messageApi.error("加载失败，请检查网络连接");
         }).finally(() => {
             setTableLoading(false);
         });
-    }, [page, pageSize, pageProps]);
-    const [editOpen, setEditOpen] = useState(false);
+    }, [page, pageSize, pageProps, editSuccess]);
     const [selectedRow, setSelectedRow] = useState<User | null>(null);
     const [adding, setAdding] = useState(false);
-
+    const [editOpen, setEditOpen] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
     const rowSelection = {
         selectedRowKeys: selectedRowKeys,
@@ -280,7 +282,8 @@ const UserManagement = () => {
                                 setPageSize(pageSize)
                             }}/>
             </Space>
-            <Table dataSource={data} scroll={{x: 'max-content', y: '80vh'}} size={"small"} loading={tableLoading}
+            <Table dataSource={data} scroll={{x: 'max-content', y: '80vh'}} style={{minHeight: '80vh'}} size={"small"}
+                   loading={tableLoading}
                    pagination={{position: ['none'], pageSize: pageSize, current: page, total: total}}
                    rowSelection={{type: 'radio', ...rowSelection}} rowKey={'id'} summary={() => {
                 return (
@@ -345,7 +348,7 @@ const UserManagement = () => {
                 <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency" width={'8rem'}/>
             </Table>
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow} adding={adding}
-                       setAdding={setAdding}/>
+                       setAdding={setAdding} onSuccess={() => setEditSuccess(!editSuccess)}/>
         </>
 
     );

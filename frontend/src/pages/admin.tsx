@@ -11,7 +11,9 @@ import {
 } from '@ant-design/icons';
 import type {MenuProps} from 'antd';
 import {Breadcrumb, Button, Layout, Menu, Space, theme, Typography} from 'antd';
+import DepartmentManagement from '../components/DepartmentManagement';
 import UserManagement from '../components/UserManagement';
+import {Link} from "react-router-dom";
 
 const {Text} = Typography;
 const {Content, Sider} = Layout;
@@ -33,17 +35,17 @@ function siderItem(
 }
 
 const items: MenuItem[] = [
-    siderItem('总览', 1, <PieChartOutlined/>),
-    siderItem('部门管理', 2, <DeploymentUnitOutlined/>),
+    siderItem(<Link to={"/admin"}>总览</Link>, 1, <PieChartOutlined/>),
+    siderItem(<Link to={"/admin/departments"}>部门管理</Link>, 2, <DeploymentUnitOutlined/>),
     siderItem('人员管理', -1, <TeamOutlined/>, [
-        siderItem('普通用户管理', 3),
-        siderItem('内部员工管理', 4),
-        siderItem('坐诊申请管理', 5),
+        siderItem(<Link to={"/admin/users"}>全体用户管理</Link>, 3),
+        siderItem(<Link to={"/admin/staff"}>内部管理</Link>, 4),
+        siderItem(<Link to={"/admin/applies"}>坐诊申请管理</Link>, 5),
     ]),
-    siderItem('预约管理', 6, <FileSearchOutlined/>),
+    siderItem(<Link to={"/admin/appointments"}>预约管理</Link>, 6, <FileSearchOutlined/>),
     siderItem('社区管理', -2, <NotificationOutlined/>, [
-        siderItem('公告', 7),
-        siderItem('医学知识', 8),
+        siderItem(<Link to={"/admin/notice"}>公告</Link>, 7),
+        siderItem(<Link to={"/admin/tips"}>医学知识</Link>, 8),
     ]),
 ];
 
@@ -52,7 +54,11 @@ interface ContentProps {
 }
 
 const AdminContent = (props: ContentProps) => {
-    if (props.tabKey === 3) {
+    if (props.tabKey === 2) {
+        return (
+            <DepartmentManagement/>
+        );
+    } else if (props.tabKey === 3) {
         return (
             <UserManagement/>
         );
