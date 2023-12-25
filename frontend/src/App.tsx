@@ -18,8 +18,7 @@ import Login from "./pages/login.tsx";
 
 const App = () => {
     const [curTheme, setCurTheme] = useState(0);
-    const [curColor, setCurColor] = useState<Color | string>('#2c9678')
-
+    const [curColor, setCurColor] = useState<Color | string>('#2c9678');
     return (
         <ConfigProvider theme={{
             algorithm: curTheme === 0 ? theme.defaultAlgorithm : theme.darkAlgorithm,

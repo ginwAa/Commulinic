@@ -49,7 +49,7 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
                         </div>
                     </div>
                     <Menu mode="vertical" theme={"light"} defaultSelectedKeys={[props.tabKey.toString()]}
-                          items={siderItems}>
+                          items={siderItems} triggerSubMenuAction="click">
                     </Menu>
                 </Space>
             </Sider>

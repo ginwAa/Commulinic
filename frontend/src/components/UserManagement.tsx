@@ -1,5 +1,4 @@
 import {User} from "../utils/entity.ts";
-import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {
     Button,
@@ -10,14 +9,14 @@ import {
     message,
     Modal,
     Pagination,
-    Radio,
-    RadioChangeEvent,
+    Select,
     Space,
     Table,
     TablePaginationConfig,
 } from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import {SorterResult} from "antd/es/table/interface";
+import {userAdd, userPage, userUpdate} from "../apis/userApi.ts";
 
 interface PageProps {
     name: string;
@@ -30,27 +29,13 @@ interface PageProps {
 
 const fetchData = async (page: number, pageSize: number, props: PageProps) => {
     console.log('header params:', props);
-    return axios.get("http://localhost:5173/api/user/page", {
-        params: {
-            page: page,
-            pageSize: pageSize,
-            status: props.status?.join(','),
-            gender: props.gender?.join(','),
-            age: props.age,
-            name: props.name,
-            role: props.role?.join(','),
-            phone: props.phone
-        }
+    return userPage({
+        page: page,
+        pageSize: pageSize,
+        ...props,
     });
 };
 
-const addUser = async (user: User) => {
-    return axios.post("http://localhost:5173/api/user/add", user);
-};
-
-const updateUser = async (user: User) => {
-    return axios.post("http://localhost:5173/api/user/update", user);
-}
 
 interface EditProps {
     editOpen: boolean;
@@ -61,10 +46,6 @@ interface EditProps {
     onSuccess: () => void;
 }
 
-interface RadioFormItemProps {
-    value?: number;
-    onChange?: (e: RadioChangeEvent) => void;
-}
 const EditModal = (props: EditProps) => {
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm<FormInstance>();
@@ -88,90 +69,64 @@ const EditModal = (props: EditProps) => {
             emergency: form.getFieldValue("emergency"),
         }
         form.validateFields().then(() => {
-            if (props.adding) {
-                addUser(formData).then(() => {
-                    messageApi.success("添加成功!");
-                    props.onSuccess();
-                    props.setEditOpen(false);
-                    props.setAdding(false);
-                }).catch(err => {
-                    console.log(err);
-                    messageApi.error("请检查网络连接");
-                });
-            } else {
-                updateUser(formData).then(() => {
-                    messageApi.success("修改成功!");
-                    props.onSuccess();
-                    props.setEditOpen(false);
-                }).catch(err => {
-                    console.log(err);
-                    messageApi.error("请检查网络连接");
-                });
-            }
-
+            const func = props.adding ? userAdd : userUpdate;
+            func(formData).then(() => {
+                messageApi.success("操作成功!");
+                props.onSuccess();
+                props.setEditOpen(false);
+                props.setEditOpen(false);
+            }).catch(err => {
+                console.log(err);
+                messageApi.error("请检查网络连接");
+            });
         }).catch(() => {
             messageApi.error("请检查用户信息");
         });
     };
-
-
-    const SexualRadioGroup = (props: RadioFormItemProps) => {
-        return (
-            <Radio.Group value={props.value} onChange={props.onChange} optionType={'button'}>
-                <Radio value={1} key={1}>男</Radio>
-                <Radio value={2} key={2}>女</Radio>
-            </Radio.Group>
-        );
-    };
-    const StatusRadioGroup = (props: RadioFormItemProps) => {
-        return (
-            <Radio.Group value={props.value} onChange={props.onChange} optionType={'button'}>
-                <Radio value={1} key={1}>正常</Radio>
-                <Radio value={2} key={2}>冻结</Radio>
-            </Radio.Group>
-        );
-    };
-    const RoleRadioGroup = (props: RadioFormItemProps) => {
-        return (
-            <Radio.Group value={props.value} onChange={props.onChange} optionType={'button'}>
-                <Radio value={1} key={1}>管理员</Radio>
-                <Radio value={2} key={2}>医生</Radio>
-                <Radio value={3} key={3}>普通用户</Radio>
-            </Radio.Group>
-        );
-    }
 
     return (
         <>
             {contextHolder}
             <Modal open={props.editOpen} onCancel={() => closeEditModal(false)} onOk={() => closeEditModal(true)}
                    title={'编辑用户'} centered={true} destroyOnClose={true}>
+                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                {/*@ts-expect-error*/}
                 <Form initialValues={props.adding ? undefined : props.record} form={form} preserve={false}
-                      size={"small"}
-                      layout={'horizontal'}>
-                    <Form.Item label="姓名" name="name" rules={[{required: true, message: '请输入姓名'}]}>
-                        <Input/>
-                    </Form.Item>
-                    <Form.Item label="年龄" name="age" rules={[{required: true, message: '请输入年龄'}]}>
-                        <InputNumber/>
-                    </Form.Item>
-                    <Form.Item label="性别" name="gender" rules={[{required: true, message: '请输入性别'}]}>
-                        <SexualRadioGroup/>
-                    </Form.Item>
-                    <Form.Item label="状态" name="status" rules={[{required: true, message: '请输入状态'}]}>
-                        <StatusRadioGroup/>
-                    </Form.Item>
-                    <Form.Item label="角色" name="role" rules={[{required: true, message: '请输入角色'}]}>
-                        <RoleRadioGroup/>
-                    </Form.Item>
-                    <Form.Item label="手机号" name="phone" rules={[{required: true, message: '请输入手机号'}]}>
-                        <Input/>
-                    </Form.Item>
+                      size={"small"} layout={'horizontal'}>
+                    <Space direction={"horizontal"}>
+                        <Form.Item label="姓名" name="name" rules={[{required: true, message: '请输入姓名'}]}>
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item label="年龄" name="age" rules={[{required: true, message: '请输入年龄'}]}>
+                            <InputNumber/>
+                        </Form.Item>
+                    </Space>
+                    <Space direction={'horizontal'}>
+                        <Form.Item label="性别" name="gender" rules={[{required: true, message: '请输入性别'}]}>
+                            <Select options={[{value: 1, label: '男'}, {value: 2, label: '女'}]}/>
+                        </Form.Item>
+                        <Form.Item label="状态" name="status" rules={[{required: true, message: '请输入状态'}]}>
+                            <Select options={[{value: 1, label: '正常'}, {value: 2, label: '冻结'}]}/>
+                        </Form.Item>
+                    </Space>
+                    <Space direction={'horizontal'}>
+                        <Form.Item label="角色" name="role" rules={[{required: true, message: '请输入角色'}]}>
+                            <Select options={[{value: 1, label: '管理员'}, {value: 2, label: '医生'}, {
+                                value: 3,
+                                label: '普通用户'
+                            }]} style={{width: '6rem'}}/>
+                        </Form.Item>
+                    </Space>
+                    <Space direction={'horizontal'}>
+                        <Form.Item label="手机号" name="phone" rules={[{required: true, message: '请输入手机号'}]}>
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item label="紧急联系人" name="emergency"
+                                   rules={[{required: true, message: '请输入紧急联系人'}]}>
+                            <Input/>
+                        </Form.Item>
+                    </Space>
                     <Form.Item label="地址" name="address" rules={[{required: true, message: '请输入地址'}]}>
-                        <Input/>
-                    </Form.Item>
-                    <Form.Item label="紧急联系人" name="emergency"
-                               rules={[{required: true, message: '请输入紧急联系人'}]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item label="密码" name="password" rules={[{required: props.adding, message: '请输入密码'}]}>
@@ -205,6 +160,7 @@ const FilterSearch = (props: FilterSearchProps) => {
 
 const UserManagement = () => {
     const [messageApi, contextHolder] = message.useMessage();
+
     const [data, setData] = useState<User[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(50);
@@ -292,11 +248,18 @@ const UserManagement = () => {
                     </Table.Summary.Row>
                 );
             }}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                    onChange={(pagination: TablePaginationConfig, filters: Record<string, number>, sorter: SorterResult<User> | SorterResult<User>[]) => {
                        console.log('params', filters, sorter, pagination);
+
                        setPageProps({
                            ...pageProps,
+                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                           // @ts-expect-error
                            age: sorter?.order !== undefined ? sorter.order === 'ascend' ? 1 : 2 : 0,
+                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                           // @ts-expect-error
                            gender: filters?.gender ? filters?.gender : null,
                            role: filters?.role ? filters?.role : null,
                            status: filters?.status ? filters?.status : null,
