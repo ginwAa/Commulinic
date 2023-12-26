@@ -12,6 +12,6 @@ public interface DoctorMapper {
 
     Long update(Doctor doctor);
 
-    @Insert("insert into doctor (user_id, department_id, department, seniority, status) VALUES (#{userId}, #{departmentId}, #{department}, #{seniority}, #{status})")
+    @Insert("insert into doctor (user_id, department_id, seniority, status) VALUES (#{userId}, #{departmentId}, #{seniority}, #{status})")
     Long add(Doctor doctor);
 }

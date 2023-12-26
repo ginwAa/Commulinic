@@ -1,3 +1,8 @@
+export interface PageRes<T> {
+    records: T[],
+    total: number,
+}
+
 export interface User {
     id?: number,
     name: string,
@@ -9,9 +14,14 @@ export interface User {
     phone: string,
     age: number,
     emergency: string,
+    email: string,
 }
 
-export interface PageQueryRes<T> {
-    data: T[],
-    total: number,
+export interface Department {
+    id?: number,
+    parentId?: number,
+    name: string,
+    head: string,
+    headId: number,
+    description: string,
 }

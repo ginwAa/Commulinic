@@ -16,7 +16,7 @@ import {
 } from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import {SorterResult} from "antd/es/table/interface";
-import {userAdd, userPage, userUpdate} from "../apis/userApi.ts";
+import {userAdd, userPage, userUpdate} from "../apis/userApis.ts";
 
 interface PageProps {
     name: string;
@@ -25,6 +25,7 @@ interface PageProps {
     role: Array<number> | null;
     phone: string;
     age: number;
+    email: string;
 }
 
 const fetchData = async (page: number, pageSize: number, props: PageProps) => {
@@ -67,6 +68,7 @@ const EditModal = (props: EditProps) => {
             age: form.getFieldValue("age"),
             address: form.getFieldValue("address"),
             emergency: form.getFieldValue("emergency"),
+            email: form.getFieldValue("email"),
         }
         form.validateFields().then(() => {
             const func = props.adding ? userAdd : userUpdate;
@@ -115,6 +117,10 @@ const EditModal = (props: EditProps) => {
                                 value: 3,
                                 label: '普通用户'
                             }]} style={{width: '6rem'}}/>
+                        </Form.Item>
+                        <Form.Item label="邮箱" name="email"
+                                   rules={[{required: true, message: '请输入邮箱', type: 'email'}]}>
+                            <Input/>
                         </Form.Item>
                     </Space>
                     <Space direction={'horizontal'}>
@@ -174,6 +180,7 @@ const UserManagement = () => {
         status: null,
         role: null,
         age: 0,
+        email: '',
     });
     useEffect(() => {
         setTableLoading(true);
@@ -261,7 +268,11 @@ const UserManagement = () => {
                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                            // @ts-expect-error
                            gender: filters?.gender ? filters?.gender : null,
+                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                           // @ts-expect-error
                            role: filters?.role ? filters?.role : null,
+                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                           // @ts-expect-error
                            status: filters?.status ? filters?.status : null,
                        });
                    }}
@@ -276,10 +287,11 @@ const UserManagement = () => {
                               })}/>
                 <Table.Column title="性别" dataIndex="gender" key="gender" width={'5rem'}
                               render={(gender: number) => gender === 1 ? '男' : '女'}
-                              filters={[
-                    {text: '男', value: 1},
-                    {text: '女', value: 2},
-                ]
+                              filters={
+                                  [
+                                      {text: '男', value: 1},
+                                      {text: '女', value: 2},
+                                  ]
                 }/>
                 <Table.Column title="状态" dataIndex="status" key="status" width={'5rem'}
                               render={(status: number) => status === 1 ? '正常' : '禁用'}
@@ -305,10 +317,16 @@ const UserManagement = () => {
                                       (value: string) => {
                                           setPageProps({...pageProps, phone: value});
                                       }
-                              })}
-                />
+                              })}/>
                 <Table.Column title="年龄" dataIndex="age" key="age" sorter={true} width={'5rem'}/>
                 <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency" width={'8rem'}/>
+                <Table.Column title="邮箱" dataIndex="email" key="email" filterIcon={<SearchOutlined/>} width={'8rem'}
+                              filterDropdown={FilterSearch({
+                                  searchText: pageProps.email, onSearch:
+                                      (value: string) => {
+                                          setPageProps({...pageProps, email: value});
+                                      }
+                              })}/>
             </Table>
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow} adding={adding}
                        setAdding={setAdding} onSuccess={() => setEditSuccess(!editSuccess)}/>

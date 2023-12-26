@@ -1,10 +1,6 @@
-import {User} from "../utils/entity.ts";
+import {PageRes, User} from "../utils/entity.ts";
 import {get, post} from "../utils/request.ts";
 
-interface PageRes {
-    records: User[];
-    total: number;
-}
 
 interface PageDTO {
     page: number;
@@ -15,17 +11,21 @@ interface PageDTO {
     role: Array<number> | null;
     phone: string;
     age: number;
+    email: string;
 }
 
 export const userAdd = async (user: User) => {
-    return post('/user/add', user);
+    return post<number>('/user/add', user);
 };
 export const userPage = async (user: PageDTO) => {
-    return get<PageRes>('/user/page', user);
+    return get<PageRes<User>>('/user/page', user);
 };
 
 export const userUpdate = async (user: User) => {
-    return post('/user/update', user);
+    return post<number>('/user/update', user);
 };
 
+export const userRegister = async (user: User) => {
+    return post<number>('/user/register', user);
+}
 

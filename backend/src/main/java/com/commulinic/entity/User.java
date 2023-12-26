@@ -14,6 +14,7 @@ public class User implements Serializable {
     private Integer status; // 1 active 2 frozen
     private Integer role; // 1 admin 2 doctor 3 normal
     private String phone;
+    private String email;
     private Integer age;
     private String emergency;
 }

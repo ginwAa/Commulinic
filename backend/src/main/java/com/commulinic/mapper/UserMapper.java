@@ -11,8 +11,8 @@ import org.apache.ibatis.annotations.Options;
 public interface UserMapper {
     Long update(User user);
 
-    @Insert("insert into user (name, password, role, status, gender, phone, age, address, emergency) VALUES " +
-            "(#{name}, #{password}, #{role}, #{status}, #{gender}, #{phone}, #{age}, #{address}, #{emergency})")
+    @Insert("insert into user (name, password, role, status, gender, phone, age, address, emergency, email) VALUES " +
+            "(#{name}, #{password}, #{role}, #{status}, #{gender}, #{phone}, #{age}, #{address}, #{emergency}, #{email})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     Long add(User user);
 
