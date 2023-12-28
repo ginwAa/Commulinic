@@ -32,7 +32,6 @@ const Login = () => {
                     </Space>
                 </Card>
             </Content>
-
         </Layout>
 
 
@@ -69,11 +68,15 @@ const LoginTab = () => {
 const RegisterTab = () => {
     const [form] = Form.useForm<FormInstance>();
     return (
-        <Form form={form} labelCol={{span: 6}} labelWrap={true}>
+        <Form form={form} labelCol={{span: 7}}>
             <Form.Item label="姓名" name="name" rules={[{required: true, message: '请输入姓名'}]}>
                 <Input prefix={<UserOutlined className="site-form-item-icon"/>}/>
             </Form.Item>
             <Form.Item label="密码" name="password" rules={[{required: true, message: '请输入密码'}]}>
+                <Input.Password prefix={<LockOutlined className="site-form-item-icon"/>}/>
+            </Form.Item>
+            <Form.Item label="确认密码" name="confirm" dependencies={['password']}
+                       rules={[{required: true, message: '请再次输入密码'}]}>
                 <Input.Password prefix={<LockOutlined className="site-form-item-icon"/>}/>
             </Form.Item>
             <Form.Item label="邮箱" name="email" rules={[{required: true, message: '请输入邮箱', type: 'email'}]}>
