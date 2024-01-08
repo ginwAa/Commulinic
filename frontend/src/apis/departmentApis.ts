@@ -1,17 +1,16 @@
-import {Department, PageRes} from "../utils/entity.ts";
+import {Department, DepartmentTreeNode, PageRes} from "../utils/entity.ts";
 import {get, post} from "../utils/request.ts";
 
 interface PageDTO {
     page: number;
     pageSize: number;
     name: string;
-    head: string;
     description: string;
     parentId: number;
 }
 
 export const departmentGetById = async (id: number) => {
-    return get<Department>(`/department/${id}`);
+    return get<Department>(`/department/getById/${id}`);
 }
 
 export const departmentDelete = async (id: number) => {
@@ -29,3 +28,8 @@ export const departmentAdd = async (department: Department) => {
 export const departmentUpdate = async (department: Department) => {
     return post<number>('/department/update', department);
 };
+
+export const departmentTree = async () => {
+    return get<DepartmentTreeNode>('/department/tree');
+};
+

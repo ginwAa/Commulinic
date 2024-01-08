@@ -6,6 +6,7 @@ import {
     FormInstance,
     Input,
     InputNumber,
+    Menu,
     message,
     Modal,
     Pagination,
@@ -29,7 +30,6 @@ interface PageProps {
 }
 
 const fetchData = async (page: number, pageSize: number, props: PageProps) => {
-    console.log('header params:', props);
     return userPage({
         page: page,
         pageSize: pageSize,
@@ -152,14 +152,16 @@ interface FilterSearchProps {
 const FilterSearch = (props: FilterSearchProps) => {
     const [text, setText] = useState(props.searchText);
     return (
-        <Space>
-            <Input size={"small"} placeholder="姓名" value={text} onChange={e => setText(e.target.value)}></Input>
-            <Button size={"small"} type="primary" onClick={() => props.onSearch(text)}>搜索</Button>
-            <Button size={"small"} type="primary" onClick={() => {
-                props.onSearch('');
-                setText('');
-            }}>重置</Button>
-        </Space>
+        <Menu>
+            <Input size={"small"} value={text} onChange={e => setText(e.target.value)}></Input>
+            <Button.Group style={{justifyContent: "right", display: "flex"}}>
+                <Button size={"small"} type="primary" onClick={() => props.onSearch(text)}>搜索</Button>
+                <Button size={"small"} type="primary" onClick={() => {
+                    props.onSearch('');
+                    setText('');
+                }}>重置</Button>
+            </Button.Group>
+        </Menu>
     );
 }
 
@@ -188,7 +190,6 @@ const UserManagement = () => {
         setSelectedRowKeys([]);
         fetchData(page, pageSize, pageProps)
             .then(res => {
-                console.log(res);
                 setData(res.data.records);
                 setTotal(res.data.total);
             }).catch(err => {

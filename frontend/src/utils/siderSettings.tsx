@@ -30,7 +30,7 @@ const siderItems: MenuItem[] = [
     siderItem(<Link to={"/admin/departments"}>部门管理</Link>, 2, <DeploymentUnitOutlined/>),
     siderItem('人员管理', -1, <TeamOutlined/>, [
         siderItem(<Link to={"/admin/users"}>全体用户管理</Link>, 3),
-        siderItem(<Link to={"/admin/staff"}>内部管理</Link>, 4),
+        siderItem(<Link to={"/admin/staff"}>内部人员管理</Link>, 4),
         siderItem(<Link to={"/admin/applies"}>坐诊申请管理</Link>, 5),
     ]),
     siderItem(<Link to={"/admin/register"}>预约管理</Link>, 6, <FileSearchOutlined/>),

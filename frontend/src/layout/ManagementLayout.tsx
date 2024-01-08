@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {CopyrightOutlined, MenuFoldOutlined, MenuUnfoldOutlined,} from '@ant-design/icons';
+import {
+    CopyrightOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    MessageOutlined,
+    UserOutlined,
+} from '@ant-design/icons';
 import {Breadcrumb, Button, Layout, Menu, Space, theme, Typography} from 'antd';
 import siderItems from "../utils/siderSettings.tsx";
 
@@ -33,10 +39,10 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
     }, []);
 
     return (
-        <Layout style={{height: '100vh', width: '100vw'}}>
+        <Layout style={{minHeight: '100vh', width: '100vw'}}>
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}
                    defaultCollapsed={false}
-                   width='12rem' collapsedWidth={windowWidth <= 750 ? '0' : '4rem'} trigger={null} theme='light'
+                   width='10rem' collapsedWidth={windowWidth <= 750 ? '0' : '4rem'} trigger={null} theme='light'
             >
                 <Space direction="vertical" style={{display: 'flow'}} size='small'>
                     <div className="demo-logo-vertical" style={{textAlign: 'center'}}>
@@ -45,7 +51,7 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
                                 style={{fontSize: '2rem', color: themeToken.theme.id === 0 ? "black" : "white"}}/>
                         </div>
                         <div className="logo-text" style={{visibility: collapsed ? 'hidden' : 'visible'}}>
-                            <Text strong>Commulinic</Text>
+                            <Text strong>ComMuLiNiC</Text>
                         </div>
                     </div>
                     <Menu mode="vertical" theme={"light"} defaultSelectedKeys={[props.tabKey.toString()]}
@@ -58,9 +64,13 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
                     <Space direction={'horizontal'} style={{display: 'flex', justifyContent: 'space-between'}}>
                         <Space direction={'horizontal'}>
                             <Button type="text" icon={collapsed ? <MenuUnfoldOutlined/> : <MenuFoldOutlined/>}
-                                    onClick={() => setCollapsed(!collapsed)}/>
+                                    onClick={() => setCollapsed(!collapsed)} style={{border: 'none'}}/>
                             <Breadcrumb items={props.breadcrumbItems}/>
                         </Space>
+                        <div>
+                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}></Button>
+                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}></Button>
+                        </div>
                     </Space>
                     <div style={{padding: '0.5rem 0'}}>
                         <props.component></props.component>

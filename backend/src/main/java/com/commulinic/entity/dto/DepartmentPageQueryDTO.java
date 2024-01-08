@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class DepartmentPageQueryDTO implements Serializable {
     private Long id;
     private String name;
-    private String head;
     private String description;
     private Long parentId;
     private Integer page;

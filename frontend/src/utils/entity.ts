@@ -1,3 +1,4 @@
+
 export interface PageRes<T> {
     records: T[],
     total: number,
@@ -21,7 +22,22 @@ export interface Department {
     id?: number,
     parentId?: number,
     name: string,
-    head: string,
-    headId: number,
     description: string,
+}
+
+export interface DepartmentTreeNode {
+    value?: number,
+    parentId?: number | null,
+    title: string,
+    description: string,
+    children: DepartmentTreeNode[],
+}
+
+export interface Doctor {
+    id?: number,
+    userId: number,
+    departmentId: number,
+    seniority: number,
+    position: string,
+    status: number,
 }

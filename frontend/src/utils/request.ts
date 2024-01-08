@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5173/api',
@@ -19,7 +19,7 @@ instance.interceptors.request.use(function (config) {
 });
 instance.interceptors.response.use(
     (response) => {
-        return response;
+        return Promise.resolve(response);
     }, function (error) {
         return Promise.reject(error);
     }
@@ -31,34 +31,46 @@ interface ApiResponse<T> {
 }
 
 export const get = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
-    try {
-        const res: AxiosResponse<T> = await instance.get<T>(url, {params});
-        return {
-            data: res.data,
-            status: res.status,
-        };
-    } catch (err: any) {
-        return {
+    return instance.get<T>(url, {params}).then(res => {
+        if (res.status < 400) {
+            return Promise.resolve({
+                data: res.data,
+                status: res.status,
+            });
+        } else {
+            return Promise.reject({
+                data: res.data,
+                status: res.status,
+            });
+        }
+    }).catch(err => {
+        return Promise.reject({
             data: err.response?.data,
             status: err.response?.status || 500,
             msg: err.message,
-        }
-    }
+        });
+    });
 }
 
 export const post = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
-    try {
-        const res: AxiosResponse<T> = await instance.post<T>(url, params);
-        return {
-            data: res.data,
-            status: res.status,
-        };
-    } catch (err: any) {
-        return {
+    return instance.post<T>(url, params).then(res => {
+        if (res.status < 400) {
+            return Promise.resolve({
+                data: res.data,
+                status: res.status,
+            });
+        } else {
+            return Promise.reject({
+                data: res.data,
+                status: res.status,
+            });
+        }
+    }).catch(err => {
+        return Promise.reject({
             data: err.response?.data,
             status: err.response?.status || 500,
             msg: err.message,
-        }
-    }
+        });
+    });
 }
 

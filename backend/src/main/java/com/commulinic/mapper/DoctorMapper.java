@@ -14,4 +14,6 @@ public interface DoctorMapper {
 
     @Insert("insert into doctor (user_id, department_id, seniority, status) VALUES (#{userId}, #{departmentId}, #{seniority}, #{status})")
     Long add(Doctor doctor);
+
+    Long count(DoctorPageQueryDTO dto);
 }

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import About from "./pages/About.tsx";
 import User from "./pages/User.tsx";
 import {ColorPicker, ConfigProvider, FloatButton, theme} from "antd";
-import {FormatPainterOutlined, MessageOutlined, SkinOutlined, UserOutlined} from "@ant-design/icons";
+import {FormatPainterOutlined, SkinOutlined} from "@ant-design/icons";
 import {useState} from "react";
 import {Color} from "antd/lib/color-picker";
 import UserManagementPage from "./pages/admin/UserManagementPage.tsx";
@@ -28,7 +28,7 @@ const App = () => {
             components: {
                 Layout: {
                     headerBg: curTheme === 0 ? "white" : "#141414",
-                }
+                },
             }
         }}
         >
@@ -49,8 +49,8 @@ const App = () => {
                 </Routes>
             </Router>
             <FloatButton.Group shape="square" style={{right: '1rem', bottom: '1rem',}}>
-                <FloatButton icon={<UserOutlined/>} tooltip={'个人中心'}/>
-                <FloatButton icon={<MessageOutlined/>} tooltip={'消息中心'}/>
+                {/*<FloatButton icon={<UserOutlined/>} tooltip={'个人中心'}/>*/}
+                {/*<FloatButton icon={<MessageOutlined/>} tooltip={'消息中心'}/>*/}
                 <FloatButton icon={<SkinOutlined/>} tooltip={'暗黑模式'} onClick={() => {
                     setCurTheme(curTheme ^ 1);
                 }}/>
