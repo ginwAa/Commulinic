@@ -1,12 +1,10 @@
-import {User} from "../utils/entity.ts";
+import {EMPTY_USER, User} from "../utils/entity.ts";
 import React, {useEffect, useState} from "react";
 import {
     Button,
     Form,
-    FormInstance,
     Input,
     InputNumber,
-    Menu,
     message,
     Modal,
     Pagination,
@@ -18,43 +16,24 @@ import {
 import {SearchOutlined} from "@ant-design/icons";
 import {SorterResult} from "antd/es/table/interface";
 import {userAdd, userPage, userUpdate} from "../apis/userApis.ts";
+import {FilterSearch} from "./TableComponents.tsx";
 
-interface PageProps {
-    name: string;
-    gender: Array<number> | null;
-    status: Array<number> | null;
-    role: Array<number> | null;
-    phone: string;
-    age: number;
-    email: string;
-}
-
-const fetchData = async (page: number, pageSize: number, props: PageProps) => {
-    return userPage({
-        page: page,
-        pageSize: pageSize,
-        ...props,
-    });
-};
-
-
+const fetchData = userPage;
 interface EditProps {
     editOpen: boolean;
     setEditOpen: (visible: boolean) => void;
-    record: User | null;
+    record: User; //Record<string, any> = User
     adding: boolean;
-    setAdding: (adding: boolean) => void;
     onSuccess: () => void;
 }
 
 const EditModal = (props: EditProps) => {
     const [messageApi, contextHolder] = message.useMessage();
-    const [form] = Form.useForm<FormInstance>();
+    const [form] = Form.useForm<User>();
 
     const closeEditModal = (changed: boolean) => {
         if (!changed) {
             props.setEditOpen(false);
-            props.setAdding(false);
             return;
         }
         const formData: User = {
@@ -85,14 +64,11 @@ const EditModal = (props: EditProps) => {
             messageApi.error("请检查用户信息");
         });
     };
-
     return (
         <>
             {contextHolder}
             <Modal open={props.editOpen} onCancel={() => closeEditModal(false)} onOk={() => closeEditModal(true)}
                    title={'编辑用户'} centered={true} destroyOnClose={true}>
-                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                {/*@ts-expect-error*/}
                 <Form initialValues={props.adding ? undefined : props.record} form={form} preserve={false}
                       size={"small"} layout={'horizontal'}>
                     <Space direction={"horizontal"}>
@@ -144,27 +120,6 @@ const EditModal = (props: EditProps) => {
     );
 };
 
-interface FilterSearchProps {
-    searchText: string;
-    onSearch: (value: string) => void;
-}
-
-const FilterSearch = (props: FilterSearchProps) => {
-    const [text, setText] = useState(props.searchText);
-    return (
-        <Menu>
-            <Input size={"small"} value={text} onChange={e => setText(e.target.value)}></Input>
-            <Button.Group style={{justifyContent: "right", display: "flex"}}>
-                <Button size={"small"} type="primary" onClick={() => props.onSearch(text)}>搜索</Button>
-                <Button size={"small"} type="primary" onClick={() => {
-                    props.onSearch('');
-                    setText('');
-                }}>重置</Button>
-            </Button.Group>
-        </Menu>
-    );
-}
-
 
 const UserManagement = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -175,20 +130,12 @@ const UserManagement = () => {
     const [total, setTotal] = useState(0);
     const [tableLoading, setTableLoading] = useState(false);
     const [editSuccess, setEditSuccess] = useState(false);
-    const [pageProps, setPageProps] = useState<PageProps>({
-        name: '',
-        phone: '',
-        gender: null,
-        status: null,
-        role: null,
-        age: 0,
-        email: '',
-    });
+    const [pageProps, setPageProps] = useState<User>(EMPTY_USER);
     useEffect(() => {
         setTableLoading(true);
-        setSelectedRow(null);
-        setSelectedRowKeys([]);
-        fetchData(page, pageSize, pageProps)
+        setSelectedRow(EMPTY_USER);
+        setSelectedKey(0);
+        fetchData(page, pageSize, pageProps, true)
             .then(res => {
                 setData(res.data.records);
                 setTotal(res.data.total);
@@ -199,17 +146,17 @@ const UserManagement = () => {
             setTableLoading(false);
         });
     }, [page, pageSize, pageProps, editSuccess]);
-    const [selectedRow, setSelectedRow] = useState<User | null>(null);
+
+    const [selectedRow, setSelectedRow] = useState<User>(EMPTY_USER);
     const [adding, setAdding] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
-    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+    const [selectedKey, setSelectedKey] = useState<number>(0);
     const rowSelection = {
-        selectedRowKeys: selectedRowKeys,
+        selectedRowKeys: [selectedKey],
         onChange: (selectedRowKeys: React.Key[], selectedRows: User[]) => {
-            setSelectedRowKeys(selectedRowKeys);
+            setSelectedKey(selectedRowKeys[0] as number);
             setSelectedRow(selectedRows[0]);
         },
-
     };
 
     return (
@@ -224,31 +171,21 @@ const UserManagement = () => {
                     <Button size={"small"} type={'primary'} onClick={() => {
                         setAdding(false);
                         setEditOpen(true);
-                    }} disabled={selectedRow === null}>编辑</Button>
+                    }} disabled={selectedKey === 0}>编辑</Button>
                     <Button size={"small"} type={'primary'} onClick={() => {
-                        setSelectedRow(null);
-                        setSelectedRowKeys([]);
-                        fetchData(page, pageSize, pageProps).then(res => {
-                            setData(res.data.records);
-                            setTotal(res.data.total);
-                        }).catch(err => {
-                            console.log(err);
-                            messageApi.error("刷新失败，请检查网络连接");
-                        });
+                        setEditSuccess(!editSuccess)
                     }}>刷新</Button>
                 </Button.Group>
-                <></>
-                <Pagination defaultCurrent={1} total={total} current={page} pageSize={pageSize} simple
-                            style={{width: '50vw', textAlign: 'right'}} responsive={true}
-                            disabled={tableLoading || total === 0}
+                <Pagination defaultCurrent={1} total={total} current={page} pageSize={pageSize} simple responsive={true}
+                            style={{width: '50vw', textAlign: 'right'}} disabled={tableLoading || total === 0}
                             onChange={(page, pageSize) => {
                                 setPage(page);
-                                setPageSize(pageSize)
-                            }}/>
+                                setPageSize(pageSize);
+                            }} showSizeChanger/>
             </Space>
             <Table dataSource={data} scroll={{x: 'max-content', y: '80vh'}} style={{minHeight: '80vh'}} size={"small"}
-                   loading={tableLoading}
-                   pagination={{position: ['none'], pageSize: pageSize, current: page, total: total}}
+                   loading={tableLoading} pagination={false}
+                // pagination={{position: ['none'], pageSize: pageSize, current: page, total: total}}
                    rowSelection={{type: 'radio', ...rowSelection}} rowKey={'id'} summary={() => {
                 return (
                     <Table.Summary.Row>
@@ -258,23 +195,17 @@ const UserManagement = () => {
             }}
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
-                   onChange={(pagination: TablePaginationConfig, filters: Record<string, number>, sorter: SorterResult<User> | SorterResult<User>[]) => {
+                   onChange={(pagination: TablePaginationConfig, filters: Record<string, number[]>, sorter: SorterResult<User> | SorterResult<User>[]) => {
                        console.log('params', filters, sorter, pagination);
 
                        setPageProps({
                            ...pageProps,
                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                            // @ts-expect-error
-                           age: sorter?.order !== undefined ? sorter.order === 'ascend' ? 1 : 2 : 0,
-                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                           // @ts-expect-error
-                           gender: filters?.gender ? filters?.gender : null,
-                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                           // @ts-expect-error
-                           role: filters?.role ? filters?.role : null,
-                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                           // @ts-expect-error
-                           status: filters?.status ? filters?.status : null,
+                           age: sorter?.order ? sorter?.order === 'ascend' ? 1 : 2 : 0,
+                           gender: filters?.gender ? filters.gender.reduce((pre, v) => pre | v, 0) : 0,
+                           role: filters?.role ? filters.role.reduce((pre, v) => pre | v, 0) : 0,
+                           status: filters?.status ? filters.status.reduce((pre, v) => pre | v, 0) : 0,
                        });
                    }}
             >
@@ -282,9 +213,7 @@ const UserManagement = () => {
                 <Table.Column title="姓名" dataIndex="name" key="name" filterIcon={<SearchOutlined/>} width={'7rem'}
                               filterDropdown={FilterSearch({
                                   searchText: pageProps.name, onSearch:
-                                      (value: string) => {
-                                          setPageProps({...pageProps, name: value});
-                                      }
+                                      (value: string) => setPageProps({...pageProps, name: value})
                               })}/>
                 <Table.Column title="性别" dataIndex="gender" key="gender" width={'5rem'}
                               render={(gender: number) => gender === 1 ? '男' : '女'}
@@ -308,31 +237,26 @@ const UserManagement = () => {
                                   [
                                       {text: '管理员', value: 1},
                                       {text: '医生', value: 2},
-                                      {text: '普通用户', value: 3},
+                                      {text: '普通用户', value: 4},
                                   ]
                               }/>
                 <Table.Column title="地址" dataIndex="address" key="address" width={'10rem'}/>
                 <Table.Column title="手机号" dataIndex="phone" key="phone" filterIcon={<SearchOutlined/>} width={'8rem'}
                               filterDropdown={FilterSearch({
                                   searchText: pageProps.phone, onSearch:
-                                      (value: string) => {
-                                          setPageProps({...pageProps, phone: value});
-                                      }
+                                      (value: string) => setPageProps({...pageProps, phone: value})
                               })}/>
                 <Table.Column title="年龄" dataIndex="age" key="age" sorter={true} width={'5rem'}/>
                 <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency" width={'8rem'}/>
                 <Table.Column title="邮箱" dataIndex="email" key="email" filterIcon={<SearchOutlined/>} width={'8rem'}
                               filterDropdown={FilterSearch({
                                   searchText: pageProps.email, onSearch:
-                                      (value: string) => {
-                                          setPageProps({...pageProps, email: value});
-                                      }
+                                      (value: string) => setPageProps({...pageProps, email: value})
                               })}/>
             </Table>
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow} adding={adding}
-                       setAdding={setAdding} onSuccess={() => setEditSuccess(!editSuccess)}/>
+                       onSuccess={() => setEditSuccess(!editSuccess)}/>
         </>
-
     );
 }
 

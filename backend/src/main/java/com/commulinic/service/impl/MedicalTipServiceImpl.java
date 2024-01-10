@@ -5,9 +5,10 @@ import com.commulinic.entity.PageResult;
 import com.commulinic.entity.dto.MedicalTipPageQueryDTO;
 import com.commulinic.mapper.MedicalTipMapper;
 import com.commulinic.service.MedicalTipService;
-import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MedicalTipServiceImpl implements MedicalTipService {
@@ -27,9 +28,8 @@ public class MedicalTipServiceImpl implements MedicalTipService {
     @Override
     public PageResult page(MedicalTipPageQueryDTO dto) {
         PageResult ret = new PageResult();
-        Page<MedicalTip> res = medicalTipMapper.page(dto);
-        ret.setRecords(res.getResult());
-        ret.setTotal(res.getTotal());
+        List<MedicalTip> res = medicalTipMapper.page(dto);
+        ret.setRecords(res);
         return ret;
     }
 }

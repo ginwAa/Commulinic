@@ -2,12 +2,13 @@ package com.commulinic.service.impl;
 
 import com.commulinic.entity.PageResult;
 import com.commulinic.entity.User;
-import com.commulinic.entity.dto.UserPageQueryDTO;
+import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.mapper.UserMapper;
 import com.commulinic.service.UserService;
-import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,13 +26,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageResult pageByUser(UserPageQueryDTO userPageQueryDTO) {
-        userPageQueryDTO.setPage((userPageQueryDTO.getPage() - 1) * userPageQueryDTO.getPageSize());
-        Page<User> res = userMapper.page(userPageQueryDTO);
+    public User getById(Long id) {
+        return userMapper.getById(id);
+    }
+
+    @Override
+    public PageResult pageByUser(PageQueryDTO<User> dto) {
+        List<User> res = userMapper.page(dto);
         PageResult ret = new PageResult();
-        Long total = userMapper.count(userPageQueryDTO);
-        ret.setTotal(total);
-        ret.setRecords(res.getResult());
+        ret.setRecords(res);
+        if (dto.getCount()) {
+            Long total = userMapper.count(dto.getData());
+            ret.setTotal(total);
+        }
         return ret;
     }
 }

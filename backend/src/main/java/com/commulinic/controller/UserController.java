@@ -2,11 +2,14 @@ package com.commulinic.controller;
 
 import com.commulinic.entity.PageResult;
 import com.commulinic.entity.User;
-import com.commulinic.entity.dto.UserPageQueryDTO;
+import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
@@ -22,12 +25,13 @@ public class UserController {
         return userService.add(user);
     }
 
-    @GetMapping("/page")
-    public PageResult page(UserPageQueryDTO userPageQueryDTO) {
-        log.info("page {}", userPageQueryDTO.toString());
-        PageResult result = userService.pageByUser(userPageQueryDTO);
+    @PostMapping("/page")
+    public PageResult page(@RequestBody PageQueryDTO<User> dto) {
+        log.info(dto.toString());
+        PageResult result = userService.pageByUser(dto);
         return result;
     }
+
 
     @PostMapping("/update")
     public Long update(@RequestBody User user) {

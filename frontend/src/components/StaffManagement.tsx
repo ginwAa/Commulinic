@@ -1,4 +1,4 @@
-import {User} from "../utils/entity.ts";
+import {Doctor, DoctorVO} from "../utils/entity.ts";
 import React, {useEffect, useState} from "react";
 import {
     Button,
@@ -17,20 +17,20 @@ import {
 } from "antd";
 import {SearchOutlined} from "@ant-design/icons";
 import {SorterResult} from "antd/es/table/interface";
-import {userAdd, userPage, userUpdate} from "../apis/userApis.ts";
+import {doctorAdd, doctorPage, doctorUpdate} from "../apis/doctorApis.ts";
 
 interface PageProps {
     name: string;
     gender: Array<number> | null;
     status: Array<number> | null;
-    role: Array<number> | null;
     phone: string;
-    age: number;
     email: string;
+    seniority: number;
+    departmentId: number;
 }
 
 const fetchData = async (page: number, pageSize: number, props: PageProps) => {
-    return userPage({
+    return doctorPage({
         page: page,
         pageSize: pageSize,
         ...props,
@@ -41,7 +41,7 @@ const fetchData = async (page: number, pageSize: number, props: PageProps) => {
 interface EditProps {
     editOpen: boolean;
     setEditOpen: (visible: boolean) => void;
-    record: User | null;
+    record: Doctor | null;
     adding: boolean;
     setAdding: (adding: boolean) => void;
     onSuccess: () => void;
@@ -57,21 +57,14 @@ const EditModal = (props: EditProps) => {
             props.setAdding(false);
             return;
         }
-        const formData: User = {
+        const formData: Doctor = {
             id: props.record?.id ? props.record.id : -1,
-            name: form.getFieldValue("name"),
-            password: form.getFieldValue("password"),
-            role: form.getFieldValue("role"),
             status: form.getFieldValue("status"),
-            gender: form.getFieldValue("gender"),
-            phone: form.getFieldValue("phone"),
-            age: form.getFieldValue("age"),
-            address: form.getFieldValue("address"),
-            emergency: form.getFieldValue("emergency"),
-            email: form.getFieldValue("email"),
+            position: form.getFieldValue("position"),
+            departmentId: form.getFieldValue("departmentId"),
         }
         form.validateFields().then(() => {
-            const func = props.adding ? userAdd : userUpdate;
+            const func = props.adding ? doctorAdd : doctorUpdate;
             func(formData).then(() => {
                 messageApi.success("操作成功!");
                 props.onSuccess();
@@ -169,7 +162,7 @@ const FilterSearch = (props: FilterSearchProps) => {
 const StaffManagement = () => {
     const [messageApi, contextHolder] = message.useMessage();
 
-    const [data, setData] = useState<User[]>([]);
+    const [data, setData] = useState<DoctorVO[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(50);
     const [total, setTotal] = useState(0);
@@ -177,12 +170,12 @@ const StaffManagement = () => {
     const [editSuccess, setEditSuccess] = useState(false);
     const [pageProps, setPageProps] = useState<PageProps>({
         name: '',
-        phone: '',
         gender: null,
         status: null,
-        role: null,
-        age: 0,
+        phone: '',
         email: '',
+        seniority: 0,
+        departmentId: 0,
     });
     useEffect(() => {
         setTableLoading(true);
@@ -199,13 +192,14 @@ const StaffManagement = () => {
             setTableLoading(false);
         });
     }, [page, pageSize, pageProps, editSuccess]);
-    const [selectedRow, setSelectedRow] = useState<User | null>(null);
+
+    const [selectedRow, setSelectedRow] = useState<DoctorVO | null>(null);
     const [adding, setAdding] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
     const rowSelection = {
         selectedRowKeys: selectedRowKeys,
-        onChange: (selectedRowKeys: React.Key[], selectedRows: User[]) => {
+        onChange: (selectedRowKeys: React.Key[], selectedRows: DoctorVO[]) => {
             setSelectedRowKeys(selectedRowKeys);
             setSelectedRow(selectedRows[0]);
         },
@@ -258,20 +252,17 @@ const StaffManagement = () => {
             }}
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
-                   onChange={(pagination: TablePaginationConfig, filters: Record<string, number>, sorter: SorterResult<User> | SorterResult<User>[]) => {
+                   onChange={(pagination: TablePaginationConfig, filters: Record<string, number>, sorter: SorterResult<DoctorVO> | SorterResult<DoctorVO>[]) => {
                        console.log('params', filters, sorter, pagination);
 
                        setPageProps({
                            ...pageProps,
                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                            // @ts-expect-error
-                           age: sorter?.order !== undefined ? sorter.order === 'ascend' ? 1 : 2 : 0,
+                           seniority: sorter?.order !== undefined ? sorter.order === 'ascend' ? 1 : 2 : 0,
                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                            // @ts-expect-error
                            gender: filters?.gender ? filters?.gender : null,
-                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                           // @ts-expect-error
-                           role: filters?.role ? filters?.role : null,
                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                            // @ts-expect-error
                            status: filters?.status ? filters?.status : null,
@@ -302,16 +293,8 @@ const StaffManagement = () => {
                                       {text: '禁用', value: 2},
                                   ]
                               }/>
-                <Table.Column title="角色" dataIndex="role" key="role" width={'5rem'}
-                              render={(role: number) => role === 1 ? '管理员' : (role === 2 ? '医生' : '普通用户')}
-                              filters={
-                                  [
-                                      {text: '管理员', value: 1},
-                                      {text: '医生', value: 2},
-                                      {text: '普通用户', value: 3},
-                                  ]
-                              }/>
-                <Table.Column title="地址" dataIndex="address" key="address" width={'10rem'}/>
+                <Table.Column title="工龄" dataIndex="seniority" key="seniority" sorter={true} width={'5rem'}/>
+                <Table.Column title="位置" dataIndex="position" key="position" width={'10rem'}/>
                 <Table.Column title="手机号" dataIndex="phone" key="phone" filterIcon={<SearchOutlined/>} width={'8rem'}
                               filterDropdown={FilterSearch({
                                   searchText: pageProps.phone, onSearch:
@@ -319,8 +302,6 @@ const StaffManagement = () => {
                                           setPageProps({...pageProps, phone: value});
                                       }
                               })}/>
-                <Table.Column title="年龄" dataIndex="age" key="age" sorter={true} width={'5rem'}/>
-                <Table.Column title="紧急联系人" dataIndex="emergency" key="emergency" width={'8rem'}/>
                 <Table.Column title="邮箱" dataIndex="email" key="email" filterIcon={<SearchOutlined/>} width={'8rem'}
                               filterDropdown={FilterSearch({
                                   searchText: pageProps.email, onSearch:

@@ -2,13 +2,14 @@ package com.commulinic.mapper;
 
 import com.commulinic.entity.MedicalHistory;
 import com.commulinic.entity.dto.MedicalHistoryPageQueryDTO;
-import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface MedicalHistoryMapper {
-    Page<MedicalHistory> page(MedicalHistoryPageQueryDTO dto);
+    List<MedicalHistory> page(MedicalHistoryPageQueryDTO dto);
 
     Long update(MedicalHistory history);
 
