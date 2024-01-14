@@ -6,4 +6,4 @@
 
 ### React-Ts + Antd
 
-### SpringBoot + MariaDB/PostgreSQL? + Redis + Kafka/RocketMQ?
+### JDK21 + SpringBoot3 + MariaDB + Redis + Kafka/RocketMQ?
