@@ -2,6 +2,7 @@ package com.commulinic.mapper;
 
 import com.commulinic.entity.Application;
 import com.commulinic.entity.dto.PageQueryDTO;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface ApplicationMapper {
 
     List<Application> page(PageQueryDTO<Application> dto);
 
+    @Insert("insert into application (user_id, department_id, name, description, extra, updated_at, status) " +
+            "VALUES (#{userId}, #{departmentId}, #{name}, #{description}, #{extra}, #{updatedAt}, #{status})")
     Long add(Application application);
 
     Long update(Application application);
