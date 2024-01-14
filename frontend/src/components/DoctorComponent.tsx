@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {FormOutlined, SearchOutlined} from "@ant-design/icons";
 import {FilterSearch} from "./TableComponents.tsx";
 import {DataNode} from "antd/es/tree";
+import {unixSecondToYear} from "../utils/time.ts";
 
 const fetchData = doctorPage;
 
@@ -70,12 +71,7 @@ interface Props {
 
 const DoctorComponent = (props: Props) => {
     const [messageApi, contextHolder] = message.useMessage();
-    const [data, setData] = useState<DoctorVO[]>([{
-        ...EMPTY_DOCTOR_VO,
-        departmentId: 1,
-        id: 1,
-        name: 'test',
-    }]);
+    const [data, setData] = useState<DoctorVO[]>([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
@@ -124,7 +120,7 @@ const DoctorComponent = (props: Props) => {
             <Table size={"small"} dataSource={data} loading={loading} pagination={false} rowKey="id"
                    scroll={{x: 'max-content', y: '55vh'}} rowSelection={{type: 'radio', ...rowSelection}}>
                 <Table.Column title="ID" dataIndex="id" key="id"/>
-                <Table.Column title="姓名" dataIndex="name" key="name" filterIcon={<SearchOutlined/>} width={'8rem'}
+                <Table.Column title="姓名" dataIndex="name" key="name" filterIcon={<SearchOutlined/>}
                               filterDropdown={FilterSearch({
                                   searchText: pageProps.name, onSearch:
                                       (value: string) => {
@@ -147,7 +143,8 @@ const DoctorComponent = (props: Props) => {
                                       {text: '离职', value: 4},
                                   ]
                               }/>
-                <Table.Column title="工龄" dataIndex="seniority" key="seniority" sorter={true} width={'5rem'}/>
+                <Table.Column title="工龄" dataIndex="seniority" key="seniority" sorter={true} width={'5rem'}
+                              render={(seniority: number) => unixSecondToYear(Date.now() / 1000 - seniority) + '年'}/>
                 <Table.Column title="科室" dataIndex="position" key="position" width={'10rem'}/>
                 <Table.Column title="手机号" dataIndex="phone" key="phone" filterIcon={<SearchOutlined/>} width={'8rem'}
                               filterDropdown={FilterSearch({

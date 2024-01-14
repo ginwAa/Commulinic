@@ -1,8 +1,8 @@
 package com.commulinic.service.impl;
 
-import com.commulinic.entity.PageResult;
 import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
+import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.UserMapper;
 import com.commulinic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageResult pageByUser(PageQueryDTO<User> dto) {
+    public PageVO<User> pageByUser(PageQueryDTO<User> dto) {
         List<User> res = userMapper.page(dto);
-        PageResult ret = new PageResult();
+        PageVO<User> ret = new PageVO<User>();
         ret.setRecords(res);
         if (dto.getCount()) {
             Long total = userMapper.count(dto.getData());

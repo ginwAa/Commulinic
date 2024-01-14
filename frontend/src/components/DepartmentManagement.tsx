@@ -3,11 +3,9 @@ import {
     Card,
     Descriptions,
     DescriptionsProps,
-    Drawer,
     Empty,
     Form,
     Input,
-    List,
     message,
     Modal,
     Space,
@@ -26,6 +24,7 @@ import {
 import {DataNode} from "antd/es/tree";
 import DoctorComponent from "./DoctorComponent.tsx";
 import {DeleteWarning} from "./TableComponents.tsx";
+import ApplyComponent from "./ApplyComponent.tsx";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -104,21 +103,7 @@ const EditModal = (props: EditProps) => {
     );
 }
 
-interface ApplyProps {
-    applyOpen: boolean;
-    setApplyOpen: (visible: boolean) => void;
-}
 
-const ApplyDrawer = (props: ApplyProps) => {
-    return (
-        <>
-            <Drawer title="坐诊申请" placement="left" open={props.applyOpen} onClose={() => props.setApplyOpen(false)}
-                    size={'large'}>
-                <List/>
-            </Drawer>
-        </>
-    );
-}
 const DepartmentManagement = () => {
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -252,7 +237,7 @@ const DepartmentManagement = () => {
 
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedNode} adding={adding}
                        setAdding={setAdding} onSuccess={() => setEditSuccess(!editSuccess)}/>
-            <ApplyDrawer applyOpen={applyOpen} setApplyOpen={setApplyOpen}/>
+            <ApplyComponent applyOpen={applyOpen} setApplyOpen={setApplyOpen}/>
             <DeleteWarning name={selectedNode.name} onOk={() => {
                 setDeleteOpen(false);
                 onDelete(selectedNode.id);

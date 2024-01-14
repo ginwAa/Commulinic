@@ -1,6 +1,7 @@
 package com.commulinic.controller;
 
 import com.commulinic.entity.Department;
+import com.commulinic.entity.Result;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +14,33 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @GetMapping("/tree")
-    public DepartmentVO tree() {
-        return departmentService.tree();
+    public Result<DepartmentVO> tree() {
+        DepartmentVO tree = departmentService.tree();
+        return Result.success(tree);
     }
 
     @PostMapping("/add")
-    public Long add(@RequestBody Department department) {
-        return departmentService.add(department);
+    public Result<Long> add(@RequestBody Department department) {
+        Long added = departmentService.add(department);
+        return Result.success(added);
     }
 
     @PostMapping("/update")
-    public Long update(@RequestBody Department department) {
-        return departmentService.update(department);
+    public Result<Long> update(@RequestBody Department department) {
+        Long updated = departmentService.update(department);
+        return Result.success(updated);
     }
 
     @PostMapping("/delete/{id}")
-    public Long delete(@PathVariable Long id) {
-        return departmentService.delete(id);
+    public Result<Long> delete(@PathVariable Long id) {
+        Long deleted = departmentService.delete(id);
+        return Result.success(deleted);
     }
 
     @GetMapping("/getById/{id}")
-    public Department getById(@PathVariable Long id) {
-        return departmentService.getById(id);
+    public Result<Department> getById(@PathVariable Long id) {
+        Department res = departmentService.getById(id);
+        return Result.success(res);
     }
 
 }

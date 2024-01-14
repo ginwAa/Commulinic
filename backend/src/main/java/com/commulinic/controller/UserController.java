@@ -1,8 +1,9 @@
 package com.commulinic.controller;
 
-import com.commulinic.entity.PageResult;
+import com.commulinic.entity.Result;
 import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
+import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,29 +20,32 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public Long register(@RequestBody User user) {
+    public Result<Long> register(@RequestBody User user) {
         //TODO check duplicate
         log.info("register {}", user.toString());
-        return userService.add(user);
+        Long added = userService.add(user);
+        return Result.success(added);
     }
 
     @PostMapping("/page")
-    public PageResult page(@RequestBody PageQueryDTO<User> dto) {
+    public Result<PageVO<User>> page(@RequestBody PageQueryDTO<User> dto) {
         log.info(dto.toString());
-        PageResult result = userService.pageByUser(dto);
-        return result;
+        PageVO<User> result = userService.pageByUser(dto);
+        return Result.success(result);
     }
 
 
     @PostMapping("/update")
-    public Long update(@RequestBody User user) {
+    public Result<Long> update(@RequestBody User user) {
         log.info("update {}", user.toString());
-        return userService.update(user);
+        Long updated = userService.update(user);
+        return Result.success(updated);
     }
 
     @PostMapping("/add")
-    public Long add(@RequestBody User user) {
+    public Result<Long> add(@RequestBody User user) {
         log.info("add {}", user.toString());
-        return userService.add(user);
+        Long added = userService.add(user);
+        return Result.success(added);
     }
 }

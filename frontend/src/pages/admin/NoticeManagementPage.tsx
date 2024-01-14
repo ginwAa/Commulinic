@@ -9,11 +9,11 @@ const breadcrumbItems = [
         title: '公告管理',
     }
 ];
-const OverviewPage = () => {
+const NoticeManagementPage = () => {
     return (
         <ManagementLayout component={NoticeManagement} key={7} tabKey={7}
                           breadcrumbItems={breadcrumbItems}></ManagementLayout>
     )
 }
 
-export default OverviewPage;
+export default NoticeManagementPage;

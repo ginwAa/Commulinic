@@ -9,8 +9,6 @@ import {Color} from "antd/lib/color-picker";
 import UserManagementPage from "./pages/admin/UserManagementPage.tsx";
 import OverviewPage from "./pages/admin/OverviewPage.tsx";
 import TipManagementPage from "./pages/admin/TipManagementPage.tsx";
-import StaffManagementPage from "./pages/admin/StaffManagementPage.tsx";
-import ApplyManagementPage from "./pages/admin/ApplyManagementPage.tsx";
 import NoticeManagementPage from "./pages/admin/NoticeManagementPage.tsx";
 import RegisterManagementPage from "./pages/admin/RegisterManagementPage.tsx";
 import DepartmentManagementPage from "./pages/admin/DepartmentManagementPage.tsx";
@@ -41,8 +39,6 @@ const App = () => {
                     <Route path="/user" element={<User/>} key="/user"/>
                     <Route path="/admin/departments" element={<DepartmentManagementPage/>} key="/admin/departments"/>
                     <Route path="/admin/users" element={<UserManagementPage/>} key="/admin/users"/>
-                    <Route path="/admin/staff" element={<StaffManagementPage/>} key="/admin/staff"/>
-                    <Route path="/admin/applies" element={<ApplyManagementPage/>} key="/admin/applies"/>
                     <Route path="/admin/register" element={<RegisterManagementPage/>} key="/admin/register"/>
                     <Route path="/admin/notice" element={<NoticeManagementPage/>} key="/admin/notice"/>
                     <Route path="/admin/tips" element={<TipManagementPage/>} key="/admin/tips"/>

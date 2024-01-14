@@ -1,7 +1,6 @@
 package com.commulinic.mapper;
 
 import com.commulinic.entity.Register;
-import com.commulinic.entity.dto.RegisterPageQueryDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 

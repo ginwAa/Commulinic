@@ -4,7 +4,7 @@
 <mapper namespace="com.commulinic.mapper.DoctorMapper">
     <select id="page" resultType="com.commulinic.entity.vo.DoctorVO">
         select * from
-            (select * from doctor
+            (select * from doctor do
             <where>
                 <if test="data.id != null and data.id != 0"> and id = #{data.id} </if>
                 <if test="data.userId != null and data.userId != 0"> and user_id = #{data.userId} </if>
