@@ -4,6 +4,7 @@ import com.commulinic.entity.Department;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.mapper.DepartmentMapper;
 import com.commulinic.service.DepartmentService;
+import com.commulinic.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ import java.util.Map;
 public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentMapper departmentMapper;
+    @Autowired
+    private DoctorService doctorService;
 
     public DepartmentVO tree() {
         List<Department> data = departmentMapper.all();
-
         DepartmentVO root = new DepartmentVO();
         Long rootId = null;
-//        log.info("data {}", data);
         Map<Long, DepartmentVO> map = new HashMap<>();
         int i = 0;
         for (; i < data.size(); ++i) {
@@ -58,6 +59,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     public Long update(Department department) {
+        if (department.getName() != null) {
+            doctorService.updateDepartment(department);
+        }
         return departmentMapper.update(department);
     }
 

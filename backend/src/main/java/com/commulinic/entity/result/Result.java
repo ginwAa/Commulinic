@@ -1,4 +1,4 @@
-package com.commulinic.entity;
+package com.commulinic.entity.result;
 
 import lombok.Data;
 

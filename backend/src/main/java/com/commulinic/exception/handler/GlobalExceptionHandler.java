@@ -1,7 +1,7 @@
 package com.commulinic.exception.handler;
 
 import com.commulinic.constant.MessageConstant;
-import com.commulinic.entity.Result;
+import com.commulinic.entity.result.Result;
 import com.commulinic.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;

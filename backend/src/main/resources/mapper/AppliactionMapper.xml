@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.commulinic.mapper.ApplicationMapper">
+
+    <select id="page" resultType="com.commulinic.entity.Application">
+        select * from application
+        <where>
+            <if test="name != null and name !=''">and name like concat('%', #{name}, '%')</if>
+        </where>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <update id="update">
+        update application
+            <set>
+                <if test="status != null and status != 0">status = #{status},</if>
+                <if test="updatedAt != null and updatedAt != 0">updated_at = #{updatedAt},</if>
+            </set>
+    </update>
+
+    <select id="count" resultType="java.lang.Long">
+        select count(1) from application
+        <where>
+            <if test="name != null and name !=''">and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+</mapper>

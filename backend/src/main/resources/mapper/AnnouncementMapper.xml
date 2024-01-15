@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.commulinic.mapper.MedTipMapper">
+<mapper namespace="com.commulinic.mapper.AnnouncementMapper">
 
-    <select id="page" resultType="com.commulinic.entity.MedTip">
-        select * from medical_tip
+    <select id="page" resultType="com.commulinic.entity.Announcement">
+        select * from announcemont
         <where>
             <if test="description != null and description != ''">
                 and description like concat('%', #{description}, '%')
@@ -14,7 +14,7 @@
     </select>
 
     <select id="count" resultType="java.lang.Long">
-        select COUNT(1) from medical_tip
+        select COUNT(1) from announcemont
         <where>
             <if test="description != null and description != ''">
                 and description like concat('%', #{description}, '%')

@@ -1,8 +1,8 @@
 package com.commulinic.controller;
 
 import com.commulinic.entity.Application;
-import com.commulinic.entity.Result;
 import com.commulinic.entity.dto.PageQueryDTO;
+import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.commulinic.controller;
 
 import com.commulinic.entity.Department;
-import com.commulinic.entity.Result;
+import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;

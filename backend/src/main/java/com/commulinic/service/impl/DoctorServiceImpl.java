@@ -1,12 +1,12 @@
 package com.commulinic.service.impl;
 
+import com.commulinic.entity.Department;
 import com.commulinic.entity.Doctor;
 import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.DoctorVO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.DoctorMapper;
-import com.commulinic.service.DepartmentService;
 import com.commulinic.service.DoctorService;
 import com.commulinic.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -21,8 +21,6 @@ public class DoctorServiceImpl implements DoctorService {
     private DoctorMapper doctorMapper;
     @Autowired
     private UserService userService;
-    @Autowired
-    private DepartmentService departmentService;
 
     public PageVO<DoctorVO> page(PageQueryDTO<DoctorVO> dto) {
         List<DoctorVO> page = doctorMapper.page(dto);
@@ -40,8 +38,12 @@ public class DoctorServiceImpl implements DoctorService {
         DoctorVO vo = new DoctorVO();
         BeanUtils.copyProperties(doctor, vo);
         BeanUtils.copyProperties(user, vo);
-        vo.setDepartment(departmentService.getById(doctor.getDepartmentId()).getName());
         return vo;
+    }
+
+    @Override
+    public Long updateDepartment(Department department) {
+        return doctorMapper.updateDepartment(department);
     }
 
     public Long update(Doctor doctor) {

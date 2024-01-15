@@ -17,4 +17,6 @@ public interface MedTipMapper {
 
     @Update("update medical_tip set description = #{description}, updated_at = #{updated_at} where id = #{id}")
     Long update(MedTip tip);
+
+    Long count(PageQueryDTO<MedTip> dto);
 }

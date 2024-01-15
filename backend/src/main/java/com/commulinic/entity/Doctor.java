@@ -13,9 +13,8 @@ public class Doctor implements Serializable {
     private Integer seniority;
     private String position;
     private Integer status;
-//    private Integer rating;
-//    private Integer morningBegin;
-//    private Integer morningEnd;
-//    private Integer afternoonBegin;
-//    private Integer afternoonEnd;
+    private Integer morningBegin;
+    private Integer morningEnd;
+    private Integer afternoonBegin;
+    private Integer afternoonEnd;
 }

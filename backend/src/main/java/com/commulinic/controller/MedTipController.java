@@ -1,11 +1,10 @@
 package com.commulinic.controller;
 
 import com.commulinic.entity.MedTip;
-import com.commulinic.entity.Result;
 import com.commulinic.entity.dto.PageQueryDTO;
+import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.MedTipService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/meditip")
-@Slf4j
+@RequestMapping("/medTip")
 public class MedTipController {
     @Autowired
     private MedTipService medTipService;
