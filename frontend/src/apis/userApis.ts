@@ -5,7 +5,7 @@ export const userAdd = async (user: User) => {
     delete user.id;
     return post<number>('/user/add', user);
 };
-export const userPage = async (page: number, pageSize: number, user: User, count: boolean) => {
+export const userPage = async (user: User, page: number, pageSize: number, count: boolean) => {
     delete user.password;
     const dto: PageDTO<User> = {
         count: count,

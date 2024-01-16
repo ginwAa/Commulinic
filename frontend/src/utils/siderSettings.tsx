@@ -30,10 +30,7 @@ const siderItems: MenuItem[] = [
     siderItem(<Link to={"/admin/departments"}>部门管理</Link>, 2, <DeploymentUnitOutlined/>),
     siderItem(<Link to={"/admin/users"}>用户管理</Link>, 3, <TeamOutlined/>,),
     siderItem(<Link to={"/admin/register"}>预约管理</Link>, 6, <FileSearchOutlined/>),
-    siderItem('社区管理', -2, <NotificationOutlined/>, [
-        siderItem(<Link to={"/admin/notice"}>公告管理</Link>, 7),
-        siderItem(<Link to={"/admin/tips"}>医学知识</Link>, 8),
-    ]),
+    siderItem(<Link to={"/admin/community"}>社区管理</Link>, 7, <NotificationOutlined/>),
 ];
 
 export default siderItems;

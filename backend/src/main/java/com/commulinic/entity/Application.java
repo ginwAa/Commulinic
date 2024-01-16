@@ -9,9 +9,10 @@ public class Application implements Serializable {
     private Long id;
     private Long userId;
     private Long departmentId;
+    private String department;
     private String name;
     private String description;
     private String extra;
     private Integer updateAt;
-    private Integer status;
+    private Integer status; // 1申请者 2通过 3拒绝
 }

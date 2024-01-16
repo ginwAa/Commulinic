@@ -6,8 +6,8 @@
     <select id="page" resultType="com.commulinic.entity.Announcement">
         select * from announcemont
         <where>
-            <if test="description != null and description != ''">
-                and description like concat('%', #{description}, '%')
+            <if test="data.description != null and data.description != ''">
+                and description like concat('%', #{data.description}, '%')
             </if>
         </where>
         LIMIT #{size} OFFSET #{offset}

@@ -52,7 +52,10 @@ const EditModal = (props: EditProps) => {
                         <Input/>
                     </Form.Item>
                     <Form.Item name="status" label="状态" rules={[{required: true, message: '请选择状态'}]}>
-                        <Select options={[{value: 2, label: '在职'}, {value: 4, label: '离职'}]}/>
+                        <Select options={[{value: 2, label: '在职'}, {value: 4, label: '离职'}, {
+                            value: 1,
+                            label: '休假'
+                        }]}/>
                     </Form.Item>
                     <Form.Item name="departmentId" label="部门" rules={[{required: true, message: '请选择部门'}]}>
                         <TreeSelect treeData={props.treeData}/>
@@ -136,11 +139,12 @@ const DoctorComponent = (props: Props) => {
                                   ]
                               }/>
                 <Table.Column title="状态" dataIndex="status" key="status" width={'5rem'}
-                              render={(status: number) => status === 2 ? '在职' : '离职'}
+                              render={(status: number) => status === 2 ? '在职' : status === 1 ? '休假' : '离职'}
                               filters={
                                   [
                                       {text: '在职', value: 2},
                                       {text: '离职', value: 4},
+                                      {text: '休假', value: 1},
                                   ]
                               }/>
                 <Table.Column title="工龄" dataIndex="seniority" key="seniority" sorter={true} width={'5rem'}

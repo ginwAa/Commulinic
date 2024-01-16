@@ -6,7 +6,7 @@
     <select id="page" resultType="com.commulinic.entity.Application">
         select * from application
         <where>
-            <if test="name != null and name !=''">and name like concat('%', #{name}, '%')</if>
+            <if test="data.name != null and data.name !=''">and name like concat('%', #{data.name}, '%')</if>
         </where>
         LIMIT #{size} OFFSET #{offset}
     </select>

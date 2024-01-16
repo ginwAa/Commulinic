@@ -4,19 +4,34 @@ import About from "./pages/About.tsx";
 import User from "./pages/User.tsx";
 import {ColorPicker, ConfigProvider, FloatButton, theme} from "antd";
 import {FormatPainterOutlined, SkinOutlined} from "@ant-design/icons";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Color} from "antd/lib/color-picker";
 import UserManagementPage from "./pages/admin/UserManagementPage.tsx";
 import OverviewPage from "./pages/admin/OverviewPage.tsx";
-import TipManagementPage from "./pages/admin/TipManagementPage.tsx";
-import NoticeManagementPage from "./pages/admin/NoticeManagementPage.tsx";
 import RegisterManagementPage from "./pages/admin/RegisterManagementPage.tsx";
 import DepartmentManagementPage from "./pages/admin/DepartmentManagementPage.tsx";
 import Login from "./pages/Login.tsx";
+import CommunityManagementPage from "./pages/admin/CommunityManagementPage.tsx";
 
 const App = () => {
-    const [curTheme, setCurTheme] = useState(0);
-    const [curColor, setCurColor] = useState<Color | string>('#2c9678');
+    if (localStorage.getItem('admin/siderCollapsed') === null) {
+
+        localStorage.setItem('admin/siderCollapsed', 'false');
+    }
+    if (localStorage.getItem('theme') === null) {
+        localStorage.setItem('theme', '0');
+    }
+    if (localStorage.getItem('color') === null) {
+        localStorage.setItem('color', '#2c9678');
+    }
+    const [curTheme, setCurTheme] = useState<number>(Number(localStorage.getItem('theme')));
+    const [curColor, setCurColor] = useState<string | Color>(String(localStorage.getItem('color')));
+    useEffect(() => {
+        localStorage.setItem('theme', String(curTheme));
+    }, [curTheme]);
+    useEffect(() => {
+        localStorage.setItem('color', (typeof curColor === 'string' ? curColor : curColor.toHexString()));
+    }, [curColor]);
     return (
         <ConfigProvider theme={{
             algorithm: curTheme === 0 ? theme.defaultAlgorithm : theme.darkAlgorithm,
@@ -40,8 +55,7 @@ const App = () => {
                     <Route path="/admin/departments" element={<DepartmentManagementPage/>} key="/admin/departments"/>
                     <Route path="/admin/users" element={<UserManagementPage/>} key="/admin/users"/>
                     <Route path="/admin/register" element={<RegisterManagementPage/>} key="/admin/register"/>
-                    <Route path="/admin/notice" element={<NoticeManagementPage/>} key="/admin/notice"/>
-                    <Route path="/admin/tips" element={<TipManagementPage/>} key="/admin/tips"/>
+                    <Route path="/admin/community" element={<CommunityManagementPage/>} key="/admin/community"/>
                 </Routes>
             </Router>
             <FloatButton.Group shape="square" style={{right: '1rem', bottom: '1rem',}}>

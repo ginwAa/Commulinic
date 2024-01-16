@@ -5,29 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AnnouncementMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/CommunityManagement.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DoctorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/result/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/exception/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/exception/handler/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/AnnouncementMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/AnnouncementMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DoctorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DoctorMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/MedTipMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/MedTipMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/AnnouncementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/AnnouncementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/AnnouncementServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/AnnouncementServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DepartmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DoctorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ApplicationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ApplicationMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/AnnouncementMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AnnouncementMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/MedTipMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/MedTipMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/apis/applyApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/applicationApis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/apis/departmentApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/departmentApis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/apis/userApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/userApis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ApplyComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DoctorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DoctorComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/NoticeManagement.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/TipManagement.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/UserManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layout/ManagementLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/ManagementLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/CommunityManagementPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/CommunityManagementPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/NoticeManagementPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/TipManagementPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/siderSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/siderSettings.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +117,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
     &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CodeFields/Code_Java/Commulinic/Commulinic/backend/src/main/resources/mapper&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CodeFields/Code_Java/Commulinic/Commulinic/backend/target&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -142,9 +143,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\target" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\resources\mapper" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\java\com\commulinic" />
-      <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\target" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\frontend\src\pages\admin" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\frontend\public" />
     </key>
@@ -270,7 +271,9 @@
       <workItem from="1705250178442" duration="283000" />
       <workItem from="1705250498234" duration="73000" />
       <workItem from="1705250602447" duration="2945000" />
-      <workItem from="1705294003624" duration="3001000" />
+      <workItem from="1705294003624" duration="5023000" />
+      <workItem from="1705400857140" duration="7176000" />
+      <workItem from="1705415733467" duration="3143000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -416,7 +419,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705251942817</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add sql">
+      <option name="closed" value="true" />
+      <created>1705297205954</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1705297205954</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -440,7 +451,6 @@
     <MESSAGE value="router set" />
     <MESSAGE value="edit README.md" />
     <MESSAGE value="theme &amp; responsive layout" />
-    <MESSAGE value="add sql" />
     <MESSAGE value="user management add" />
     <MESSAGE value="user management edit modal" />
     <MESSAGE value="user management: add" />
@@ -453,7 +463,8 @@
     <MESSAGE value="doctor management" />
     <MESSAGE value="reconstruct and improve" />
     <MESSAGE value="http filter" />
-    <option name="LAST_COMMIT_MESSAGE" value="http filter" />
+    <MESSAGE value="add sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="add sql" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

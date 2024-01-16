@@ -135,7 +135,7 @@ const UserManagement = () => {
         setTableLoading(true);
         setSelectedRow(EMPTY_USER);
         setSelectedKey(0);
-        fetchData(page, pageSize, pageProps, true)
+        fetchData(pageProps, page, pageSize, true)
             .then(res => {
                 setData(res.data.records);
                 setTotal(res.data.total);

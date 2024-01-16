@@ -24,7 +24,7 @@ import {
 import {DataNode} from "antd/es/tree";
 import DoctorComponent from "./DoctorComponent.tsx";
 import {DeleteWarning} from "./TableComponents.tsx";
-import ApplyComponent from "./ApplyComponent.tsx";
+import ApplicationComponent from "./ApplicationComponent.tsx";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -237,7 +237,7 @@ const DepartmentManagement = () => {
 
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedNode} adding={adding}
                        setAdding={setAdding} onSuccess={() => setEditSuccess(!editSuccess)}/>
-            <ApplyComponent applyOpen={applyOpen} setApplyOpen={setApplyOpen}/>
+            <ApplicationComponent applyOpen={applyOpen} setApplyOpen={setApplyOpen}/>
             <DeleteWarning name={selectedNode.name} onOk={() => {
                 setDeleteOpen(false);
                 onDelete(selectedNode.id);

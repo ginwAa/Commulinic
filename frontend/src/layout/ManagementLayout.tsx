@@ -23,13 +23,18 @@ interface MainContentProps {
 
 
 const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) => {
-    const [collapsed, setCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(localStorage.getItem('admin/siderCollapsed') === 'true');
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const themeToken = theme.useToken();
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth);
     };
+
+    useEffect(() => {
+        localStorage.setItem('admin/siderCollapsed', String(collapsed));
+    }, [collapsed]);
+
 
     useEffect(() => {
         window.addEventListener('resize', handleWindowResize);

@@ -12,8 +12,8 @@ public interface ApplicationMapper {
 
     List<Application> page(PageQueryDTO<Application> dto);
 
-    @Insert("insert into application (user_id, department_id, name, description, extra, updated_at, status) " +
-            "VALUES (#{userId}, #{departmentId}, #{name}, #{description}, #{extra}, #{updatedAt}, #{status})")
+    @Insert("insert into application (user_id, department_id, department, name, description, extra, updated_at, status) " +
+            "VALUES (#{userId}, #{departmentId}, #{department}, #{name}, #{description}, #{extra}, #{updatedAt}, #{status})")
     Long add(Application application);
 
     Long update(Application application);

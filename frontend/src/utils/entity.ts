@@ -91,6 +91,27 @@ export const EMPTY_DOCTOR_VO: DoctorVO = {
     email: '',
 }
 
+export interface Application {
+    id?: number;
+    userId?: number;
+    departmentId: number;
+    department: string;
+    name: string;
+    description: string;
+    extra?: string;
+    updateAt: number;
+    status: number;
+}
+
+export const EMPTY_APPLICATION: Application = {
+    departmentId: 0,
+    department: '',
+    name: '',
+    description: '',
+    updateAt: 0,
+    status: 0
+}
+
 export interface PageDTO<T> {
     size: number,
     offset: number,

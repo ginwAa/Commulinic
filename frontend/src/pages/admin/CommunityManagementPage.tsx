@@ -1,4 +1,5 @@
 import ManagementLayout from "../../layout/ManagementLayout.tsx";
+import CommunityManagement from "../../components/CommunityManagement.tsx";
 
 const breadcrumbItems = [
     {
@@ -7,7 +8,7 @@ const breadcrumbItems = [
 ];
 const OverviewPage = () => {
     return (
-        <ManagementLayout component={DepartmentManagement} key={2} tabKey={2}
+        <ManagementLayout component={CommunityManagement} key={7} tabKey={7}
                           breadcrumbItems={breadcrumbItems}></ManagementLayout>
     )
 }

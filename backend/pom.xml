@@ -75,6 +75,7 @@
                     <source>21</source>
                     <target>21</target>
                     <encoding>UTF-8</encoding>
+                    <compilerArgument>-parameters</compilerArgument>
                 </configuration>
             </plugin>
             <plugin>
