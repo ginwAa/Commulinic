@@ -1,9 +1,8 @@
 import {
+    Badge,
     Button,
-    Card,
     Descriptions,
     DescriptionsProps,
-    Empty,
     Form,
     Input,
     message,
@@ -13,7 +12,13 @@ import {
     TreeSelect
 } from "antd";
 import {useEffect, useState} from "react";
-import {Department, DepartmentTreeNode, EMPTY_DEPARTMENT} from "../utils/entity.ts";
+import {
+    APPLICATION_CONSTANT,
+    Department,
+    DepartmentTreeNode,
+    EMPTY_APPLICATION,
+    EMPTY_DEPARTMENT
+} from "../utils/entity.ts";
 import {
     departmentAdd,
     departmentDelete,
@@ -23,8 +28,9 @@ import {
 } from "../apis/departmentApis.ts";
 import {DataNode} from "antd/es/tree";
 import DoctorComponent from "./DoctorComponent.tsx";
-import {DeleteWarning} from "./TableComponents.tsx";
+import {ModalWarning} from "./TableComponents.tsx";
 import ApplicationComponent from "./ApplicationComponent.tsx";
+import {applicationCount} from "../apis/applicationApis.ts";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -116,12 +122,15 @@ const DepartmentManagement = () => {
     const [loading, setLoading] = useState(false);
     const [applyOpen, setApplyOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
+    const [unread, setUnread] = useState(0);
     const getDescription = async (key: number) => {
         if (!key) {
+            setSelectedKey(0);
             setDescription([]);
             setSelectedNode(EMPTY_DEPARTMENT);
             return;
         }
+        console.log("get desc ", key);
         departmentGetById(key).then(res => {
             if (!res || !res.data) {
                 setDescription([]);
@@ -149,7 +158,6 @@ const DepartmentManagement = () => {
     };
     const [description, setDescription] = useState<DescriptionsProps['items']>([]);
     useEffect(() => {
-        console.log("tree");
         setLoading(true);
         departmentTree().then(res => {
             setData([res.data]);
@@ -157,22 +165,30 @@ const DepartmentManagement = () => {
                 setSelectedKey(res.data.value);
             }
         }).catch(err => {
-            console.log(err);
-            messageApi.error("加载失败，请检查网络连接");
+            messageApi.error("部门结构信息加载失败，请检查网络连接！", err.message);
         }).finally(() => {
             setLoading(false);
+            console.log("tree");
         });
-    }, [editSuccess]);
-
+    }, [editSuccess, applyOpen]);
     useEffect(() => {
-        console.log("get desc");
         setLoading(true);
         getDescription(selectedKey).catch(err => {
-            throw new Error(err);
+            messageApi.error("部门详细信息加载失败，请检查网络连接！", err.message);
         }).finally(() => {
             setLoading(false);
         });
     }, [selectedKey]);
+    useEffect(() => {
+        applicationCount({
+            ...EMPTY_APPLICATION,
+            status: APPLICATION_CONSTANT.STATUS_UNREAD,
+        }).then(res => {
+            setUnread(res.data);
+        }).catch(err => {
+            messageApi.error("坐镇申请信息加载失败，请检查网络连接！", err.message);
+        })
+    }, [editSuccess]);
     const onSelect = (value: number | null, node: DataNode) => {
         if (value) {
             setSelectedKey(value);
@@ -203,8 +219,11 @@ const DepartmentManagement = () => {
                 <TreeSelect treeData={transform(data)} disabled={!data || data.length === 0} placeholder={'选择部门'}
                             dropdownStyle={{maxHeight: 400, overflow: 'auto', width: 'max-content'}}
                             placement={"bottomLeft"} onSelect={onSelect} value={selectedKey} size={"small"}/>
+                <Badge count={unread} showZero={true} size={"small"}>
+                    <Button size={'small'} type={'primary'} onClick={() => setApplyOpen(true)}>查看坐诊申请</Button>
+                </Badge>
                 <Button.Group size={'small'}>
-                    <Button type={'primary'} onClick={() => setApplyOpen(true)}>查看坐诊申请</Button>
+
                     <Button type={'primary'} disabled={selectedKey === 0} onClick={() => {
                         setAdding(true);
                         setEditOpen(true);
@@ -221,28 +240,20 @@ const DepartmentManagement = () => {
                 </Button.Group>
             </Space>
             <Spin spinning={loading}>
-                <Card size={'small'} title={'部门详情'}>
-                    {
-                        selectedKey === 0 ? <Empty/> :
-                            <Descriptions items={description} size={"small"}/>
-                    }
-                </Card>
-                <Card size={'small'} title={'部门成员'} style={{height: '70vh'}}>
-                    {
-                        selectedKey === 0 ? <Empty/> :
-                            <DoctorComponent departmentId={selectedKey} treeData={transform(data)}/>
-                    }
-                </Card>
+                <Descriptions items={selectedKey === 0 ? [] : description} title={'部门详情'} bordered={true}/>
+                <DoctorComponent departmentId={selectedKey} treeData={selectedKey === 0 ? [] : transform(data)}
+                                 parentChange={editSuccess}/>
             </Spin>
 
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedNode} adding={adding}
                        setAdding={setAdding} onSuccess={() => setEditSuccess(!editSuccess)}/>
-            <ApplicationComponent applyOpen={applyOpen} setApplyOpen={setApplyOpen}/>
-            <DeleteWarning name={selectedNode.name} onOk={() => {
+            <ApplicationComponent applyOpen={applyOpen} setApplyOpen={setApplyOpen}
+                                  onChange={() => setEditSuccess(!editSuccess)}/>
+            <ModalWarning actionName={'删除'} name={selectedNode.name} onOk={() => {
                 setDeleteOpen(false);
                 onDelete(selectedNode.id);
             }}
-                           open={deleteOpen} onCancel={() => setDeleteOpen(false)}/>
+                          open={deleteOpen} onCancel={() => setDeleteOpen(false)}/>
         </>
     );
 }

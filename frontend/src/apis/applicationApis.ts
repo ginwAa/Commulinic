@@ -24,3 +24,7 @@ export const applicationPage = async (application: Application, page: number, pa
 export const applicationCount = async (application: Application) => {
     return post<number>('/application/count', application);
 }
+
+export const applicationAccept = async (application: Application) => {
+    return post<number>('/application/accept', application);
+}

@@ -4,6 +4,16 @@ export interface PageRes<T> {
     total: number,
 }
 
+export const USER_CONSTANT = {
+    GENDER_MALE: 1,
+    GENDER_FEMALE: 2,
+    ROLE_ADMIN: 1,
+    ROLE_DOCTOR: 2,
+    ROLE_NORMAL: 4,
+    STATUS_ACTIVE: 1,
+    STATUS_FROZEN: 2,
+}
+
 export interface User {
     id?: number,
     name: string,
@@ -50,6 +60,11 @@ export interface DepartmentTreeNode {
     children: DepartmentTreeNode[],
 }
 
+export const DOCTOR_CONSTANT = {
+    STATUS_ACTIVE: 2,
+    STATUS_ABSENT: 1,
+    STATUS_ABORT: 4,
+}
 export interface Doctor {
     id?: number,
     userId?: number,
@@ -89,6 +104,13 @@ export const EMPTY_DOCTOR_VO: DoctorVO = {
     gender: 0,
     phone: '',
     email: '',
+}
+
+export const APPLICATION_CONSTANT = {
+    STATUS_WAIT: 1,
+    STATUS_PASS: 2,
+    STATUS_REJECT: 4,
+    STATUS_UNREAD: 8,
 }
 
 export interface Application {

@@ -40,4 +40,10 @@ public class ApplicationController {
         Long count = applicationService.count(application);
         return Result.success(count);
     }
+
+    @PostMapping("/accept")
+    public Result<Long> accept(@RequestBody Application application) {
+        Long accepted = applicationService.accept(application);
+        return Result.success(accepted);
+    }
 }

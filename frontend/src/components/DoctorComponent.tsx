@@ -70,6 +70,7 @@ const EditModal = (props: EditProps) => {
 interface Props {
     departmentId: number;
     treeData: DataNode[];
+    parentChange: boolean;
 }
 
 const DoctorComponent = (props: Props) => {
@@ -107,7 +108,7 @@ const DoctorComponent = (props: Props) => {
         }).finally(() => {
             setLoading(false);
         })
-    }, [page, pageSize, pageProps, props.departmentId, editSuccess]);
+    }, [page, pageSize, pageProps, props.departmentId, editSuccess, props.parentChange]);
     return (
         <>
             {contextHolder}

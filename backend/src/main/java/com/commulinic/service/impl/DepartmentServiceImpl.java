@@ -3,12 +3,14 @@ package com.commulinic.service.impl;
 import com.commulinic.entity.Department;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.mapper.DepartmentMapper;
+import com.commulinic.service.ApplicationService;
 import com.commulinic.service.DepartmentService;
 import com.commulinic.service.DoctorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +24,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentMapper departmentMapper;
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private ApplicationService applicationService;
 
     public DepartmentVO tree() {
         List<Department> data = departmentMapper.all();
@@ -58,9 +62,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentMapper.add(department);
     }
 
+    @Transactional
     public Long update(Department department) {
         if (department.getName() != null) {
             doctorService.updateDepartment(department);
+            applicationService.updateDepartment(department);
         }
         return departmentMapper.update(department);
     }

@@ -123,7 +123,6 @@ const EditModal = (props: EditProps) => {
 
 const UserManagement = () => {
     const [messageApi, contextHolder] = message.useMessage();
-
     const [data, setData] = useState<User[]>([]);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(50);
@@ -140,8 +139,7 @@ const UserManagement = () => {
                 setData(res.data.records);
                 setTotal(res.data.total);
             }).catch(err => {
-            console.log(err);
-            messageApi.error("加载失败，请检查网络连接");
+            messageApi.error("加载用户失败，请检查网络连接", err.message);
         }).finally(() => {
             setTableLoading(false);
         });
@@ -184,9 +182,8 @@ const UserManagement = () => {
                             }} showSizeChanger/>
             </Space>
             <Table dataSource={data} scroll={{x: 'max-content', y: '80vh'}} style={{minHeight: '80vh'}} size={"small"}
-                   loading={tableLoading} pagination={false}
-                // pagination={{position: ['none'], pageSize: pageSize, current: page, total: total}}
-                   rowSelection={{type: 'radio', ...rowSelection}} rowKey={'id'} summary={() => {
+                   loading={tableLoading} pagination={false} rowSelection={{type: 'radio', ...rowSelection}}
+                   rowKey={'id'} summary={() => {
                 return (
                     <Table.Summary.Row>
                         <Table.Summary.Cell index={0} colSpan={5}>总计{total}条</Table.Summary.Cell>

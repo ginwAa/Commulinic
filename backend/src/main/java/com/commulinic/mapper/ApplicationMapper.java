@@ -1,6 +1,7 @@
 package com.commulinic.mapper;
 
 import com.commulinic.entity.Application;
+import com.commulinic.entity.Department;
 import com.commulinic.entity.dto.PageQueryDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,4 +20,6 @@ public interface ApplicationMapper {
     Long update(Application application);
 
     Long count(Application application);
+
+    Long updateDepartment(Department department);
 }

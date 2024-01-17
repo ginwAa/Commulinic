@@ -7,6 +7,7 @@
         select * from application
         <where>
             <if test="data.name != null and data.name !=''">and name like concat('%', #{data.name}, '%')</if>
+            <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
         </where>
         LIMIT #{size} OFFSET #{offset}
     </select>
@@ -17,6 +18,7 @@
                 <if test="status != null and status != 0">status = #{status},</if>
                 <if test="updatedAt != null and updatedAt != 0">updated_at = #{updatedAt},</if>
             </set>
+        where id = #{id}
     </update>
 
     <select id="count" resultType="java.lang.Long">
@@ -25,4 +27,8 @@
             <if test="name != null and name !=''">and name like concat('%', #{name}, '%')</if>
         </where>
     </select>
+
+    <update id="updateDepartment">
+        update application set department = #{name} where department_id = #{id} and status = ${@com.commulinic.constant.ApplicationConstant.STATUS_WAIT}
+    </update>
 </mapper>

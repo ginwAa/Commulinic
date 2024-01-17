@@ -26,11 +26,13 @@ interface DeleteInfo {
     name: string;
     onOk: () => void;
     open: boolean;
+    actionName: string;
     onCancel: () => void;
 }
 
-export const DeleteWarning = (props: DeleteInfo) => {
+export const ModalWarning = (props: DeleteInfo) => {
     return (
-        <Modal open={props.open} onOk={props.onOk} onCancel={props.onCancel} title={'确定要删除' + props.name + '吗'}/>
+        <Modal open={props.open} onOk={props.onOk} onCancel={props.onCancel}
+               title={'确定要' + props.actionName + props.name + '吗'}/>
     );
 }
