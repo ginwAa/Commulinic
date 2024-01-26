@@ -134,6 +134,31 @@ export const EMPTY_APPLICATION: Application = {
     status: 0
 }
 
+export interface Announcement {
+    id?: number;
+    title: string;
+    content: string;
+    updateAt: number;
+}
+
+export const EMPTY_ANNOUNCEMENT: Announcement = {
+    title: '',
+    content: '',
+    updateAt: 0
+}
+
+export interface MedTip {
+    id?: number;
+    title: string;
+    content: string;
+    updateAt: number;
+}
+
+export const EMPTY_MED_TIP: MedTip = {
+    title: '',
+    content: '',
+    updateAt: 0
+}
 export interface PageDTO<T> {
     size: number,
     offset: number,

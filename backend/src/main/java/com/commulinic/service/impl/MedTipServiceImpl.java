@@ -17,11 +17,13 @@ public class MedTipServiceImpl implements MedTipService {
 
     @Override
     public Long add(MedTip tip) {
+        tip.setUpdatedAt((int) (System.currentTimeMillis() / 1000));
         return medTipMapper.add(tip);
     }
 
     @Override
     public Long update(MedTip tip) {
+        tip.setUpdatedAt((int) (System.currentTimeMillis() / 1000));
         return medTipMapper.update(tip);
     }
 

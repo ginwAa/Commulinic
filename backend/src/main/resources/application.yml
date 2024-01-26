@@ -2,10 +2,20 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3306/commulinic?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 1234
+    url: jdbc:mariadb://${mariadb.host}:3306/commulinic?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${mariadb.username}
+    password: ${mariadb.password}
     type: com.alibaba.druid.pool.DruidDataSource
+  config:
+    import: classpath:password.yml
+  data:
+    redis:
+      cluster:
+        nodes:
+          - ${redis.nodes[0]}
+          - ${redis.nodes[1]}
+          - ${redis.nodes[2]}
+      password: ${redis.password}
 logging:
   level:
     com:

@@ -37,4 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-#/backend/src/main/resources/application.yml
+/backend/src/main/resources/password.yml

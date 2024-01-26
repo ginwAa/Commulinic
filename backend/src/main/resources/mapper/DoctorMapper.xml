@@ -56,7 +56,7 @@
             <if test="userId != null and userId != 0"> and user_id = #{userId} </if>
             <if test="departmentId != null and departmentId != 0"> and department_id = #{departmentId}</if>
 <!--            <if test="seniority != null and seniority != 0">and seniority &lt; #{seniority}</if>-->
-            <if test="status != null and status != 0">and status &amp; #{staus} != 0</if>
+            <if test="status != null and status != 0">and status &amp; #{status} != 0</if>
         </where>) as d
         inner join
         (select id from user

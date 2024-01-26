@@ -6,6 +6,7 @@ import {FormOutlined, SearchOutlined} from "@ant-design/icons";
 import {FilterSearch} from "./TableComponents.tsx";
 import {DataNode} from "antd/es/tree";
 import {unixSecondToYear} from "../utils/time.ts";
+import {SorterResult} from "antd/es/table/interface";
 
 const fetchData = doctorPage;
 
@@ -122,7 +123,18 @@ const DoctorComponent = (props: Props) => {
                             }}/>
             </div>
             <Table size={"small"} dataSource={data} loading={loading} pagination={false} rowKey="id"
-                   scroll={{x: 'max-content', y: '55vh'}} rowSelection={{type: 'radio', ...rowSelection}}>
+                   scroll={{x: 'max-content', y: '55vh'}} rowSelection={{type: 'radio', ...rowSelection}}
+                   onChange={(_pagination, filters: Record<string, number[]>, sorter: SorterResult<DoctorVO> | SorterResult<DoctorVO>[]) => {
+                       console.log(sorter);
+                       setPageProps({
+                           ...pageProps,
+                           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                           // @ts-expect-error
+                           seniority: sorter?.order ? sorter?.order === 'ascend' ? 1 : 2 : 0,
+                           gender: filters?.gender ? filters.gender.reduce((pre, v) => pre | v, 0) : 0,
+                           status: filters?.status ? filters.status.reduce((pre, v) => pre | v, 0) : 0,
+                       });
+                   }}>
                 <Table.Column title="ID" dataIndex="id" key="id"/>
                 <Table.Column title="姓名" dataIndex="name" key="name" filterIcon={<SearchOutlined/>}
                               filterDropdown={FilterSearch({

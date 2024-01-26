@@ -6,19 +6,51 @@
     <select id="page" resultType="com.commulinic.entity.MedTip">
         select * from medical_tip
         <where>
-            <if test="data.description != null and data.description != ''">
-                and description like concat('%', #{data.description}, '%')
+            <if test="data.content != null and data.content != ''">
+                and content like concat('%', #{data.content}, '%')
+            </if>
+            <if test="data.title != null and data.title != ''">
+                and title like concat('%', #{data.title}, '%')
             </if>
         </where>
         LIMIT #{size} OFFSET #{offset}
+        <choose>
+            <when test="data.updatedAt != null and data.updatedAt == 2">
+                ORDER BY updated_at DESC
+            </when>
+            <when test="data.updatedAt != null and data.updatedAt == 1">
+                ORDER BY updated_at ASC
+            </when>
+            <otherwise>
+                ORDER BY id DESC
+            </otherwise>
+        </choose>
     </select>
 
     <select id="count" resultType="java.lang.Long">
         select COUNT(1) from medical_tip
         <where>
-            <if test="description != null and description != ''">
-                and description like concat('%', #{description}, '%')
+            <if test="content != null and content != ''">
+                and content like concat('%', #{content}, '%')
+            </if>
+            <if test="title != null and title != ''">
+                and title like concat('%', #{title}, '%')
             </if>
         </where>
     </select>
+
+    <update id="update">
+        update medical_tip
+        <set>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="updatedAt != null and updatedAt != 0">
+                updated_at = #{updatedAt},
+            </if>
+        </set>
+    </update>
 </mapper>

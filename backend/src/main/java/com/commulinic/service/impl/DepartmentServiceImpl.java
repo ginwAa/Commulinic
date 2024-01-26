@@ -6,9 +6,9 @@ import com.commulinic.mapper.DepartmentMapper;
 import com.commulinic.service.ApplicationService;
 import com.commulinic.service.DepartmentService;
 import com.commulinic.service.DoctorService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Slf4j
 public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentMapper departmentMapper;
@@ -26,8 +25,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DoctorService doctorService;
     @Autowired
     private ApplicationService applicationService;
+    private final static String REDIS_DEPARTMENT_TREE_KEY = "departmentTree";
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     public DepartmentVO tree() {
+        DepartmentVO res = (DepartmentVO) redisTemplate.opsForValue().get(REDIS_DEPARTMENT_TREE_KEY);
+        if (res != null) {
+            return res;
+        }
         List<Department> data = departmentMapper.all();
         DepartmentVO root = new DepartmentVO();
         Long rootId = null;
@@ -55,11 +61,16 @@ public class DepartmentServiceImpl implements DepartmentService {
                 map.put(data.get(i).getId(), child);
             }
         }
+        redisTemplate.opsForValue().set(REDIS_DEPARTMENT_TREE_KEY, root);
         return root;
     }
 
     public Long add(Department department) {
-        return departmentMapper.add(department);
+        Long added = departmentMapper.add(department);
+        if (added != null) {
+            redisTemplate.delete(REDIS_DEPARTMENT_TREE_KEY);
+        }
+        return added;
     }
 
     @Transactional
@@ -68,11 +79,20 @@ public class DepartmentServiceImpl implements DepartmentService {
             doctorService.updateDepartment(department);
             applicationService.updateDepartment(department);
         }
-        return departmentMapper.update(department);
+        Long updated = departmentMapper.update(department);
+        if (updated != null) {
+            redisTemplate.delete(REDIS_DEPARTMENT_TREE_KEY);
+        }
+        return updated;
     }
 
+    @Transactional
     public Long delete(Long id) {
-        return departmentMapper.delete(id);
+        Long deleted = departmentMapper.delete(id);
+        if (deleted != null) {
+            redisTemplate.delete(REDIS_DEPARTMENT_TREE_KEY);
+        }
+        return deleted;
     }
 
     public Department getById(Long id) {

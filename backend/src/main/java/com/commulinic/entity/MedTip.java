@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Data
 public class MedTip implements Serializable {
     private Long id;
-    private String description;
-    private Integer updated_at;
+    private String title;
+    private String content;
+    private Integer updatedAt;
 }
