@@ -1,4 +1,4 @@
-import {Announcement, PageDTO, PageRes} from "../utils/entity.ts";
+import {Announcement, EMPTY_ANNOUNCEMENT, PageDTO, PageRes} from "../utils/entity.ts";
 import {post} from "../utils/request.ts";
 
 export const announcementPage = async (page: number, pageSize: number, announcement: Announcement, count: boolean) => {
@@ -19,4 +19,12 @@ export const announcementAdd = async (announcement: Announcement) => {
 
 export const announcementUpdate = async (announcement: Announcement) => {
     return post<number>('/announcement/update', announcement);
+}
+
+export const announcementDelete = async (id: number) => {
+    const announcement = {
+        ...EMPTY_ANNOUNCEMENT,
+        id: id
+    }
+    return post<number>('/announcement/delete', announcement);
 }

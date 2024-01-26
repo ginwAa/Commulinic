@@ -138,26 +138,26 @@ export interface Announcement {
     id?: number;
     title: string;
     content: string;
-    updateAt: number;
+    updatedAt: number;
 }
 
 export const EMPTY_ANNOUNCEMENT: Announcement = {
     title: '',
     content: '',
-    updateAt: 0
+    updatedAt: 0
 }
 
 export interface MedTip {
     id?: number;
     title: string;
     content: string;
-    updateAt: number;
+    updatedAt: number;
 }
 
 export const EMPTY_MED_TIP: MedTip = {
     title: '',
     content: '',
-    updateAt: 0
+    updatedAt: 0
 }
 export interface PageDTO<T> {
     size: number,

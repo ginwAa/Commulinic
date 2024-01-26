@@ -10,4 +10,6 @@ public interface MedTipService {
     Long update(MedTip tip);
 
     PageVO<MedTip> page(PageQueryDTO<MedTip> dto);
+
+    Long delete(MedTip tip);
 }

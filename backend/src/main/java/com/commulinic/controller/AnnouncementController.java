@@ -40,4 +40,10 @@ public class AnnouncementController {
         Long count = announcementService.count(announcement);
         return Result.success(count);
     }
+
+    @PostMapping("/delete")
+    public Result<Long> delete(@RequestBody Announcement announcement) {
+        Long deleted = announcementService.delete(announcement);
+        return Result.success(deleted);
+    }
 }

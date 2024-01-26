@@ -32,6 +32,15 @@ public class MedTipServiceImpl implements MedTipService {
         PageVO<MedTip> ret = new PageVO<MedTip>();
         List<MedTip> res = medTipMapper.page(dto);
         ret.setRecords(res);
+        if (dto.getCount()) {
+            Long count = medTipMapper.count(dto.getData());
+            ret.setTotal(count);
+        }
         return ret;
+    }
+
+    @Override
+    public Long delete(MedTip tip) {
+        return medTipMapper.delete(tip);
     }
 }

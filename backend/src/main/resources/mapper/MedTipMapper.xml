@@ -13,7 +13,6 @@
                 and title like concat('%', #{data.title}, '%')
             </if>
         </where>
-        LIMIT #{size} OFFSET #{offset}
         <choose>
             <when test="data.updatedAt != null and data.updatedAt == 2">
                 ORDER BY updated_at DESC
@@ -25,6 +24,7 @@
                 ORDER BY id DESC
             </otherwise>
         </choose>
+        LIMIT #{size} OFFSET #{offset}
     </select>
 
     <select id="count" resultType="java.lang.Long">
@@ -52,5 +52,6 @@
                 updated_at = #{updatedAt},
             </if>
         </set>
+        where id = #{id}
     </update>
 </mapper>

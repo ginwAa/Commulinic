@@ -35,4 +35,10 @@ public class MedTipController {
         return Result.success(updated);
     }
 
+    @PostMapping("/delete")
+    private Result<Long> delete(@RequestBody MedTip tip) {
+        Long deleted = medTipService.delete(tip);
+        return Result.success(deleted);
+    }
+
 }

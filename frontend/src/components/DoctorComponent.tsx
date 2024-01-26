@@ -102,7 +102,6 @@ const DoctorComponent = (props: Props) => {
         fetchData(page, pageSize, {...pageProps, departmentId: props.departmentId}, true).then((res) => {
             setData(res.data.records);
             setTotal(res.data.total);
-            setLoading(false);
         }).catch(err => {
             console.log(err);
             messageApi.error("加载失败，请检查网络连接");

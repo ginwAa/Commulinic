@@ -12,4 +12,6 @@ public interface AnnouncementService {
     Long update(Announcement announcement);
 
     Long add(Announcement announcement);
+
+    Long delete(Announcement announcement);
 }

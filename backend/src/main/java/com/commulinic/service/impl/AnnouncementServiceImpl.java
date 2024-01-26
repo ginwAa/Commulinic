@@ -35,6 +35,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
+    public Long delete(Announcement announcement) {
+        return announcementMapper.delete(announcement);
+    }
+
+    @Override
     public Long add(Announcement announcement) {
         announcement.setUpdatedAt((int) (System.currentTimeMillis() / 1000));
         return announcementMapper.add(announcement);

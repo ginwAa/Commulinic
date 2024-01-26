@@ -1,4 +1,4 @@
-import {MedTip, PageDTO, PageRes} from "../utils/entity.ts";
+import {EMPTY_MED_TIP, MedTip, PageDTO, PageRes} from "../utils/entity.ts";
 import {post} from "../utils/request.ts";
 
 export const medTipPage = async (page: number, pageSize: number, medTip: MedTip, count: boolean) => {
@@ -19,4 +19,12 @@ export const medTipAdd = async (medTip: MedTip) => {
 
 export const medTipUpdate = async (medTip: MedTip) => {
     return post<number>('/medTip/update', medTip);
+}
+
+export const medTipDelete = async (id: number) => {
+    const tip = {
+        ...EMPTY_MED_TIP,
+        id: id
+    }
+    return post<number>('/medTip/delete', tip);
 }
