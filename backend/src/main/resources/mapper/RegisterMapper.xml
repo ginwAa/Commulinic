@@ -6,19 +6,35 @@
     <select id="page" resultType="com.commulinic.entity.Register">
         select * from register
         <where>
-            <if test="id != null and id != 0">and id = #{id}</if>
-            <if test="userId != null and userId != 0">and user_id = #{userId}</if>
-            <if test="doctorId != null and doctorId != 0">and doctor_id = #{doctorId}</if>
-            <if test="beginCreateTime != null and beginCreateTime != 0">and create_time &gt;= #{beginCreateTime}</if>
-            <if test="endCreateTime != null and endCreateTime != 0">and create_time &lt;= #{endCreateTime}</if>
-            <if test="beginDate != null and beginDate != 0">and date &gt;= #{beginDate}</if>
-            <if test="endDate != null and endDate != 0">and date &lt;= #{endDate}</if>
-            <if test="minPrice != null and minPrice != 0">and price &gt;= #{minPrice}</if>
-            <if test="maxPrice != null and maxPrice != 0">and price &lt;= #{maxPrice}</if>
-            <if test="status != null and status != 0">and status = #{status}</if>
-            <if test="section != null and section != 0">and section = #{section}</if>
+            <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
+            <if test="data.section != null and data.section != 0">and section &amp; #{data.section} != 0</if>
+            <if test="data.userName != null and data.userName != ''">and user_name like concat('%', #{data.userName}, '%')</if>
+            <if test="data.doctorName != null and data.doctorName != ''">and doctor_name like concat('%', #{data.doctorName}, '%')</if>
         </where>
-        order by id asc LIMIT #{pageSize} OFFSET #{page}
+        <choose>
+            <when test="data.createTime != null and data.createTime == 1">
+                order by create_time
+            </when>
+            <when test="data.createTime != null and data.createTime == 2">
+                order by create_time DESC
+            </when>
+            <when test="data.date != null and data.date == 1">
+                order by date
+            </when>
+            <when test="data.date != null and data.date == 2">
+                order by date DESC
+            </when>
+            <when test="data.price != null and data.price == 1">
+                order by price
+            </when>
+            <when test="data.price != null and data.price == 2">
+                order by price DESC
+            </when>
+            <otherwise>
+                order by id
+            </otherwise>
+        </choose>
+        LIMIT #{pageSize} OFFSET #{page}
     </select>
 
     <update id="update">
@@ -31,7 +47,19 @@
             <if test="price != null and price != 0">price = #{price},</if>
             <if test="status != null and status != 0">status = #{status},</if>
             <if test="section != null and section != 0">section = #{section},</if>
+            <if test="userName != null and userName != ''">user_name = #{userName},</if>
+            <if test="doctorName != null and doctorName != ''">doctor_name = #{doctorName},</if>
         </set>
         where id = #{id}
     </update>
+
+    <select id="count" resultType="java.lang.Long">
+        select COUNT(1) from register
+        <where>
+            <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
+            <if test="data.section != null and data.section != 0">and section &amp; #{data.section} != 0</if>
+            <if test="data.userName != null and data.userName != ''">and user_name like concat('%', #{data.userName}, '%')</if>
+            <if test="data.doctorName != null and data.doctorName != ''">and doctor_name like concat('%', #{data.doctorName}, '%')</if>
+        </where>
+    </select>
 </mapper>

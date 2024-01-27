@@ -159,6 +159,38 @@ export const EMPTY_MED_TIP: MedTip = {
     content: '',
     updatedAt: 0
 }
+
+export interface Register {
+    id?: number;
+    userId?: number;
+    doctorId?: number;
+    doctorName: string;
+    userName: string;
+    date: number;
+    section: number;
+    status: number;
+    price: number;
+    createTime: number;
+}
+
+export const EMPTY_REGISTER: Register = {
+    userId: 0,
+    doctorId: 0,
+    doctorName: '',
+    userName: '',
+    date: 0,
+    section: 0,
+    status: 0,
+    price: 0,
+    createTime: 0
+}
+
+export const REGISTER_CONSTANT = {
+    STATUS_UNPAID: 1,
+    STATUS_PAID: 2,
+    STATUS_FINISHED: 4,
+    STATUS_ABORTED: 8,
+}
 export interface PageDTO<T> {
     size: number,
     offset: number,

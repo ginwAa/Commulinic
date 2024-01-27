@@ -11,9 +11,11 @@ import java.util.List;
 public interface RegisterMapper {
     List<Register> page(PageQueryDTO<Register> dto);
 
-    @Insert("insert into register (user_id, doctor_id, create_time, date, section, status, price) values " +
-            "(#{userId}, #{doctorId}, #{createTime}, #{date}, #{section}, #{status}, #{price})")
+    @Insert("insert into register (user_id, doctor_id, create_time, date, section, status, price, user_name, doctor_name) values " +
+            "(#{userId}, #{doctorId}, #{createTime}, #{date}, #{section}, #{status}, #{price}, #{userName}, #{doctorName})")
     Long add(Register register);
 
     Long update(Register register);
+
+    Long count(Register register);
 }
