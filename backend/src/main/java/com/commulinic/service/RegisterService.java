@@ -13,4 +13,8 @@ public interface RegisterService {
     Long update(Register register);
 
     Long count(Register register);
+
+    Long updateUserName(Long userId, String userName);
+
+    Long updateDoctorName(Long doctorId, String doctorName);
 }

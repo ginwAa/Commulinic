@@ -12,18 +12,6 @@
             <if test="data.doctorName != null and data.doctorName != ''">and doctor_name like concat('%', #{data.doctorName}, '%')</if>
         </where>
         <choose>
-            <when test="data.createTime != null and data.createTime == 1">
-                order by create_time
-            </when>
-            <when test="data.createTime != null and data.createTime == 2">
-                order by create_time DESC
-            </when>
-            <when test="data.date != null and data.date == 1">
-                order by date
-            </when>
-            <when test="data.date != null and data.date == 2">
-                order by date DESC
-            </when>
             <when test="data.price != null and data.price == 1">
                 order by price
             </when>

@@ -18,8 +18,15 @@ import java.util.List;
 public class ApplicationServiceImpl implements ApplicationService {
     @Autowired
     private ApplicationMapper applicationMapper;
+
     @Autowired
     private DoctorService doctorService;
+
+    @Override
+    public Long updateUserName(Long userId, String userName) {
+        Long updated = applicationMapper.updateUserName(userId, userName);
+        return updated;
+    }
 
     @Override
     public PageVO<Application> page(PageQueryDTO<Application> dto) {

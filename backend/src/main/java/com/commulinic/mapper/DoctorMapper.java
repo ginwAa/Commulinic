@@ -26,6 +26,9 @@ public interface DoctorMapper {
     @Select("select * from doctor where id = #{id}")
     Doctor getById(Long id);
 
+    @Select("select * from doctor where user_id = #{id}")
+    Doctor getByUserId(Long id);
+
     @Update("update doctor set department = #{department} where department_id = #{id}")
     Long updateDepartment(Department department);
 }

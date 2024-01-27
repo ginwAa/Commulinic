@@ -63,7 +63,7 @@ export interface DepartmentTreeNode {
 export const DOCTOR_CONSTANT = {
     STATUS_ACTIVE: 2,
     STATUS_ABSENT: 1,
-    STATUS_ABORT: 4,
+    STATUS_ABORTED: 4,
 }
 export interface Doctor {
     id?: number,
@@ -190,6 +190,8 @@ export const REGISTER_CONSTANT = {
     STATUS_PAID: 2,
     STATUS_FINISHED: 4,
     STATUS_ABORTED: 8,
+    SECTION_MORNING: 1,
+    SECTION_AFTERNOON: 2,
 }
 export interface PageDTO<T> {
     size: number,

@@ -5,6 +5,7 @@ import com.commulinic.entity.Department;
 import com.commulinic.entity.dto.PageQueryDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public interface ApplicationMapper {
     Long count(Application application);
 
     Long updateDepartment(Department department);
+
+    @Update("update application set name = #{userName} where user_id = #{userId}")
+    Long updateUserName(Long userId, String userName);
 }

@@ -16,5 +16,7 @@ public interface DoctorService {
 
     DoctorVO getById(Long id);
 
+    DoctorVO getByUserId(Long id);
+
     Long updateDepartment(Department department);
 }

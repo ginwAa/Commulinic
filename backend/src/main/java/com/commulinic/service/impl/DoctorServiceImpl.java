@@ -22,6 +22,16 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private UserService userService;
 
+    @Override
+    public DoctorVO getByUserId(Long id) {
+        Doctor doctor = doctorMapper.getByUserId(id);
+        User user = userService.getById(doctor.getUserId());
+        DoctorVO vo = new DoctorVO();
+        BeanUtils.copyProperties(doctor, vo);
+        BeanUtils.copyProperties(user, vo);
+        return vo;
+    }
+
     public PageVO<DoctorVO> page(PageQueryDTO<DoctorVO> dto) {
         List<DoctorVO> page = doctorMapper.page(dto);
         PageVO<DoctorVO> result = new PageVO<DoctorVO>();

@@ -44,4 +44,16 @@ public class RegisterServiceImpl implements RegisterService {
         Long counted = registerMapper.count(register);
         return counted;
     }
+
+    @Override
+    public Long updateUserName(Long userId, String userName) {
+        Long updated = registerMapper.updateUserName(userId, userName);
+        return updated;
+    }
+
+    @Override
+    public Long updateDoctorName(Long doctorId, String doctorName) {
+        Long updated = registerMapper.updateDoctorName(doctorId, doctorName);
+        return updated;
+    }
 }

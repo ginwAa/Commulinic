@@ -17,4 +17,6 @@ public interface ApplicationService {
     Long updateDepartment(Department department);
 
     Long accept(Application application);
+
+    Long updateUserName(Long userId, String userName);
 }
