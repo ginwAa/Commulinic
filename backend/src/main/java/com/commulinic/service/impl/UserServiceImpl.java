@@ -1,13 +1,13 @@
 package com.commulinic.service.impl;
 
+import com.commulinic.entity.Doctor;
 import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
-import com.commulinic.entity.vo.DoctorVO;
 import com.commulinic.entity.vo.PageVO;
+import com.commulinic.mapper.ApplicationMapper;
+import com.commulinic.mapper.DoctorMapper;
+import com.commulinic.mapper.RegisterMapper;
 import com.commulinic.mapper.UserMapper;
-import com.commulinic.service.ApplicationService;
-import com.commulinic.service.DoctorService;
-import com.commulinic.service.RegisterService;
 import com.commulinic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    private RegisterService registerService;
+    private RegisterMapper registerMapper;
     @Autowired
-    private DoctorService doctorService;
+    private DoctorMapper doctorMapper;
     @Autowired
-    private ApplicationService applicationService;
+    private ApplicationMapper applicationMapper;
 
     @Override
     public Long add(User user) {
@@ -36,11 +36,11 @@ public class UserServiceImpl implements UserService {
     public Long update(User user) {
         Long updated = userMapper.update(user);
         if (user.getName() != null && !user.getName().isEmpty()) {
-            registerService.updateUserName(user.getId(), user.getName());
-            applicationService.updateUserName(user.getId(), user.getName());
-            DoctorVO doctor = doctorService.getByUserId(user.getId());
+            registerMapper.updateUserName(user.getId(), user.getName());
+            applicationMapper.updateUserName(user.getId(), user.getName());
+            Doctor doctor = doctorMapper.getByUserId(user.getId());
             if (doctor != null) {
-                registerService.updateDoctorName(doctor.getId(), user.getName());
+                registerMapper.updateDoctorName(doctor.getId(), user.getName());
             }
         }
         return updated;

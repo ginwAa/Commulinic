@@ -6,21 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Doctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Doctor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ApplicationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ApplicationMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DoctorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DoctorMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/RegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/RegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ApplicationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/RegisterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ApplicationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ApplicationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DepartmentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DoctorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/RegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/RegisterServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/RegisterMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/RegisterMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/RegisterManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegisterManagement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/TableComponents.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TableComponents.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +265,8 @@
       <workItem from="1706204010670" duration="4828000" />
       <workItem from="1706260080932" duration="10850000" />
       <workItem from="1706294876040" duration="80000" />
-      <workItem from="1706348912936" duration="7046000" />
+      <workItem from="1706348912936" duration="7155000" />
+      <workItem from="1706461938825" duration="5293000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -465,7 +460,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706374705419</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="register management apis">
+      <option name="closed" value="true" />
+      <created>1706379309155</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1706379309155</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +510,8 @@
     <MESSAGE value="redis add" />
     <MESSAGE value="community management" />
     <MESSAGE value="register api" />
-    <option name="LAST_COMMIT_MESSAGE" value="register api" />
+    <MESSAGE value="register management apis" />
+    <option name="LAST_COMMIT_MESSAGE" value="register management apis" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

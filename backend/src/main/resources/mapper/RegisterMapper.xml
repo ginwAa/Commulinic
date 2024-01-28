@@ -22,7 +22,7 @@
                 order by id
             </otherwise>
         </choose>
-        LIMIT #{pageSize} OFFSET #{page}
+        LIMIT #{size} OFFSET #{offset}
     </select>
 
     <update id="update">
@@ -44,10 +44,10 @@
     <select id="count" resultType="java.lang.Long">
         select COUNT(1) from register
         <where>
-            <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
-            <if test="data.section != null and data.section != 0">and section &amp; #{data.section} != 0</if>
-            <if test="data.userName != null and data.userName != ''">and user_name like concat('%', #{data.userName}, '%')</if>
-            <if test="data.doctorName != null and data.doctorName != ''">and doctor_name like concat('%', #{data.doctorName}, '%')</if>
+            <if test="status != null and status != 0">and status &amp; #{status} != 0</if>
+            <if test="section != null and section != 0">and section &amp; #{section} != 0</if>
+            <if test="userName != null and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
+            <if test="doctorName != null and doctorName != ''">and doctor_name like concat('%', #{doctorName}, '%')</if>
         </where>
     </select>
 </mapper>

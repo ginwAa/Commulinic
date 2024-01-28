@@ -2,10 +2,10 @@ package com.commulinic.service.impl;
 
 import com.commulinic.entity.Department;
 import com.commulinic.entity.vo.DepartmentVO;
+import com.commulinic.mapper.ApplicationMapper;
 import com.commulinic.mapper.DepartmentMapper;
-import com.commulinic.service.ApplicationService;
+import com.commulinic.mapper.DoctorMapper;
 import com.commulinic.service.DepartmentService;
-import com.commulinic.service.DoctorService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,9 +22,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentMapper departmentMapper;
     @Autowired
-    private DoctorService doctorService;
+    private DoctorMapper doctorMapper;
     @Autowired
-    private ApplicationService applicationService;
+    private ApplicationMapper applicationMapper;
     private final static String REDIS_DEPARTMENT_TREE_KEY = "departmentTree";
     @Autowired
     private RedisTemplate redisTemplate;
@@ -76,8 +76,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public Long update(Department department) {
         if (department.getName() != null) {
-            doctorService.updateDepartment(department);
-            applicationService.updateDepartment(department);
+            doctorMapper.updateDepartment(department);
+            applicationMapper.updateDepartment(department);
         }
         Long updated = departmentMapper.update(department);
         if (updated != null) {

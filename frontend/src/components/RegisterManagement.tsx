@@ -1,22 +1,11 @@
-import {
-    Button,
-    Form,
-    Input,
-    InputNumber,
-    message,
-    Modal,
-    Pagination,
-    Select,
-    Space,
-    Table,
-    TablePaginationConfig
-} from "antd";
+import {Button, Form, message, Modal, Pagination, Select, Space, Table, TablePaginationConfig} from "antd";
 import React, {useEffect, useState} from "react";
 import {EMPTY_REGISTER, Register} from "../utils/entity.ts";
 import {registerPage, registerUpdate} from "../apis/registerApis.ts";
 import {SorterResult} from "antd/es/table/interface";
 import {SearchOutlined} from "@ant-design/icons";
-import {FilterSearch} from "./TableComponents.tsx";
+import {FilterSearch, MyDatePicker, PriceInput} from "./TableComponents.tsx";
+import {unixSecondToDate} from "../utils/time.ts";
 
 interface EditProps {
     editOpen: boolean;
@@ -35,6 +24,8 @@ const EditModal = (props: EditProps) => {
             return;
         }
         const formData: Register = form.getFieldsValue();
+        formData.id = props.record.id;
+        console.log('getFieldsValue', formData);
         form.validateFields().then(() => {
             const func = registerUpdate;
             func(formData).then(() => {
@@ -50,6 +41,7 @@ const EditModal = (props: EditProps) => {
             messageApi.error("请检查用户信息");
         });
     };
+
     return (
         <>
             {contextHolder}
@@ -58,15 +50,15 @@ const EditModal = (props: EditProps) => {
                 <Form initialValues={props.record} form={form} preserve={false}
                       size={"small"} layout={'horizontal'}>
                     <Space direction={"horizontal"}>
-                        <Form.Item label="日期" name="name" rules={[{required: true, message: '请输入日期'}]}>
-                            <Input/>
+                        <Form.Item label="日期" name="date" rules={[{required: true, message: '请输入日期'}]}>
+                            <MyDatePicker beforeDisabled={true}/>
                         </Form.Item>
-                        <Form.Item label="金额" name="age" rules={[{required: true, message: '请输入金额'}]}>
-                            <InputNumber/>
+                        <Form.Item label="金额" name="price" rules={[{required: true, message: '请输入金额'}]}>
+                            <PriceInput/>
                         </Form.Item>
                     </Space>
                     <Space direction={'horizontal'}>
-                        <Form.Item label="预约时段" name="gender" rules={[{required: true, message: '请输入时段'}]}>
+                        <Form.Item label="预约时段" name="section" rules={[{required: true, message: '请输入时段'}]}>
                             <Select options={[{value: 1, label: '上午'}, {value: 2, label: '下午'}]}/>
                         </Form.Item>
                         <Form.Item label="状态" name="status" rules={[{required: true, message: '请输入状态'}]}>
@@ -101,6 +93,7 @@ const RegisterManagement = () => {
                 setData(res.data.records);
                 setTotal(res.data.total);
             }).catch(err => {
+            console.log(err);
             messageApi.error("加载预约记录失败，请检查网络连接", err.message);
         }).finally(() => {
             setTableLoading(false);
@@ -115,6 +108,7 @@ const RegisterManagement = () => {
         onChange: (selectedRowKeys: React.Key[], selectedRows: Register[]) => {
             setSelectedKey(selectedRowKeys[0] as number);
             setSelectedRow(selectedRows[0]);
+            console.log(selectedRows[0]);
         },
     };
     return (
@@ -192,9 +186,11 @@ const RegisterManagement = () => {
                                       {text: '已终止', value: 8},
                                   ]
                               }/>
-                <Table.Column title="创建时间" dataIndex="createTime" key="createTime" width={'10rem'}/>
-                <Table.Column title="金额" dataIndex="price" key="price" sorter={true} width={'5rem'}/>
-                <Table.Column title="预约日期" dataIndex="date" key="date" width={'8rem'}/>
+                <Table.Column title="创建时间" dataIndex="createTime" key="createTime" width={'10rem'}
+                              render={unixSecondToDate}/>
+                <Table.Column title="金额" dataIndex="price" key="price" sorter={true} width={'5rem'}
+                              render={(price: number) => price / 100}/>
+                <Table.Column title="预约日期" dataIndex="date" key="date" width={'8rem'} render={unixSecondToDate}/>
             </Table>
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow}
                        onSuccess={() => setEditSuccess(!editSuccess)}/>

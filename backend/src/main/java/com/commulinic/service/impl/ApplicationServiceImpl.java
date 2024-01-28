@@ -6,8 +6,8 @@ import com.commulinic.entity.Doctor;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.ApplicationMapper;
+import com.commulinic.mapper.DoctorMapper;
 import com.commulinic.service.ApplicationService;
-import com.commulinic.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private ApplicationMapper applicationMapper;
 
     @Autowired
-    private DoctorService doctorService;
+    private DoctorMapper doctorMapper;
 
     @Override
     public Long updateUserName(Long userId, String userName) {
@@ -72,7 +72,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         doctor.setDepartment(application.getDepartment());
         doctor.setStatus(Doctor.STATUS_ABSENT);
         doctor.setSeniority((int) (System.currentTimeMillis() / 1000));
-        doctorService.add(doctor);
+        doctorMapper.add(doctor);
         application.setUpdatedAt(doctor.getSeniority());
         application.setStatus(Application.STATUS_PASS);
         applicationMapper.update(application);

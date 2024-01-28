@@ -7,8 +7,8 @@ import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.DoctorVO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.DoctorMapper;
+import com.commulinic.mapper.UserMapper;
 import com.commulinic.service.DoctorService;
-import com.commulinic.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +20,12 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorMapper doctorMapper;
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
 
     @Override
     public DoctorVO getByUserId(Long id) {
         Doctor doctor = doctorMapper.getByUserId(id);
-        User user = userService.getById(doctor.getUserId());
+        User user = userMapper.getById(doctor.getUserId());
         DoctorVO vo = new DoctorVO();
         BeanUtils.copyProperties(doctor, vo);
         BeanUtils.copyProperties(user, vo);
@@ -44,7 +44,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     public DoctorVO getById(Long id) {
         Doctor doctor = doctorMapper.getById(id);
-        User user = userService.getById(doctor.getUserId());
+        User user = userMapper.getById(doctor.getUserId());
         DoctorVO vo = new DoctorVO();
         BeanUtils.copyProperties(doctor, vo);
         BeanUtils.copyProperties(user, vo);
