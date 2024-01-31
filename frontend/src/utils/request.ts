@@ -18,14 +18,13 @@ instance.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 instance.interceptors.response.use(
-    (res) => {
+    res => {
         if (res.status < 400) {
             return Promise.resolve(res);
         } else {
             return Promise.reject(res);
         }
-        // return Promise.resolve(res);
-    }, function (error) {
+    }, error => {
         return Promise.reject(error);
     }
 )
@@ -47,20 +46,20 @@ export const get = async <T>(url: string, params?: Record<string, any>): Promise
             return Promise.resolve({
                 data: res.data.data,
                 status: res.data.code,
-                msg: res.data.msg,
+                message: res.data.msg,
             });
         } else {
             return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,
-                msg: res.data.msg,
+                message: res.data.msg,
             });
         }
     }).catch(err => {
         return Promise.reject({
             data: err.response?.data,
             status: err.response?.status || 500,
-            msg: err.message,
+            message: err.message,
         });
     });
 }
@@ -71,20 +70,20 @@ export const post = async <T>(url: string, params?: Record<string, any>): Promis
             return Promise.resolve({
                 data: res.data.data,
                 status: res.data.code,
-                msg: res.data.msg,
+                message: res.data.msg,
             });
         } else {
             return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,
-                msg: res.data.msg,
+                message: res.data.msg,
             });
         }
     }).catch(err => {
         return Promise.reject({
             data: err.response?.data,
             status: err.response?.status || 500,
-            msg: err.message,
+            message: err.message,
         });
     });
 }

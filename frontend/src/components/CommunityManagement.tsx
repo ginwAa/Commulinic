@@ -86,8 +86,7 @@ const CommunityManagement = () => {
         content: '',
         updatedAt: 0,
     });
-    const [data, setData] = useState<Announcement[] | MedTip[]>([
-    ]);
+    const [data, setData] = useState<Announcement[] | MedTip[]>([]);
     const rowSelection = {
         selectedRowKeys: [selectedKey],
         onChange: (selectedRowKeys: React.Key[], selectedRows: Announcement[] | MedTip[]) => {
@@ -103,13 +102,11 @@ const CommunityManagement = () => {
             fetchData = medTipPage;
         }
         setLoading(true);
-        fetchData(page, pageSize, pageProps, true).then((res) => {
+        fetchData(page, pageSize, pageProps, true).then(res => {
             setData(res.data.records);
             setTotal(res.data.total);
-            console.log("success")
         }).catch(err => {
-            messageApi.error(err);
-            console.log("error")
+            messageApi.error(err.message);
         }).finally(() => {
             setLoading(false);
         })
@@ -161,7 +158,7 @@ const CommunityManagement = () => {
                                 setPageSize(pageSize);
                             }}/>
             </div>
-            <Table size={"small"} dataSource={data} loading={loading} pagination={false} rowKey="id"
+            <Table size={"small"} dataSource={data} loading={loading} pagination={false} rowKey={"id"}
                    scroll={{x: 'max-content', y: '55vh'}} rowSelection={{type: 'radio', ...rowSelection}}
                    onChange={(_pagination, _filters, sorter: SorterResult<Announcement> | SorterResult<Announcement>[]) => {
                        setPageProps({
