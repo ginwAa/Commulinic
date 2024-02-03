@@ -1,11 +1,17 @@
 package com.commulinic.entity;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Data
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
     public final static Integer GENDER_MALE = 1;
     public final static Integer GENDER_FEMALE = 2;
     public final static Integer ROLE_ADMIN = 1;
@@ -24,4 +30,34 @@ public class User implements Serializable {
     private String email;
     private Integer age;
     private String emergency;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.toString()));
+    }
+
+    @Override
+    public String getUsername() {
+        return phone;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return Objects.equals(status, STATUS_ACTIVE);
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return Objects.equals(status, STATUS_ACTIVE);
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return Objects.equals(status, STATUS_ACTIVE);
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return Objects.equals(status, STATUS_ACTIVE);
+    }
 }

@@ -39,7 +39,8 @@ const Login = () => {
 }
 
 const LoginTab = () => {
-    const [form] = Form.useForm<FormInstance>()
+    const [form] = Form.useForm<FormInstance>();
+
     return (
         <Form form={form}>
             <Form.Item label="姓名" name="name" rules={[{required: true, message: '请输入姓名'}]}>
@@ -58,7 +59,7 @@ const LoginTab = () => {
             </Space>
 
             <Form.Item>
-                <Button type="primary" htmlType="submit" size={'middle'}>登录</Button>
+                <Button type="primary" htmlType="submit" size={'middle'} onClick={}>登录</Button>
             </Form.Item>
         </Form>
 

@@ -199,3 +199,7 @@ export interface PageDTO<T> {
     count: boolean,
     data: T,
 }
+
+export interface authenticationResponse {
+    token: string
+}

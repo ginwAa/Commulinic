@@ -23,6 +23,14 @@ public interface UserMapper {
 
     Long count(User user);
 
-    @Select("select * from user where id = #{id}")
+    @Select("select id, name, password, role, status, gender, phone, email, age, address, emergency from user where id = #{id}")
     User getById(Long id);
+
+    @Select("select id, name, role, status, gender, phone, email, age, address, emergency from user where phone = #{phone} and password = #{password}")
+    User getByLogin(String phone, String password);
+
+    @Select("select id, name, role, status, gender, phone, email, age, address, emergency from user where phone = #{phone}")
+    User getByPhone(String phone);
+
+
 }

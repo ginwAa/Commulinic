@@ -19,9 +19,3 @@ export const userPage = async (user: User, page: number, pageSize: number, count
 export const userUpdate = async (user: User) => {
     return post<number>('/user/update', user);
 };
-
-export const userRegister = async (user: User) => {
-    delete user.id;
-    return post<number>('/user/register', user);
-}
-

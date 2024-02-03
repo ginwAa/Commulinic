@@ -9,27 +9,27 @@ import com.commulinic.mapper.DoctorMapper;
 import com.commulinic.mapper.RegisterMapper;
 import com.commulinic.mapper.UserMapper;
 import com.commulinic.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private RegisterMapper registerMapper;
-    @Autowired
-    private DoctorMapper doctorMapper;
-    @Autowired
-    private ApplicationMapper applicationMapper;
+    private final UserMapper userMapper;
+    private final RegisterMapper registerMapper;
+    private final DoctorMapper doctorMapper;
+    private final ApplicationMapper applicationMapper;
 
     @Override
     public Long add(User user) {
         return userMapper.add(user);
     }
+
 
     @Override
     @Transactional
@@ -61,5 +61,23 @@ public class UserServiceImpl implements UserService {
             ret.setTotal(total);
         }
         return ret;
+    }
+
+    @Override
+    public UserDetails getByLogin(String phone, String password) {
+        User user = userMapper.getByLogin(phone, password);
+        if (user == null) {
+            throw new RuntimeException("用户不存在");
+        }
+        return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        User user = userMapper.getByPhone(phone);
+        if (user == null) {
+            throw new UsernameNotFoundException("用户不存在");
+        }
+        return user;
     }
 }

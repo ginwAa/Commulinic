@@ -5,7 +5,7 @@ import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @PostMapping("/register")
-    public Result<Long> register(@RequestBody User user) {
-        //TODO check duplicate
-        Long added = userService.add(user);
-        return Result.success(added);
-    }
 
     @PostMapping("/page")
     public Result<PageVO<User>> page(@RequestBody PageQueryDTO<User> dto) {
@@ -42,4 +36,5 @@ public class UserController {
         Long added = userService.add(user);
         return Result.success(added);
     }
+
 }
