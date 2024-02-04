@@ -29,7 +29,7 @@ public interface UserMapper {
     @Select("select id, name, role, status, gender, phone, email, age, address, emergency from user where phone = #{phone} and password = #{password}")
     User getByLogin(String phone, String password);
 
-    @Select("select id, name, role, status, gender, phone, email, age, address, emergency from user where phone = #{phone}")
+    @Select("select id, name, role, status, gender, phone, email, age, address, emergency, password from user where phone = #{phone}")
     User getByPhone(String phone);
 
 

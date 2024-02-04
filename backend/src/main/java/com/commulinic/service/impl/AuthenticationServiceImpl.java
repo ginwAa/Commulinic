@@ -8,6 +8,7 @@ import com.commulinic.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 )
         );
         User verifiedUser = userMapper.getByPhone(user.getPhone());
+        if (verifiedUser == null) {
+            throw new UsernameNotFoundException("手机号或密码错误");
+        }
         String token = jwtProvider.createToken(verifiedUser);
         return new AuthenticationResponse(token);
     }
@@ -36,7 +40,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public AuthenticationResponse register(User user) {
         User duplicate = userMapper.getByPhone(user.getPhone());
         if (duplicate != null) {
-            return null;
+            throw new UsernameNotFoundException("手机号或密码错误");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         String token = jwtProvider.createToken(user);
