@@ -1,13 +1,14 @@
 package com.commulinic.service.impl;
 
+import com.commulinic.constant.RedisConstant;
 import com.commulinic.entity.Department;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.mapper.ApplicationMapper;
 import com.commulinic.mapper.DepartmentMapper;
 import com.commulinic.mapper.DoctorMapper;
 import com.commulinic.service.DepartmentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,19 +19,15 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
-    @Autowired
-    private DepartmentMapper departmentMapper;
-    @Autowired
-    private DoctorMapper doctorMapper;
-    @Autowired
-    private ApplicationMapper applicationMapper;
-    private final static String REDIS_DEPARTMENT_TREE_KEY = "departmentTree";
-    @Autowired
-    private RedisTemplate redisTemplate;
+    private final DepartmentMapper departmentMapper;
+    private final DoctorMapper doctorMapper;
+    private final ApplicationMapper applicationMapper;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     public DepartmentVO tree() {
-        DepartmentVO res = (DepartmentVO) redisTemplate.opsForValue().get(REDIS_DEPARTMENT_TREE_KEY);
+        DepartmentVO res = (DepartmentVO) redisTemplate.opsForValue().get(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         if (res != null) {
             return res;
         }
@@ -61,14 +58,14 @@ public class DepartmentServiceImpl implements DepartmentService {
                 map.put(data.get(i).getId(), child);
             }
         }
-        redisTemplate.opsForValue().set(REDIS_DEPARTMENT_TREE_KEY, root);
+        redisTemplate.opsForValue().set(RedisConstant.REDIS_DEPARTMENT_TREE_KEY, root);
         return root;
     }
 
     public Long add(Department department) {
         Long added = departmentMapper.add(department);
         if (added != null) {
-            redisTemplate.delete(REDIS_DEPARTMENT_TREE_KEY);
+            redisTemplate.delete(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         }
         return added;
     }
@@ -81,7 +78,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
         Long updated = departmentMapper.update(department);
         if (updated != null) {
-            redisTemplate.delete(REDIS_DEPARTMENT_TREE_KEY);
+            redisTemplate.delete(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         }
         return updated;
     }
@@ -90,7 +87,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Long delete(Long id) {
         Long deleted = departmentMapper.delete(id);
         if (deleted != null) {
-            redisTemplate.delete(REDIS_DEPARTMENT_TREE_KEY);
+            redisTemplate.delete(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         }
         return deleted;
     }

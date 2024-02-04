@@ -17,26 +17,20 @@ import java.io.IOException;
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/javascript;charset=utf-8");
         if (authException.getClass() == BadCredentialsException.class) {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/javascript;charset=utf-8");
             response.getWriter().print("手机号或密码错误！");
             return;
         }
         if (authException.getClass() == UserAlreadyExistsException.class) {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/javascript;charset=utf-8");
             response.getWriter().print("该手机号已被注册！");
             return;
         }
         if (authException.getClass() == DisabledException.class || authException.getClass() == LockedException.class) {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/javascript;charset=utf-8");
             response.getWriter().print("账号已被锁定，请联系管理员！");
             return;
         }
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/javascript;charset=utf-8");
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
 }

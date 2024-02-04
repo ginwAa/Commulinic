@@ -19,8 +19,8 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JWTAuthFilter extends OncePerRequestFilter {
-    private final JwtProvider provider;
+public class JwtAuthFilter extends OncePerRequestFilter {
+    private final JwtProvider jwtProvider;
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -33,10 +33,13 @@ public class JWTAuthFilter extends OncePerRequestFilter {
         final String phone;
         if (header != null && header.startsWith("Bearer ")) {
             final String token = header.substring(7);
-            phone = provider.extractPhone(token);
-            if (phone != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            phone = jwtProvider.extractPhone(token);
+            if (phone != null
+                    && SecurityContextHolder.getContext().getAuthentication() == null
+                    && jwtProvider.notInBlackList(token)
+            ) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
-                if (provider.validateToken(token, userDetails)) {
+                if (jwtProvider.validateTokenWithUser(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities()
                     );
