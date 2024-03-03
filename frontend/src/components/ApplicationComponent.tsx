@@ -68,7 +68,6 @@ const ApplicationComponent = (props: ApplyProps) => {
             ...selectedItem,
             status: APPLICATION_CONSTANT.STATUS_PASS,
         }
-        console.log(target);
         applicationAccept(target).then(res => {
             messageApi.success('操作成功！' + res);
         }).catch(err => {

@@ -2,6 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5173/api',
+    headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`},
 });
 instance.defaults.timeout = 5000;
 

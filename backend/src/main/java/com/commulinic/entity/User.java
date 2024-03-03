@@ -1,16 +1,17 @@
 package com.commulinic.entity;
 
+import com.commulinic.entity.auth.Role;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 @Data
+@Slf4j
 public class User implements Serializable, UserDetails {
     public final static Integer GENDER_MALE = 1;
     public final static Integer GENDER_FEMALE = 2;
@@ -33,7 +34,14 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.toString()));
+        Role roleEnum = Role.NORMAL;
+        if (Objects.equals(role, ROLE_ADMIN)) {
+            roleEnum = Role.ADMIN;
+        } else if (Objects.equals(role, ROLE_DOCTOR)) {
+            roleEnum = Role.DOCTOR;
+        }
+        log.info("roleEnum: {}", roleEnum);
+        return roleEnum.getAuthorities();
     }
 
     @Override

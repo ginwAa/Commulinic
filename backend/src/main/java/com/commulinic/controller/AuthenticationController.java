@@ -1,7 +1,7 @@
 package com.commulinic.controller;
 
-import com.commulinic.entity.AuthenticationResponse;
 import com.commulinic.entity.User;
+import com.commulinic.entity.auth.AuthenticationResponse;
 import com.commulinic.entity.result.Result;
 import com.commulinic.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;

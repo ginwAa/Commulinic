@@ -1,6 +1,7 @@
 package com.commulinic.configuration;
 
 import com.commulinic.filter.JwtAuthFilter;
+import com.commulinic.filter.UserAccessDeniedHandler;
 import com.commulinic.filter.UserAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,7 @@ public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthFilter jwtAuthFilter;
     private final LogoutHandler logoutHandler;
+    private final UserAccessDeniedHandler userAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -38,7 +40,11 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(ex -> ex.authenticationEntryPoint(userAuthenticationEntryPoint))
+                .exceptionHandling(
+                        ex -> ex
+                                .authenticationEntryPoint(userAuthenticationEntryPoint)
+                                .accessDeniedHandler(userAccessDeniedHandler)
+                )
                 .authenticationProvider(authenticationProvider)
                 .logout(
                         logout -> logout.logoutUrl("/auth/logout")

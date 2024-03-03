@@ -1,6 +1,8 @@
-import {Card, Col, Layout, Menu, MenuProps, Row, theme} from 'antd';
+import {Button, Card, Col, Layout, Menu, MenuProps, Row, Space, theme} from 'antd';
 import {CopyrightOutlined} from "@ant-design/icons";
 import React, {useState} from "react";
+import ButtonGroup from "antd/es/button/button-group";
+import {Link} from "react-router-dom";
 
 const {Header, Content, Footer} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -38,6 +40,13 @@ const Index = () => {
                         style={{fontSize: '1.5rem', color: themeToken.theme.id === 0 ? "black" : "white"}}/>
                 </div>
                 <Menu mode="horizontal" defaultSelectedKeys={['1']} items={items}/>
+                <Space>
+                    <ButtonGroup>
+                        <Link to={'/login'}>
+                            <Button type={'primary'}>登录 注册</Button>
+                        </Link>
+                    </ButtonGroup>
+                </Space>
             </Header>
             <Content style={{padding: '0 2rem', marginTop: 64, width: '100vw', minHeight: '90vh'}}>
                 <div className="site-layout-background" style={{padding: 24}}>
@@ -53,11 +62,11 @@ const Index = () => {
                                 <p>社区医院专家推荐内容...</p>
                             </Card>
                         </Col>
-                        <Col span={8}>
-                            <Card title="预约挂号" bordered={false}>
-                                <p>在线预约挂号功能...</p>
-                            </Card>
-                        </Col>
+                        {/*<Col span={8}>*/}
+                        {/*    <Card title="预约挂号" bordered={false}>*/}
+                        {/*        <p>在线预约挂号功能...</p>*/}
+                        {/*    </Card>*/}
+                        {/*</Col>*/}
                     </Row>
                 </div>
             </Content>

@@ -5,7 +5,8 @@ import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.ApplicationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/application")
 public class ApplicationController {
-    @Autowired
+    @Resource
     private ApplicationService applicationService;
 
+    @PreAuthorize("hasAuthority('admin:read')")
     @PostMapping("/page")
     public Result<PageVO<Application>> page(@RequestBody PageQueryDTO<Application> application) {
         PageVO<Application> page = applicationService.page(application);
@@ -29,6 +31,7 @@ public class ApplicationController {
         return Result.success(added);
     }
 
+    @PreAuthorize("hasAuthority('admin:update')")
     @PostMapping("/update")
     public Result<Long> update(@RequestBody Application application) {
         Long updated = applicationService.update(application);
@@ -41,6 +44,7 @@ public class ApplicationController {
         return Result.success(count);
     }
 
+    @PreAuthorize("hasAuthority('admin:update')")
     @PostMapping("/accept")
     public Result<Long> accept(@RequestBody Application application) {
         Long accepted = applicationService.accept(application);

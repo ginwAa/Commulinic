@@ -5,7 +5,6 @@ import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.MedTipService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/medTip")
 public class MedTipController {
-    @Autowired
+
     private MedTipService medTipService;
 
     @PostMapping("/page")

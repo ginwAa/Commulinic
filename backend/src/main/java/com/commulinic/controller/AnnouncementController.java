@@ -6,6 +6,7 @@ import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,14 @@ public class AnnouncementController {
     @Autowired
     private AnnouncementService announcementService;
 
+    @PreAuthorize("hasAnyAuthority('admin:create', 'doctor:create')")
     @PostMapping("/add")
     public Result<Long> add(@RequestBody Announcement announcement) {
         Long added = announcementService.add(announcement);
         return Result.success(added);
     }
 
+    @PreAuthorize("hasAnyAuthority('admin:update', 'doctor:update')")
     @PostMapping("/update")
     public Result<Long> update(@RequestBody Announcement announcement) {
         Long updated = announcementService.update(announcement);
@@ -41,6 +44,7 @@ public class AnnouncementController {
         return Result.success(count);
     }
 
+    @PreAuthorize("hasAnyAuthority('admin:delete', 'doctor:delete')")
     @PostMapping("/delete")
     public Result<Long> delete(@RequestBody Announcement announcement) {
         Long deleted = announcementService.delete(announcement);

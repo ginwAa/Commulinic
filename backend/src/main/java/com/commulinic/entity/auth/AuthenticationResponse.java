@@ -1,4 +1,4 @@
-package com.commulinic.entity;
+package com.commulinic.entity.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

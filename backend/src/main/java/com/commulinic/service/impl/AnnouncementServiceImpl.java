@@ -5,12 +5,12 @@ import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.AnnouncementMapper;
 import com.commulinic.service.AnnouncementService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
-    @Autowired
+    @Resource
     private AnnouncementMapper announcementMapper;
 
     @Override

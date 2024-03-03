@@ -1,7 +1,7 @@
 package com.commulinic.service.impl;
 
-import com.commulinic.entity.AuthenticationResponse;
 import com.commulinic.entity.User;
+import com.commulinic.entity.auth.AuthenticationResponse;
 import com.commulinic.exception.UserAlreadyExistsException;
 import com.commulinic.filter.JwtProvider;
 import com.commulinic.mapper.UserMapper;
@@ -39,6 +39,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (duplicate != null) {
             throw new UserAlreadyExistsException("手机号或密码错误");
         }
+        user.setRole(User.ROLE_NORMAL);
+        user.setStatus(User.STATUS_ACTIVE);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userMapper.add(user);
         String token = jwtProvider.createToken(user);

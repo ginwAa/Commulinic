@@ -4,13 +4,13 @@ import com.commulinic.entity.Department;
 import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
-    @Autowired
+    @Resource
     private DepartmentService departmentService;
 
     @GetMapping("/tree")
