@@ -9,3 +9,7 @@ export const authRegister = async (user: User) => {
 export const authLogin = async (user: User) => {
     return post<authenticationResponse>('/auth/login', user);
 };
+
+export const authLogout = async () => {
+    return post('/auth/logout');
+}

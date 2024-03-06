@@ -4,29 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="add logout">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/Permission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/UserAccessDeniedHandler.java" afterDir="false" />
+    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/MedTipBoard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/NoticeBoard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/AnnouncementMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/AnnouncementMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/AnnouncementServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/AnnouncementServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/AuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/AuthenticationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/apis/authApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/authApis.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +105,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "js.last.introduce.type": "CONST",
-    "last_opened_file_path": "D:/CodeFields/Code_Java/Commulinic/Commulinic/backend/target",
+    "last_opened_file_path": "D:/CodeFields/Code_Java/Commulinic/Commulinic/frontend/src/components",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -149,11 +138,11 @@
       <recent name="com.commulinic.filter" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\frontend\src\components" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\target" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\resources\mapper" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\java\com\commulinic" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\frontend\src\pages\admin" />
-      <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\frontend\public" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.commulinic.entity" />
@@ -300,7 +289,10 @@
       <workItem from="1709462239786" duration="2302000" />
       <workItem from="1709466826322" duration="326000" />
       <workItem from="1709467600435" duration="968000" />
-      <workItem from="1709468612678" duration="6200000" />
+      <workItem from="1709468612678" duration="9874000" />
+      <workItem from="1709562559180" duration="624000" />
+      <workItem from="1709642229323" duration="8653000" />
+      <workItem from="1709731918526" duration="6139000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -550,7 +542,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707071106963</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="add(frontend): authentication">
+      <option name="closed" value="true" />
+      <created>1709477823410</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1709477823410</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,7 +570,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="edit README.md" />
     <MESSAGE value="theme &amp; responsive layout" />
     <MESSAGE value="user management add" />
     <MESSAGE value="user management edit modal" />
@@ -595,7 +594,8 @@
     <MESSAGE value="bug fix" />
     <MESSAGE value="security filter improved" />
     <MESSAGE value="add logout" />
-    <option name="LAST_COMMIT_MESSAGE" value="add logout" />
+    <MESSAGE value="add(frontend): authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="add(frontend): authentication" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

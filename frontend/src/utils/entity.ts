@@ -4,6 +4,11 @@ export interface PageRes<T> {
     total: number,
 }
 
+export const EMPTY_PAGE: PageRes<any> = {
+    records: [],
+    total: 0,
+}
+
 export const USER_CONSTANT = {
     GENDER_MALE: 1,
     GENDER_FEMALE: 2,

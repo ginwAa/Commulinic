@@ -2,7 +2,6 @@ import axios from "axios";
 
 const instance = axios.create({
     baseURL: 'http://localhost:5173/api',
-    headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`},
 });
 instance.defaults.timeout = 5000;
 
@@ -12,6 +11,10 @@ instance.interceptors.request.use(function (config) {
             config.params[key] = config.params[key].join(',');
         }
     }
+    const token = sessionStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
     // Do something before request is sent
     return config;
 }, function (error) {
@@ -20,12 +23,19 @@ instance.interceptors.request.use(function (config) {
 });
 instance.interceptors.response.use(
     res => {
+        console.log("111ac", res);
         if (res.status < 400) {
+            console.log('here 200');
             return Promise.resolve(res);
         } else {
             return Promise.reject(res);
         }
     }, error => {
+        console.log("111er", error);
+        if (error.response.status === 401) {
+            console.log('here 401');
+            // window.location.href = '/login';
+        }
         return Promise.reject(error);
     }
 )
@@ -43,14 +53,14 @@ interface Result<T> {
 
 export const get = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
     return instance.get<Result<T>>(url, {params}).then(res => {
-        if (res.data.code < 400) {
-            return Promise.resolve({
+        if (res?.data?.code && res.data.code >= 400) {
+            return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,
                 message: res.data.msg,
             });
         } else {
-            return Promise.reject({
+            return Promise.resolve({
                 data: res.data.data,
                 status: res.data.code,
                 message: res.data.msg,
@@ -67,14 +77,14 @@ export const get = async <T>(url: string, params?: Record<string, any>): Promise
 
 export const post = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
     return instance.post<Result<T>>(url, params).then(res => {
-        if (res.data.code < 400) {
-            return Promise.resolve({
+        if (res?.data?.code && res.data.code >= 400) {
+            return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,
                 message: res.data.msg,
             });
         } else {
-            return Promise.reject({
+            return Promise.resolve({
                 data: res.data.data,
                 status: res.data.code,
                 message: res.data.msg,

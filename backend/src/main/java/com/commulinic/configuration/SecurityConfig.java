@@ -23,8 +23,11 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private static String[] WHITE_LIST_URL = {
-            "/auth/**",
+    private static final String[] WHITE_LIST_URL = {
+            "/auth/login",
+            "/auth/register",
+            "/announcement/page",
+            "/medTip/page",
     };
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final AuthenticationProvider authenticationProvider;
