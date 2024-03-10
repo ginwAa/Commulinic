@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/common/NotFoundPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/Permission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/auth/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/vo/DepartmentVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/vo/DepartmentVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DepartmentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DepartmentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/DepartmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DepartmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/apis/departmentApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/departmentApis.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/About.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/About.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/siderSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/siderSettings.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -309,7 +284,7 @@
       <workItem from="1709824497486" duration="4726000" />
       <workItem from="1709995624235" duration="5482000" />
       <workItem from="1710053137136" duration="14110000" />
-      <workItem from="1710073671558" duration="4529000" />
+      <workItem from="1710073671558" duration="4843000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -575,7 +550,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709743532332</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="modify(backend): &#10;&#10;1.add more role and permission&#10;2.add department tree api for registration&#10;3.modify api cache set expire time">
+      <option name="closed" value="true" />
+      <created>1710078691827</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1710078691827</updated>
+    </task>
+    <task id="LOCAL-00035" summary="add(frontend): &#10;&#10;1.add 404 page&#10;2.add department tree api for registration&#10;3.modify index page menu &amp; add default layout&#10;4.add registration page">
+      <option name="closed" value="true" />
+      <created>1710078817152</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1710078817152</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,8 +586,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="user management add" />
-    <MESSAGE value="user management edit modal" />
     <MESSAGE value="user management: add" />
     <MESSAGE value="user management: search filterDrop" />
     <MESSAGE value="user management: add&amp;update request" />
@@ -620,7 +609,9 @@
     <MESSAGE value="add logout" />
     <MESSAGE value="add(frontend): authentication" />
     <MESSAGE value="add(frontend): notice &amp; med tip board" />
-    <option name="LAST_COMMIT_MESSAGE" value="add(frontend): notice &amp; med tip board" />
+    <MESSAGE value="modify(backend): &#10;&#10;1.add more role and permission&#10;2.add department tree api for registration&#10;3.modify api cache set expire time" />
+    <MESSAGE value="add(frontend): &#10;&#10;1.add 404 page&#10;2.add department tree api for registration&#10;3.modify index page menu &amp; add default layout&#10;4.add registration page" />
+    <option name="LAST_COMMIT_MESSAGE" value="add(frontend): &#10;&#10;1.add 404 page&#10;2.add department tree api for registration&#10;3.modify index page menu &amp; add default layout&#10;4.add registration page" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
