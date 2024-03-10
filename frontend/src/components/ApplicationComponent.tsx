@@ -33,7 +33,7 @@ const ApplicationComponent = (props: ApplyProps) => {
             setData(res.data.records);
             setTotal(res.data.total);
         }).catch(err => {
-            messageApi.error("加载坐镇申请列表失败，请检查网络连接！", err.message);
+            messageApi.error("加载坐诊申请列表失败，请检查网络连接！" + err.message);
         }).finally(() => {
             setLoading(false);
         })

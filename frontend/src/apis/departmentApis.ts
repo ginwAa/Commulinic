@@ -19,7 +19,11 @@ export const departmentUpdate = async (department: Department) => {
     return post<number>('/department/update', department);
 };
 
-export const departmentTree = async () => {
-    return get<DepartmentTreeNode>('/department/tree');
+export const departmentTree = async (type: number) => {
+    return get<DepartmentTreeNode>(`/department/tree/${type}`);
+};
+
+export const departmentTreeReg = async () => {
+    return get<DepartmentTreeNode>('/department/tree/register');
 };
 

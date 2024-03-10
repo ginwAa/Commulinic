@@ -7,6 +7,7 @@ import {
     Input,
     message,
     Modal,
+    Select,
     Space,
     Spin,
     TreeSelect
@@ -38,6 +39,7 @@ const transform = (data: DepartmentTreeNode[]): DataNode[] => {
             key: item.value,
             title: item.title,
             value: item.value,
+            type: item.type == 0 ? '医院' : item.type == 1 ? '医辅部门' : '医疗部门',
             parentId: item.parentId,
             description: item.description,
             children: item.children ? transform(item.children) : [],
@@ -103,6 +105,9 @@ const EditModal = (props: EditProps) => {
                     <Form.Item name="description" label="部门描述">
                         <Input.TextArea/>
                     </Form.Item>
+                    <Form.Item name="type" label="部门类型" hidden={props.record.type === 0}>
+                        <Select options={[{value: 1, label: '医辅部门'}, {value: 2, label: '医疗部门'}]}/>
+                    </Form.Item>
                 </Form>
             </Modal>
         </>
@@ -149,6 +154,11 @@ const DepartmentManagement = () => {
                     label: '部门描述',
                     children: node.description ? node.description : '',
                 },
+                {
+                    key: '3',
+                    label: '部门类型',
+                    children: node.type === 1 ? '医辅部门' : '医疗部门',
+                }
             ]);
             setSelectedNode(node);
         }).catch(err => {
@@ -159,17 +169,19 @@ const DepartmentManagement = () => {
     const [description, setDescription] = useState<DescriptionsProps['items']>([]);
     useEffect(() => {
         setLoading(true);
-        departmentTree().then(res => {
+        departmentTree(0).then(res => {
             setData([res.data]);
             if (selectedKey === 0 && res.data.value) {
                 setSelectedKey(res.data.value);
             }
+            console.log(transform([res.data]));
         }).catch(err => {
             messageApi.error("部门结构信息加载失败，请检查网络连接！", err.message);
         }).finally(() => {
             setLoading(false);
             console.log("tree");
         });
+
     }, [editSuccess, applyOpen]);
     useEffect(() => {
         setLoading(true);
@@ -216,9 +228,9 @@ const DepartmentManagement = () => {
         <>
             {contextHolder}
             <Space direction={"horizontal"} style={{display: 'flex', justifyContent: 'space-between'}}>
-                <TreeSelect treeData={transform(data)} disabled={!data || data.length === 0} placeholder={'选择部门'}
-                            dropdownStyle={{maxHeight: 400, overflow: 'auto', width: 'max-content'}}
-                            placement={"bottomLeft"} onSelect={onSelect} value={selectedKey} size={"small"}/>
+                <TreeSelect treeData={transform(data)} disabled={!data || data.length === 0} treeDefaultExpandAll
+                            dropdownStyle={{maxHeight: 400, overflow: 'auto', width: '10rem'}}
+                            placement={"bottomRight"} onSelect={onSelect} value={selectedKey} size={"small"}/>
                 <Badge count={unread} showZero={true} size={"small"}>
                     <Button size={'small'} type={'primary'} onClick={() => setApplyOpen(true)}>查看坐诊申请</Button>
                 </Badge>

@@ -4,7 +4,7 @@ export interface PageRes<T> {
     total: number,
 }
 
-export const EMPTY_PAGE: PageRes<any> = {
+export const EMPTY_PAGE: PageRes<null> = {
     records: [],
     total: 0,
 }
@@ -49,6 +49,7 @@ export interface Department {
     id?: number,
     parentId?: number,
     name: string,
+    type?: number,
     description: string,
 }
 
@@ -62,6 +63,7 @@ export interface DepartmentTreeNode {
     parentId?: number | null,
     title: string,
     description: string,
+    type?: number,
     children: DepartmentTreeNode[],
 }
 
@@ -205,6 +207,11 @@ export interface PageDTO<T> {
     data: T,
 }
 
-export interface authenticationResponse {
-    token: string
+export interface AboutInfo {
+    description: string
+}
+
+export interface authenticationRequest {
+    username: string,
+    password: string
 }

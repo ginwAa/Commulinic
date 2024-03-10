@@ -1,4 +1,4 @@
-import Index from './pages';
+import Index from "./pages/Index.tsx";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import About from "./pages/About.tsx";
 import User from "./pages/User.tsx";
@@ -12,6 +12,8 @@ import RegisterManagementPage from "./pages/admin/RegisterManagementPage.tsx";
 import DepartmentManagementPage from "./pages/admin/DepartmentManagementPage.tsx";
 import Login from "./pages/Login.tsx";
 import CommunityManagementPage from "./pages/admin/CommunityManagementPage.tsx";
+import NotFoundPage from "./pages/common/NotFoundPage.tsx";
+import Registration from "./pages/Registration.tsx";
 
 const App = () => {
     if (localStorage.getItem('admin/siderCollapsed') === null) {
@@ -56,6 +58,8 @@ const App = () => {
                     <Route path="/admin/users" element={<UserManagementPage/>} key="/admin/users"/>
                     <Route path="/admin/register" element={<RegisterManagementPage/>} key="/admin/register"/>
                     <Route path="/admin/community" element={<CommunityManagementPage/>} key="/admin/community"/>
+                    <Route path="/registration" element={<Registration/>} key="/registration"/>
+                    <Route path="/*" element={<NotFoundPage/>} key="404"/>
                 </Routes>
             </Router>
             <FloatButton.Group shape="square" style={{right: '1rem', bottom: '1rem',}}>

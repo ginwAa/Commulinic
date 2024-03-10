@@ -23,15 +23,12 @@ instance.interceptors.request.use(function (config) {
 });
 instance.interceptors.response.use(
     res => {
-        console.log("111ac", res);
         if (res.status < 400) {
-            console.log('here 200');
             return Promise.resolve(res);
         } else {
             return Promise.reject(res);
         }
     }, error => {
-        console.log("111er", error);
         if (error.response.status === 401) {
             console.log('here 401');
             // window.location.href = '/login';
