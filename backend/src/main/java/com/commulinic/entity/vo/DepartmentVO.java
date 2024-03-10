@@ -1,6 +1,8 @@
 package com.commulinic.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,9 +12,18 @@ public class DepartmentVO implements Serializable {
     public Long id;
     @JsonProperty("title")
     public String name;
+    @Getter
+    @Setter
     private String description;
+    @Getter
+    @Setter
     private Long parentId;
+    @Getter
+    @Setter
     private List<DepartmentVO> children;
+    @Getter
+    @Setter
+    private Integer type;
 
     public Long getId() {
         return id;
@@ -28,31 +39,6 @@ public class DepartmentVO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public List<DepartmentVO> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<DepartmentVO> children) {
-        this.children = children;
     }
 
 }

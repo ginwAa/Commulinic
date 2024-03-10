@@ -23,6 +23,7 @@ public class MedTipController {
         return Result.success(page);
     }
 
+
     @PostMapping("/add")
     private Result<Long> add(@RequestBody MedTip tip) {
         Long added = medTipService.add(tip);

@@ -13,6 +13,16 @@ public enum Permission {
     DOCTOR_UPDATE("doctor:update"),
     DOCTOR_DELETE("doctor:delete"),
     DOCTOR_CREATE("doctor:create"),
+
+    TOURIST_READ("tourist:read"),
+    TOURIST_UPDATE("tourist:update"),
+    TOURIST_DELETE("tourist:delete"),
+    TOURIST_CREATE("tourist:create"),
+
+    NORMAL_READ("normal:read"),
+    NORMAL_UPDATE("normal:update"),
+    NORMAL_DELETE("normal:delete"),
+    NORMAL_CREATE("normal:create"),
     ;
 
     @Getter

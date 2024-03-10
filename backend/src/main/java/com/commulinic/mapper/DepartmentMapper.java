@@ -10,10 +10,13 @@ import java.util.List;
 
 @Mapper
 public interface DepartmentMapper {
-    @Select("select * from department order by parent_id < 0, parent_id IS NULL, parent_id")
+    @Select("select * from department where type != 2 order by parent_id < 0, parent_id IS NULL, parent_id ")
+    List<Department> allReg();
+
+    @Select("select * from department order by parent_id < 0, parent_id IS NULL, parent_id ")
     List<Department> all();
 
-    @Insert("insert into department (parent_id, name, description) values (#{parentId}, #{name}, #{description})")
+    @Insert("insert into department (parent_id, name, description, type) values (#{parentId}, #{name}, #{description}, #{type})")
     Long add(Department department);
 
     Long update(Department department);

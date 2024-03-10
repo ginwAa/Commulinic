@@ -18,7 +18,7 @@ public class ApplicationController {
     @Resource
     private ApplicationService applicationService;
 
-    @PreAuthorize("hasAuthority('admin:read')")
+    //    @PreAuthorize("hasAuthority('admin:read')")
     @PostMapping("/page")
     public Result<PageVO<Application>> page(@RequestBody PageQueryDTO<Application> application) {
         PageVO<Application> page = applicationService.page(application);

@@ -13,9 +13,15 @@ public class DepartmentController {
     @Resource
     private DepartmentService departmentService;
 
-    @GetMapping("/tree")
-    public Result<DepartmentVO> tree() {
-        DepartmentVO tree = departmentService.tree();
+    @GetMapping("/tree/{type}")
+    public Result<DepartmentVO> tree(@PathVariable Integer type) {
+        DepartmentVO tree = departmentService.tree(type);
+        return Result.success(tree);
+    }
+
+    @GetMapping("/tree/register")
+    public Result<DepartmentVO> treeRegister() {
+        DepartmentVO tree = departmentService.tree(2);
         return Result.success(tree);
     }
 

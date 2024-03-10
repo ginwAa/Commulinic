@@ -5,13 +5,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
 public enum Role {
-    NORMAL(Collections.emptySet()),
+    NORMAL(
+            Set.of(
+                    Permission.TOURIST_READ,
+                    Permission.TOURIST_UPDATE,
+                    Permission.TOURIST_CREATE,
+                    Permission.TOURIST_DELETE,
+                    Permission.NORMAL_READ,
+                    Permission.NORMAL_UPDATE,
+                    Permission.NORMAL_DELETE,
+                    Permission.NORMAL_CREATE
+            )
+    ),
     ADMIN(
             Set.of(
                     Permission.ADMIN_READ,
@@ -21,7 +31,15 @@ public enum Role {
                     Permission.DOCTOR_READ,
                     Permission.DOCTOR_UPDATE,
                     Permission.DOCTOR_CREATE,
-                    Permission.DOCTOR_DELETE
+                    Permission.DOCTOR_DELETE,
+                    Permission.TOURIST_READ,
+                    Permission.TOURIST_UPDATE,
+                    Permission.TOURIST_CREATE,
+                    Permission.TOURIST_DELETE,
+                    Permission.NORMAL_READ,
+                    Permission.NORMAL_UPDATE,
+                    Permission.NORMAL_DELETE,
+                    Permission.NORMAL_CREATE
             )
     ),
     DOCTOR(
@@ -29,9 +47,26 @@ public enum Role {
                     Permission.DOCTOR_READ,
                     Permission.DOCTOR_UPDATE,
                     Permission.DOCTOR_CREATE,
-                    Permission.DOCTOR_DELETE
+                    Permission.DOCTOR_DELETE,
+                    Permission.TOURIST_READ,
+                    Permission.TOURIST_UPDATE,
+                    Permission.TOURIST_CREATE,
+                    Permission.TOURIST_DELETE,
+                    Permission.NORMAL_READ,
+                    Permission.NORMAL_UPDATE,
+                    Permission.NORMAL_DELETE,
+                    Permission.NORMAL_CREATE
             )
     ),
+
+    TOURIST(
+            Set.of(
+                    Permission.TOURIST_READ,
+                    Permission.TOURIST_UPDATE,
+                    Permission.TOURIST_CREATE,
+                    Permission.TOURIST_DELETE
+            )
+    )
     ;
 
     @Getter

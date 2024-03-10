@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +27,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final ApplicationMapper applicationMapper;
     private final RedisTemplate<String, Object> redisTemplate;
 
-    public DepartmentVO tree() {
-        DepartmentVO res = (DepartmentVO) redisTemplate.opsForValue().get(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
+    public DepartmentVO tree(Integer type) {
+        DepartmentVO res = (DepartmentVO) redisTemplate.opsForValue().get(RedisConstant.REDIS_DEPARTMENT_TREE_KEY + type);
         if (res != null) {
             return res;
         }
-        List<Department> data = departmentMapper.all();
+        List<Department> data = type == 2 ? departmentMapper.allReg() : departmentMapper.all();
         DepartmentVO root = new DepartmentVO();
         Long rootId = null;
         Map<Long, DepartmentVO> map = new HashMap<>();
@@ -58,7 +59,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 map.put(data.get(i).getId(), child);
             }
         }
-        redisTemplate.opsForValue().set(RedisConstant.REDIS_DEPARTMENT_TREE_KEY, root);
+        redisTemplate.opsForValue().set(RedisConstant.REDIS_DEPARTMENT_TREE_KEY + type, root, Duration.ofMinutes(1L));
         return root;
     }
 

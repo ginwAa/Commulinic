@@ -4,7 +4,7 @@ import com.commulinic.entity.Department;
 import com.commulinic.entity.vo.DepartmentVO;
 
 public interface DepartmentService {
-    DepartmentVO tree();
+    DepartmentVO tree(Integer type);
 
     Long add(Department department);
 
