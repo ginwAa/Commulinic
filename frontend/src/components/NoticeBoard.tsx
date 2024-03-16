@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {announcementPage} from "../apis/announcementApis.ts";
 import {Button, Card, message, Modal, Pagination} from "antd";
 import Title from "antd/es/typography/Title";
+import {unixSecondToDate} from "../utils/time.ts";
 
 const NoticeBoard = () => {
     const [messageApi, contextHolder] = message.useMessage();
@@ -13,7 +14,8 @@ const NoticeBoard = () => {
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [moreOpen, setMoreOpen] = useState<boolean>(false);
     const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    // const [pageSize, setPageSize] = useState(10);
+    const pageSize = 10;
     const [total, setTotal] = useState(0);
 
 
@@ -63,10 +65,17 @@ const NoticeBoard = () => {
                                 onClick={() => onTitleClick(announcement)}
                                 style={{
                                     overflow: 'hidden', textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap', width: '40vw', cursor: 'pointer'
+                                    whiteSpace: 'nowrap', width: '100%', cursor: 'pointer'
                                 }}
                             >
-                                {announcement.title}
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div>
+                                        {announcement.title}
+                                    </div>
+                                    <div>
+                                        {unixSecondToDate(announcement.updatedAt)}
+                                    </div>
+                                </div>
                             </p>
                         </div>
                     ))
@@ -88,10 +97,17 @@ const NoticeBoard = () => {
                                 onClick={() => onTitleClick(announcement)}
                                 style={{
                                     overflow: 'hidden', textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap', width: '40vw', cursor: 'pointer'
+                                    whiteSpace: 'nowrap', width: '100%', cursor: 'pointer'
                                 }}
                             >
-                                {announcement.title}
+                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                    <div>
+                                        {announcement.title}
+                                    </div>
+                                    <div>
+                                        {unixSecondToDate(announcement.updatedAt)}
+                                    </div>
+                                </div>
                             </p>
                         </div>
                     ))

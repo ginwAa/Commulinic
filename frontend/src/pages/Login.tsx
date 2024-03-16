@@ -5,7 +5,6 @@ import {User} from "../utils/entity.ts";
 import {Content, Header} from "antd/es/layout/layout";
 import {authLogin, authRegister} from "../apis/authApis.ts";
 import {Link} from "react-router-dom";
-import assert from "assert";
 
 interface RegisterForm extends User {
     agreement: boolean;
@@ -53,7 +52,10 @@ const LoginTab = () => {
         form.validateFields().then(() => {
             authLogin(user).then(res => {
                 const data = res.data;
-                assert(data.token != null && data.role != null && data.userId != null && data.userName != null, "登录失败");
+                if (data.token != null && data.role != null && data.userId != null && data.userName != null) {
+                } else {
+                    throw new Error("登录信息异常！");
+                }
                 messageApi.success("登录成功");
                 sessionStorage.setItem('token', data.token);
                 sessionStorage.setItem('userId', data.userId.toString());
@@ -105,13 +107,13 @@ const RegisterTab = () => {
         const user: User = formData;
         form.validateFields().then(() => {
             authRegister(user).then(res => {
-                messageApi.success("登录成功");
-                sessionStorage.setItem('token', res.data.token);
+                messageApi.success("注册成功");
+                // sessionStorage.setItem('token', res.data.token);
                 setTimeout(() => {
                     window.location.href = '/login';
                 }, 1500);
             }).catch(err => {
-                messageApi.error("登录失败" + err.message);
+                messageApi.error("注册失败" + err.message);
             });
         })
     };

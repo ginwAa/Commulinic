@@ -4,7 +4,7 @@
 <mapper namespace="com.commulinic.mapper.AnnouncementMapper">
 
     <select id="page" resultType="com.commulinic.entity.Announcement">
-        select * from announcemont
+        select * from announcement
         <where>
             <if test="data.content != null and data.content != ''">
                 and content like concat('%', #{data.content}, '%')
@@ -28,7 +28,7 @@
     </select>
 
     <select id="count" resultType="java.lang.Long">
-        select COUNT(1) from announcemont
+        select COUNT(1) from announcement
         <where>
             <if test="content != null and content != ''">
                 and content like concat('%', #{content}, '%')
@@ -40,7 +40,7 @@
     </select>
 
     <update id="update">
-        update announcemont
+        update announcement
         <set>
             <if test="content != null and content != ''">
                 content = #{content},

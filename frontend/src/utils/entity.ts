@@ -4,7 +4,7 @@ export interface PageRes<T> {
     total: number,
 }
 
-export const EMPTY_PAGE: PageRes<null> = {
+export const EMPTY_PAGE: PageRes<any> = {
     records: [],
     total: 0,
 }

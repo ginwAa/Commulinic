@@ -18,9 +18,9 @@ public interface AnnouncementMapper {
 
     Long update(Announcement announcement);
 
-    @Insert("insert into announcemont (content, updated_at, title) VALUES (#{content}, #{updatedAt}, #{title} )")
+    @Insert("insert into announcement (content, updated_at, title) VALUES (#{content}, #{updatedAt}, #{title} )")
     Long add(Announcement announcement);
 
-    @Delete("delete from announcemont where id = #{id}")
+    @Delete("delete from announcement where id = #{id}")
     Long delete(Announcement announcement);
 }
