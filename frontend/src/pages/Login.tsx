@@ -5,6 +5,7 @@ import {User} from "../utils/entity.ts";
 import {Content, Header} from "antd/es/layout/layout";
 import {authLogin, authRegister} from "../apis/authApis.ts";
 import {Link} from "react-router-dom";
+import assert from "assert";
 
 interface RegisterForm extends User {
     agreement: boolean;
@@ -51,8 +52,13 @@ const LoginTab = () => {
         const user: LoginForm = form.getFieldsValue();
         form.validateFields().then(() => {
             authLogin(user).then(res => {
+                const data = res.data;
+                assert(data.token != null && data.role != null && data.userId != null && data.userName != null, "登录失败");
                 messageApi.success("登录成功");
-                sessionStorage.setItem('token', res.data.token);
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('userId', data.userId.toString());
+                sessionStorage.setItem('userName', data.userName);
+                sessionStorage.setItem('role', data.role.toString());
                 if (user.remember) {
                     localStorage.setItem('REMEMBERED_USER_PHONE', user.phone);
                 }

@@ -2,6 +2,7 @@ package com.commulinic.mapper;
 
 import com.commulinic.entity.Department;
 import com.commulinic.entity.Doctor;
+import com.commulinic.entity.dto.DoctorRegisterDTO;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.DoctorVO;
 import org.apache.ibatis.annotations.Insert;
@@ -15,10 +16,14 @@ import java.util.List;
 public interface DoctorMapper {
     List<DoctorVO> page(PageQueryDTO<DoctorVO> dto);
 
+    List<DoctorVO> pageWithStock(PageQueryDTO<DoctorRegisterDTO> dto);
+
+    Long countWithStock(DoctorRegisterDTO dto);
+
     Long update(Doctor doctor);
 
-    @Insert("insert into doctor (user_id, department_id, department, seniority, status, position, morning_begin, morning_end, afternoon_begin, afternoon_end) " +
-            "VALUES (#{userId}, #{departmentId}, #{department}, #{seniority}, #{status}, #{position}, #{morningBegin}, #{morningEnd}, #{afternoonBegin}, #{afternoonEnd})")
+    @Insert("insert into doctor (user_id, department_id, department, seniority, status, position, am_std, pm_std, description) " +
+            "VALUES (#{userId}, #{departmentId}, #{department}, #{seniority}, #{status}, #{position}, #{amStd}, #{pmStd}, #{description})")
     Long add(Doctor doctor);
 
     Long count(DoctorVO dto);

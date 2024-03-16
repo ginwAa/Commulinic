@@ -86,13 +86,17 @@ export interface DoctorVO {
     userId: number,
     departmentId: number,
     department?: string,
-    seniority: number,
+    seniority?: number,
     position: string,
     status: number,
     name: string,
     gender: number,
     phone: string,
     email: string,
+    amStd?: number,
+    pmStd?: number,
+    stock?: number,
+    desc: string,
 }
 
 export const EMPTY_DOCTOR: Doctor = {
@@ -104,14 +108,23 @@ export const EMPTY_DOCTOR: Doctor = {
 export const EMPTY_DOCTOR_VO: DoctorVO = {
     userId: 0,
     departmentId: 0,
-    seniority: 0,
     position: '',
     status: 0,
     name: '',
     gender: 0,
     phone: '',
     email: '',
+    desc: '',
 }
+
+export interface DoctorRegisterDTO {
+    departmentId: number;
+    name: string;
+    gender: number;
+    section: number;
+    beginDate: number,
+}
+
 
 export const APPLICATION_CONSTANT = {
     STATUS_WAIT: 1,
@@ -177,7 +190,7 @@ export interface Register {
     section: number;
     status: number;
     price: number;
-    createTime: number;
+    createTime?: number;
 }
 
 export const EMPTY_REGISTER: Register = {
@@ -189,7 +202,6 @@ export const EMPTY_REGISTER: Register = {
     section: 0,
     status: 0,
     price: 0,
-    createTime: 0
 }
 
 export const REGISTER_CONSTANT = {
@@ -214,4 +226,21 @@ export interface AboutInfo {
 export interface authenticationRequest {
     username: string,
     password: string
+}
+
+export interface authenticationResponse {
+    token: string,
+    userId: number,
+    userName: string,
+    role: number,
+}
+
+export interface SystemDict {
+    key: string,
+    value: string,
+}
+
+export const EMPTY_SYSTEM_DICT: SystemDict = {
+    key: '',
+    value: '',
 }

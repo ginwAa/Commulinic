@@ -11,6 +11,8 @@
                 <if test="data.departmentId != null and data.departmentId != 0"> and department_id = #{data.departmentId}</if>
 <!--                <if test="data.seniority != null and data.seniority != 0">and seniority &lt; #{data.seniority}</if>-->
                 <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
+                <if test="data.amStd != null">and am_std &gt; #{data.amStd}</if>
+                <if test="data.pmStd != null">and pm_std &gt; #{data.pmStd}</if>
             </where>
             <choose>
                 <when test="data.seniority == null or data.seniority == 0">
@@ -21,7 +23,6 @@
                     <if test="data.seniority == 2">order by seniority desc</if>
                 </otherwise>
             </choose>
-        LIMIT #{size} OFFSET #{offset}
         ) as d
         inner join
             (select id as user_id, name, gender, phone, email from user
@@ -30,9 +31,11 @@
                 <if test="data.phone != null and data.phone != ''">and phone like concat ('%', #{data.phone}, '%')</if>
                 <if test="data.email != null and data.email != ''">and email like concat ('%', #{data.email}, '%')</if>
                 <if test="data.gender != null and data.gender != 0">and gender &amp; #{data.gender} != 0</if>
+                <if test="data.role != null and data.role != 0">and role &amp; #{data.role} != 0</if>
             </where>
         ) as u
         on u.user_id = d.user_id
+        LIMIT #{size} OFFSET #{offset}
     </select>
     
     <update id="update">
@@ -44,7 +47,9 @@
                 <if test="seniority != null and seniority != 0">seniority = #{seniority},</if>
                 <if test="status != null and status != 0">status = #{status},</if>
                 <if test="position != null and position != ''">position = #{position}</if>
-            </set>
+                <if test="amStd != null">am_std = #{amStd},</if>
+                <if test="pmStd != null">pm_std = #{pmStd},</if>
+    </set>
         where id = #{id}
     </update>
 
@@ -57,6 +62,8 @@
             <if test="departmentId != null and departmentId != 0"> and department_id = #{departmentId}</if>
 <!--            <if test="seniority != null and seniority != 0">and seniority &lt; #{seniority}</if>-->
             <if test="status != null and status != 0">and status &amp; #{status} != 0</if>
+            <if test="amStd != null">and am_std &gt; #{amStd}</if>
+            <if test="pmStd != null">and pm_std &gt; #{pmStd}</if>
         </where>) as d
         inner join
         (select id from user
@@ -65,8 +72,75 @@
             <if test="phone != null and phone != ''">and phone like concat ('%', #{phone}, '%')</if>
             <if test="email != null and email != ''">and email like concat ('%', #{email}, '%')</if>
             <if test="gender != null and gender != 0">and gender &amp; #{gender} != 0</if>
+            <if test="role != null and role != 0">and role &amp; #{role} != 0</if>
         </where>
         ) as u
         on u.id = d.user_id
+    </select>
+
+    <select id="pageWithStock" resultType="com.commulinic.entity.vo.DoctorVO">
+        select * FROM (
+        select d.*, u.name, u.gender, COALESCE(r.stock, 0) as stock from
+            (select * from doctor
+            <where>
+                <if test="data.departmentId != null and data.departmentId != 0"> and department_id = #{data.departmentId}</if>
+                <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
+            </where>
+            ) as d inner join
+            (select id as user_id, name, gender from user
+            <where>
+                <if test="data.gender != null and data.gender != 0">and gender &amp; #{data.gender} != 0</if>
+                <if test="data.role != null and data.role != 0">and role &amp; #{data.role} != 0</if>
+            </where>
+            ) as u on u.user_id = d.user_id left join
+            (select doctor_id, COALESCE(sum(1), 0) as stock from register
+                where status != 8 and section = #{data.section} and date between #{data.beginDate} and #{data.endDate}
+                group by doctor_id
+            ) as r on r.doctor_id = d.id
+        ) as tmp
+        <where>
+            <choose>
+                <when test="data.section = 1">
+                    stock &lt; am_std
+                </when>
+                <otherwise>
+                    stock &lt; pm_std
+                </otherwise>
+            </choose>
+            <if test="data.name != null and data.name != ''">and name like concat ('%', #{data.name}, '%') OR description LIKE CONCAT('%', #{data.name}, '%')</if>
+        </where>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countWithStock" resultType="java.lang.Long">
+        select count(1) from
+        (select d.am_std, d.pm_std, u.name, d.description, COALESCE(r.stock, 0) as stock from
+        (select * from doctor
+        <where>
+            <if test="departmentId != null and departmentId != 0"> and department_id = #{departmentId}</if>
+            <if test="status != null and status != 0">and status &amp; #{status} != 0</if>
+        </where>
+        ) as d inner join
+        (select id as user_id, name, gender, phone, email from user
+        <where>
+            <if test="gender != null and gender != 0">and gender &amp; #{gender} != 0</if>
+            <if test="role != null and role != 0">and role &amp; #{role} != 0</if>
+        </where>
+        ) as u on u.user_id = d.user_id
+        left join (select doctor_id, COALESCE(sum(1), 0) as stock from register
+        where status != 8 and section = #{section} and date between #{beginDate} and #{endDate}
+        group by doctor_id) as r on r.doctor_id = d.id
+        ) as tmp
+        <where>
+            <choose>
+                <when test="section = 1">
+                    stock &lt; am_std
+                </when>
+                <otherwise>
+                    stock &lt; pm_std
+                </otherwise>
+            </choose>
+            <if test="name != null and name != ''">and name like concat ('%', #{name}, '%') OR description LIKE CONCAT('%', #{name}, '%')</if>
+        </where>
     </select>
 </mapper>

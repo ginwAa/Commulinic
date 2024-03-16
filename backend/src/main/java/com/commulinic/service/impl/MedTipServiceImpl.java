@@ -1,5 +1,6 @@
 package com.commulinic.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import com.commulinic.entity.MedTip;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
@@ -18,13 +19,17 @@ public class MedTipServiceImpl implements MedTipService {
     @Override
     public Long add(MedTip tip) {
         tip.setUpdatedAt((int) (System.currentTimeMillis() / 1000));
-        return medTipMapper.add(tip);
+        Long added = medTipMapper.add(tip);
+        Assert.isTrue(added != null && added > 0, "操作失败");
+        return added;
     }
 
     @Override
     public Long update(MedTip tip) {
         tip.setUpdatedAt((int) (System.currentTimeMillis() / 1000));
-        return medTipMapper.update(tip);
+        Long updated = medTipMapper.update(tip);
+        Assert.isTrue(updated != null && updated > 0, "操作失败");
+        return updated;
     }
 
     @Override
@@ -41,6 +46,8 @@ public class MedTipServiceImpl implements MedTipService {
 
     @Override
     public Long delete(MedTip tip) {
-        return medTipMapper.delete(tip);
+        Long deleted = medTipMapper.delete(tip);
+        Assert.isTrue(deleted != null && deleted > 0, "操作失败");
+        return deleted;
     }
 }

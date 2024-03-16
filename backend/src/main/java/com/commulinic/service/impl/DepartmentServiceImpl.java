@@ -1,5 +1,6 @@
 package com.commulinic.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import com.commulinic.constant.RedisConstant;
 import com.commulinic.entity.Department;
 import com.commulinic.entity.vo.DepartmentVO;
@@ -68,6 +69,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         if (added != null) {
             redisTemplate.delete(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         }
+        Assert.isTrue(added != null && added > 0, "操作失败");
         return added;
     }
 
@@ -78,6 +80,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             applicationMapper.updateDepartment(department);
         }
         Long updated = departmentMapper.update(department);
+        Assert.isTrue(updated != null && updated > 0, "操作失败");
         if (updated != null) {
             redisTemplate.delete(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         }
@@ -87,6 +90,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public Long delete(Long id) {
         Long deleted = departmentMapper.delete(id);
+        Assert.isTrue(deleted != null && deleted > 0, "操作失败");
         if (deleted != null) {
             redisTemplate.delete(RedisConstant.REDIS_DEPARTMENT_TREE_KEY);
         }

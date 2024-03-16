@@ -52,7 +52,7 @@ export const MyDatePicker = ({value, onChange}: formProps<number>, beforeDisable
     }
     const beforeTodayDate: RangePickerProps['disabledDate'] = (current) => {
         // Can not select days before today and today
-        return current && current < dayjs().endOf('day');
+        return current < dayjs().subtract(1, 'day');
     };
     return (
         <DatePicker

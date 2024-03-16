@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 @Data
 public class Register implements Serializable {
-    public final static Integer STATUS_UNPAID = 1;
-    public final static Integer STATUS_PAID = 2;
-    public final static Integer STATUS_FINISHED = 4;
-    public final static Integer STATUS_ABORTED = 8;
+    public final static Integer REG_STATUS_UNPAID = 1;
+    public final static Integer REG_STATUS_PAID = 2;
+    public final static Integer REG_STATUS_FINISHED = 4;
+    public final static Integer REG_STATUS_ABORTED = 8;
     public final static Integer SECTION_MORNING = 1;
     public final static Integer SECTION_AFTERNOON = 2;
     private Long id;

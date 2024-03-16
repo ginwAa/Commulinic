@@ -4,6 +4,7 @@ import com.commulinic.entity.Register;
 import com.commulinic.entity.dto.PageQueryDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface RegisterMapper {
 
     @Update("update register set doctor_name = #{doctorName} where doctor_id = #{doctorId}")
     Long updateDoctorName(Long doctorId, String doctorName);
+
+    @Select("select * from register where id = #{id}")
+    Register getById(Long id);
 }

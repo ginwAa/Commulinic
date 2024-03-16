@@ -13,4 +13,7 @@ import java.io.Serializable;
 @Builder
 public class AuthenticationResponse implements Serializable {
     private String token;
+    private Long userId;
+    private String userName;
+    private Integer role;
 }

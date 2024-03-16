@@ -47,9 +47,12 @@ const DefaultLayout = (props: MainContentProps) => {
     const onLogout = () => {
         authLogout().then(() => {
             sessionStorage.removeItem('token');
+            sessionStorage.removeItem('userId');
+            sessionStorage.removeItem('userName');
+            sessionStorage.removeItem('role');
             setTimeout(() => {
                 window.location.href = '/';
-            }, 1000);
+            }, 1500);
         }).catch(err => {
             console.log(err);
             messageApi.error("退出登录失败 + " + err.message);
@@ -57,10 +60,10 @@ const DefaultLayout = (props: MainContentProps) => {
     };
 
     return (
-        <Layout style={{width: '100vw'}}>
+        <Layout style={{width: '100vw', alignItems: 'center', display: 'flex', minHeight: '100vh'}}>
             {contextHolder}
             <Header style={{position: 'fixed', zIndex: 1, width: '100%', alignItems: 'center', display: 'flex'}}>
-                <div className="logo" style={{alignItems: 'center', padding: '0 0.5rem'}}>
+                <div className="logo" style={{alignItems: 'center'}}>
                     <CopyrightOutlined
                         style={{fontSize: '1.5rem', color: themeToken.theme.id === 0 ? "black" : "white"}}/>
                 </div>
@@ -79,12 +82,14 @@ const DefaultLayout = (props: MainContentProps) => {
                     </ButtonGroup>
                 </Space>
             </Header>
-            <Content style={{padding: '0 2rem', marginTop: 64, width: 'max-content', minHeight: '90vh'}}>
-                <props.component></props.component>
+            <Content style={{padding: '0 2rem', marginTop: 64, width: '90%'}}>
+                <props.component/>
             </Content>
-            <Footer style={{textAlign: 'center', height: '1rem'}}>社区医院 ©2023 Created by Communlinic</Footer>
+            <Footer style={{textAlign: 'center', height: '1rem', width: '100%'}}>社区医院 ©2023 Created by
+                Communlinic</Footer>
         </Layout>
     );
 }
+
 
 export default DefaultLayout;

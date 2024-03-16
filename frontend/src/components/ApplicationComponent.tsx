@@ -89,7 +89,7 @@ const ApplicationComponent = (props: ApplyProps) => {
                     <List.Item key={item.id} actions={[
                         <Button type={'primary'} size={"small"} onClick={() => onAccept(item)}>同意</Button>,
                         <Button type={'primary'} danger size={"small"} onClick={() => onRefuse(item)}>拒绝</Button>,
-                        <Button size={"small"}>下载附件</Button> // TODO
+                        // <Button size={"small"}>下载附件</Button> // TODO
 
                     ]}>
                         <List.Item.Meta

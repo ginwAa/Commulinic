@@ -1,5 +1,6 @@
 package com.commulinic.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import com.commulinic.entity.Application;
 import com.commulinic.entity.Department;
 import com.commulinic.entity.Doctor;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.commulinic.entity.Doctor.DOCTOR_STATUS_ABSENT;
+
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
     @Autowired
@@ -25,6 +28,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Long updateUserName(Long userId, String userName) {
         Long updated = applicationMapper.updateUserName(userId, userName);
+        Assert.isTrue(updated > 0, "操作失败");
         return updated;
     }
 
@@ -43,12 +47,14 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Long add(Application application) {
         Long added = applicationMapper.add(application);
+        Assert.isTrue(added != null && added > 0, "操作失败");
         return added;
     }
 
     @Override
     public Long update(Application application) {
         Long updated = applicationMapper.update(application);
+        Assert.isTrue(updated != null && updated > 0, "操作失败");
         return updated;
     }
 
@@ -60,7 +66,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public Long updateDepartment(Department department) {
-        return applicationMapper.updateDepartment(department);
+        Long updated = applicationMapper.updateDepartment(department);
+        Assert.isTrue(updated != null && updated > 0, "操作失败");
+        return updated;
     }
 
     @Override
@@ -70,12 +78,14 @@ public class ApplicationServiceImpl implements ApplicationService {
         doctor.setUserId(application.getUserId());
         doctor.setDepartmentId(application.getDepartmentId());
         doctor.setDepartment(application.getDepartment());
-        doctor.setStatus(Doctor.STATUS_ABSENT);
+        doctor.setStatus(DOCTOR_STATUS_ABSENT);
         doctor.setSeniority((int) (System.currentTimeMillis() / 1000));
-        doctorMapper.add(doctor);
+        Long added = doctorMapper.add(doctor);
+        Assert.isTrue(added > 0, "操作失败");
         application.setUpdatedAt(doctor.getSeniority());
         application.setStatus(Application.STATUS_PASS);
-        applicationMapper.update(application);
+        Long updated = applicationMapper.update(application);
+        Assert.isTrue(updated != null && updated > 0, "操作失败");
         return 1L;
     }
 }

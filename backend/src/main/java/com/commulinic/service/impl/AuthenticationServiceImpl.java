@@ -1,5 +1,6 @@
 package com.commulinic.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import com.commulinic.entity.User;
 import com.commulinic.entity.auth.AuthenticationResponse;
 import com.commulinic.exception.UserAlreadyExistsException;
@@ -30,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         );
         User verifiedUser = userMapper.getByPhone(user.getPhone());
         String token = jwtProvider.createToken(verifiedUser);
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, verifiedUser.getId(), verifiedUser.getUsername(), verifiedUser.getRole());
     }
 
     @Override
@@ -42,8 +43,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRole(User.ROLE_NORMAL);
         user.setStatus(User.STATUS_ACTIVE);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userMapper.add(user);
-        String token = jwtProvider.createToken(user);
-        return new AuthenticationResponse(token);
+        Long added = userMapper.add(user);
+        Assert.isTrue(added != null && added > 0, "操作失败");
+//        String token = jwtProvider.createToken(user);
+        return new AuthenticationResponse(null, null, null, null);
     }
 }

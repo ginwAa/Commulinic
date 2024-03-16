@@ -1,5 +1,6 @@
 package com.commulinic.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import com.commulinic.entity.Doctor;
 import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
@@ -35,12 +36,16 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Long update(User user) {
         Long updated = userMapper.update(user);
+        Assert.isTrue(updated != null && updated > 0, "操作失败");
         if (user.getName() != null && !user.getName().isEmpty()) {
-            registerMapper.updateUserName(user.getId(), user.getName());
-            applicationMapper.updateUserName(user.getId(), user.getName());
+            updated = registerMapper.updateUserName(user.getId(), user.getName());
+            Assert.isTrue(updated != null && updated > 0, "操作失败");
+            updated = applicationMapper.updateUserName(user.getId(), user.getName());
+            Assert.isTrue(updated != null && updated > 0, "操作失败");
             Doctor doctor = doctorMapper.getByUserId(user.getId());
             if (doctor != null) {
-                registerMapper.updateDoctorName(doctor.getId(), user.getName());
+                updated = registerMapper.updateDoctorName(doctor.getId(), user.getName());
+                Assert.isTrue(updated != null && updated > 0, "操作失败");
             }
         }
         return updated;

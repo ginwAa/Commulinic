@@ -1,6 +1,7 @@
 package com.commulinic.controller;
 
 import com.commulinic.entity.Doctor;
+import com.commulinic.entity.dto.DoctorRegisterDTO;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.DoctorVO;
@@ -18,6 +19,12 @@ public class DoctorController {
     @PostMapping("/page")
     public Result<PageVO<DoctorVO>> page(@RequestBody PageQueryDTO<DoctorVO> dto) {
         PageVO<DoctorVO> page = doctorService.page(dto);
+        return Result.success(page);
+    }
+
+    @PostMapping("/page/register")
+    public Result<PageVO<DoctorVO>> pageRegister(@RequestBody PageQueryDTO<DoctorRegisterDTO> dto) {
+        PageVO<DoctorVO> page = doctorService.pageRegister(dto);
         return Result.success(page);
     }
 

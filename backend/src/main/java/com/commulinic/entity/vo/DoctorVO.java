@@ -17,4 +17,9 @@ public class DoctorVO implements Serializable {
     private Integer gender;
     private String phone;
     private String email;
+    private Integer role;
+    private Integer amStd;
+    private Integer pmStd;
+    private Integer stock;
+    private String description;
 }

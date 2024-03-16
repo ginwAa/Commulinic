@@ -2,6 +2,7 @@ package com.commulinic.service;
 
 import com.commulinic.entity.Department;
 import com.commulinic.entity.Doctor;
+import com.commulinic.entity.dto.DoctorRegisterDTO;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.DoctorVO;
 import com.commulinic.entity.vo.PageVO;
@@ -19,4 +20,6 @@ public interface DoctorService {
     DoctorVO getByUserId(Long id);
 
     Long updateDepartment(Department department);
+
+    PageVO<DoctorVO> pageRegister(PageQueryDTO<DoctorRegisterDTO> dto);
 }

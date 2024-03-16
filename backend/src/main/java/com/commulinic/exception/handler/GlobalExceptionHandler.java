@@ -4,7 +4,9 @@ import com.commulinic.constant.MessageConstant;
 import com.commulinic.entity.result.Result;
 import com.commulinic.exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -23,6 +25,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandler(BaseException ex) {
         log.error("异常信息：{}", ex.getMessage());
         return Result.error(ex.getMessage());
@@ -35,6 +38,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result sqlExceptionHandler(SQLIntegrityConstraintViolationException ex) {
         String exMsg = ex.getMessage();
         if (exMsg.contains("Duplicate entry")) {

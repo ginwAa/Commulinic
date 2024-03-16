@@ -99,10 +99,11 @@ const DoctorComponent = (props: Props) => {
 
     useEffect(() => {
         setLoading(true);
-        fetchData(page, pageSize, {...pageProps, departmentId: props.departmentId}, true).then((res) => {
-            setData(res.data.records);
-            setTotal(res.data.total);
-        }).catch(err => {
+        fetchData(page, pageSize, {...pageProps, departmentId: props.departmentId}, true)
+            .then((res) => {
+                setData(res.data.records);
+                setTotal(res.data.total);
+            }).catch(err => {
             console.log(err);
             messageApi.error("加载失败，请检查网络连接");
         }).finally(() => {
