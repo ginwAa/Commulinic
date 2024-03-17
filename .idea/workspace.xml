@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="update(README):">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/util/SecurityUtil.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/src/main/resources/word/西城消防救援支队干部因私离京报告表.docx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/commulinic/myTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/AnnouncementMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/AnnouncementMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/AnnouncementMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AnnouncementMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/MedTipBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MedTipBoard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/NoticeBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/NoticeBoard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/HttpFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/HttpFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +24,8 @@
       <list>
         <option value="HTTP Public Environment File" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -329,7 +324,9 @@
       <workItem from="1710073671558" duration="13110000" />
       <workItem from="1710166613398" duration="6810000" />
       <workItem from="1710562267704" duration="2550000" />
-      <workItem from="1710577000585" duration="28291000" />
+      <workItem from="1710577000585" duration="28779000" />
+      <workItem from="1710685634223" duration="2854000" />
+      <workItem from="1710691437529" duration="1427000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -627,7 +624,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710604047141</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="update(notice): update announcement and tips&#10;&#10;1.update index layout&#10;2.update announcement database table name">
+      <option name="closed" value="true" />
+      <created>1710607600222</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1710607600222</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +652,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="user management: add&amp;update request" />
     <MESSAGE value="restructured" />
     <MESSAGE value="login page" />
     <MESSAGE value="department tree" />
@@ -672,7 +676,8 @@
     <MESSAGE value="add(frontend): &#10;&#10;1.add 404 page&#10;2.add department tree api for registration&#10;3.modify index page menu &amp; add default layout&#10;4.add registration page" />
     <MESSAGE value="update(register): add registration feature&#10;&#10;1.add registration feature&#10;2.add system dict api&#10;3.update doctor entity" />
     <MESSAGE value="update(README):" />
-    <option name="LAST_COMMIT_MESSAGE" value="update(README):" />
+    <MESSAGE value="update(notice): update announcement and tips&#10;&#10;1.update index layout&#10;2.update announcement database table name" />
+    <option name="LAST_COMMIT_MESSAGE" value="update(notice): update announcement and tips&#10;&#10;1.update index layout&#10;2.update announcement database table name" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

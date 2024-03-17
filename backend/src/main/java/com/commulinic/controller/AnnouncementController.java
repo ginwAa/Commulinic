@@ -5,6 +5,7 @@ import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.AnnouncementService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/announcement")
+@Slf4j
 public class AnnouncementController {
     @Autowired
     private AnnouncementService announcementService;

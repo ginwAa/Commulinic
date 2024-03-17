@@ -29,12 +29,12 @@ public class HttpFilter implements Filter {
         log.info(
 //                "ip:{} " +
                 "method:{} " +
-                        "path:{} " +
-                        "req:{}",
+                        "path:{} ",
+//                        "req:{}",
 //                servletRequest.getRemoteHost(),
                 ((HttpServletRequest) servletRequest).getMethod(),
-                requestWrapper.getServletPath(),
-                requestWrapper.getBody()
+                requestWrapper.getServletPath()
+//                requestWrapper.getBody()
         );
         filterChain.doFilter(requestWrapper, responseWrapper);
         String responseBody = new String(responseWrapper.getContentAsByteArray(), responseWrapper.getCharacterEncoding());
@@ -42,12 +42,12 @@ public class HttpFilter implements Filter {
             log.info(
 //                    "ip:{} " +
                     "method:{} " +
-                            "path:{} " +
-                            "res:{}",
+                            "path:{} ",
+//                            "res:{}",
 //                    requestWrapper.getRemoteHost(),
                     ((HttpServletRequest) servletRequest).getMethod(),
-                    requestWrapper.getServletPath(),
-                    responseBody
+                    requestWrapper.getServletPath()
+//                    responseBody
             );
         }
         responseWrapper.copyBodyToResponse();
