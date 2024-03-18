@@ -32,5 +32,6 @@ public interface UserMapper {
     @Select("select id, name, role, status, gender, phone, email, age, address, emergency, password from user where phone = #{phone}")
     User getByPhone(String phone);
 
+    List<User> getByIds(List<Long> ids);
 
 }

@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {CopyrightOutlined, MessageOutlined, UserOutlined} from "@ant-design/icons";
 import {Button, Layout, Menu, MenuProps, message, Space, theme} from "antd";
 import ButtonGroup from "antd/es/button/button-group";
 import {Link} from "react-router-dom";
 import {authLogout} from "../apis/authApis.ts";
 import {Content} from "antd/es/layout/layout";
+import MessageCenter from "../components/MessageCenter.tsx";
 
 const {Header, Footer} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -40,6 +41,7 @@ const DefaultLayout = (props: MainContentProps) => {
     const [messageApi, contextHolder] = message.useMessage();
     // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const themeToken = theme.useToken();
+    const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
     // const handleWindowResize = () => {
     //     setWindowWidth(window.innerWidth);
     // };
@@ -75,8 +77,9 @@ const DefaultLayout = (props: MainContentProps) => {
                             <Button type={'primary'}>登录 注册</Button>
                         </Link>
                         <div hidden={sessionStorage.getItem('token') === null} style={{width: 'max-content'}}>
-                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}></Button>
-                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}></Button>
+                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
+                                    onClick={() => setChatDrawerOpen(true)}/>
+                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}/>
                             <Button type={'primary'} onClick={onLogout}>注销</Button>
                         </div>
                     </ButtonGroup>
@@ -85,8 +88,10 @@ const DefaultLayout = (props: MainContentProps) => {
             <Content style={{padding: '0 2rem', marginTop: 64, width: '90%'}}>
                 <props.component/>
             </Content>
-            <Footer style={{textAlign: 'center', height: '1rem', width: '100%'}}>社区医院 ©2023 Created by
-                Communlinic</Footer>
+            <Footer style={{textAlign: 'center', height: '1rem', width: '100%'}}>
+                社区医院 ©2023 Created by Communlinic
+            </Footer>
+            <MessageCenter open={chatDrawerOpen} setOpen={setChatDrawerOpen}/>
         </Layout>
     );
 }

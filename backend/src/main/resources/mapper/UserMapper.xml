@@ -61,4 +61,7 @@
             <if test="emergency != null and emergency != ''">and emergency like concat('%', #{emergency}, '%')</if>
         </where>
     </select>
+
+    <select id="getByIds" resultType="com.commulinic.entity.User">
+    </select>
 </mapper>
