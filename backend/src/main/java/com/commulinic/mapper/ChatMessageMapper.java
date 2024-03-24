@@ -2,35 +2,31 @@ package com.commulinic.mapper;
 
 import com.commulinic.entity.Chat;
 import com.commulinic.entity.ChatMessage;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
 public interface ChatMessageMapper {
-    @Insert("insert into chat_message (sender_id, receiver_id, content, create_time, status) VALUES " +
-            "(#{senderId}, #{receiverId}, #{content}, #{createTime}, #{status})")
+
+    @Insert("insert into chat_message (chat_id, content, create_time, status)" +
+            " VALUES (#{chatId}, #{content}, #{createTime}, #{status})")
     Long add(ChatMessage chatMessage);
 
+    @Options(useGeneratedKeys = false, keyProperty = "id")
     Long update(ChatMessage chatMessage);
 
     Long count(ChatMessage chatMessage);
 
-    ChatMessage selectAllByUserId(Long senderId, Long receiverId);
+    List<Chat> countUnreadByChatIds(List<Long> chatIds);
 
-    List<ChatMessage> selectAllLatestMessage(Long receiverId);
+    List<ChatMessage> selectNewestByChatIds(List<Long> chatIds);
 
-    List<ChatMessage> getDistinctChatByReceiverId(Long receiverId);
+    @Update("update chat_message set status = 1 where chat_id = #{chatId} and create_time < #{createTime}")
+    Long readByChat(Long chatId, LocalDateTime createTime);
 
-    @Update("update chat_message set status = 2 where sender_id = #{senderId} and receiver_id = #{receiverId} and status = 4")
-    Long clearLatestByUserId(Long senderId, Long receiverId);
+    @Select("select * from chat_message where chat_id = #{id} or chat_id = #{revId} order by create_time desc")
+    List<ChatMessage> selectByChat(Chat chat);
 
-    @Update("update chat_message set status = 1 where sender_id = #{senderId} and receiver_id = #{receiverId} " +
-            "and status & 6 != 0 and create_time <= #{time}")
-    Long readAllByUserIdAndTime(Long senderId, Long receiverId, LocalDateTime time);
-
-    List<Chat> getUnreadCountByUserIds(List<Long> senderIds, Long receiverId);
 }

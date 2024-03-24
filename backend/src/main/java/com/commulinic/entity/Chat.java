@@ -6,8 +6,11 @@ import java.io.Serializable;
 
 @Data
 public class Chat implements Serializable {
-    private Long userId;
-    private String userName;
+    private Long id;
+    private Long receiverId;
+    private Long senderId;
+    private String senderName;
+    private Long revId;
     private Integer unreadCount;
     private ChatMessage lastMessage;
 }

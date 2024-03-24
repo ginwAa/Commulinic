@@ -5,12 +5,9 @@ import com.commulinic.entity.Doctor;
 import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
-import com.commulinic.mapper.ApplicationMapper;
-import com.commulinic.mapper.DoctorMapper;
-import com.commulinic.mapper.RegisterMapper;
-import com.commulinic.mapper.UserMapper;
+import com.commulinic.mapper.*;
 import com.commulinic.service.UserService;
-import lombok.RequiredArgsConstructor;
+import jakarta.annotation.Resource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,12 +16,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private final UserMapper userMapper;
-    private final RegisterMapper registerMapper;
-    private final DoctorMapper doctorMapper;
-    private final ApplicationMapper applicationMapper;
+    @Resource
+    private UserMapper userMapper;
+    @Resource
+    private RegisterMapper registerMapper;
+    @Resource
+    private DoctorMapper doctorMapper;
+    @Resource
+    private ApplicationMapper applicationMapper;
+    @Resource
+    private ChatMapper chatMapper;
 
     @Override
     public Long add(User user) {
@@ -47,6 +49,8 @@ public class UserServiceImpl implements UserService {
                 updated = registerMapper.updateDoctorName(doctor.getId(), user.getName());
                 Assert.isTrue(updated != null && updated > 0, "操作失败");
             }
+            updated = chatMapper.updateByUsername(user.getUsername(), user.getId());
+            Assert.isTrue(updated != null && updated > 0, "操作失败");
         }
         return updated;
     }

@@ -4,20 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="update(README):">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Chat.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/ChatMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/dto/ChatReadDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ChatMessageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ChatMessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" afterDir="false" />
+    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ChatMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/ChatMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/ChatMessageMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/SystemDictMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/util/SecurityUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/util/SecurityUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/ChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/dto/ChatReadDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/dto/ChatReadDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ChatMessageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ChatMessageMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ChatMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ChatMessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +32,9 @@
       <list>
         <option value="HTTP Public Environment File" />
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
+        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -89,51 +92,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CodeFields/Code_Java/Commulinic/Commulinic/backend/src/main/resources/word&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propDebugger&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;b43fdd98b1fd705ae4c3a10cf25aad8a&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\CodeFields\\Code_Java\\Commulinic\\Commulinic\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "js.last.introduce.type": "CONST",
+    "last_opened_file_path": "D:/CodeFields/Code_Java/Commulinic/Commulinic/backend/src/main/resources/mapper",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propDebugger",
+    "spring.configuration.checksum": "b43fdd98b1fd705ae4c3a10cf25aad8a",
+    "ts.external.directory.path": "D:\\CodeFields\\Code_Java\\Commulinic\\Commulinic\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -143,10 +146,10 @@
       <recent name="com.commulinic.filter" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\resources\mapper" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\resources\word" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\frontend\src\components" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\target" />
-      <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\resources\mapper" />
       <recent name="D:\CodeFields\Code_Java\Commulinic\Commulinic\backend\src\main\java\com\commulinic" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -334,7 +337,13 @@
       <workItem from="1710685634223" duration="2854000" />
       <workItem from="1710691437529" duration="1563000" />
       <workItem from="1710693275966" duration="99000" />
-      <workItem from="1710773325841" duration="6964000" />
+      <workItem from="1710773325841" duration="7101000" />
+      <workItem from="1711122844238" duration="1941000" />
+      <workItem from="1711187564724" duration="765000" />
+      <workItem from="1711193185497" duration="1524000" />
+      <workItem from="1711197007199" duration="350000" />
+      <workItem from="1711197386733" duration="1479000" />
+      <workItem from="1711286248454" duration="9733000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -648,7 +657,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710692953256</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="update(chats): add parts of chat code&#10;&#10;1.add parts of chat code">
+      <option name="closed" value="true" />
+      <created>1710780393484</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1710780393484</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +685,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="login page" />
     <MESSAGE value="department tree" />
     <MESSAGE value="department page" />
     <MESSAGE value="doctor management" />
@@ -691,9 +707,10 @@
     <MESSAGE value="add(frontend): &#10;&#10;1.add 404 page&#10;2.add department tree api for registration&#10;3.modify index page menu &amp; add default layout&#10;4.add registration page" />
     <MESSAGE value="update(register): add registration feature&#10;&#10;1.add registration feature&#10;2.add system dict api&#10;3.update doctor entity" />
     <MESSAGE value="update(notice): update announcement and tips&#10;&#10;1.update index layout&#10;2.update announcement database table name" />
-    <MESSAGE value="update(README):" />
     <MESSAGE value="update(security): add security utility&#10;&#10;1.add security utility to get user details" />
-    <option name="LAST_COMMIT_MESSAGE" value="update(security): add security utility&#10;&#10;1.add security utility to get user details" />
+    <MESSAGE value="update(README):" />
+    <MESSAGE value="update(chats): add parts of chat code&#10;&#10;1.add parts of chat code" />
+    <option name="LAST_COMMIT_MESSAGE" value="update(chats): add parts of chat code&#10;&#10;1.add parts of chat code" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

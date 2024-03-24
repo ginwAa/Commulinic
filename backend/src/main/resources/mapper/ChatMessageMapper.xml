@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.commulinic.mapper.ChatMessageMapper">
+
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from chat_message
+        <where>
+            <if test="receiverId != null and receiverId != 0">receiver_id = #{receiverId}</if>
+        </where>
+    </select>
+
+    <select id="countUnreadByChatIds" resultType="com.commulinic.entity.Chat">
+        select chat_id as id, sum(1) as unreadCount from chat_message where status = 2 and chat_id in
+            <foreach collection="chatIds" item="chatId" open="(" close=")" separator=",">
+                #{chatId}
+            </foreach>
+        group by chat_id;
+    </select>
+
+    <select id="selectNewestByChatIds" resultType="com.commulinic.entity.ChatMessage">
+        select * from chat_message where chat_id in
+            <foreach collection="chatIds" item="chatId" open="(" close=")" separator=",">
+                #{chatId}
+            </foreach>
+        order by create_time desc limit 1
+    </select>
+
+    <update id="update">
+        update chat_message
+            <set>
+                <if test="status != null">status = #{status},</if>
+                <if test="createTime != null">create_time = #{createTime},</if>
+                <if test="content != null">content = #{content},</if>
+            </set>
+        where id = #{id}
+    </update>
+</mapper>
