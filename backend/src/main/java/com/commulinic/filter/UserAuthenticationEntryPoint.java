@@ -1,5 +1,7 @@
 package com.commulinic.filter;
 
+import com.alibaba.fastjson2.JSON;
+import com.commulinic.entity.result.Result;
 import com.commulinic.exception.UserAlreadyExistsException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,15 +22,18 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/javascript;charset=utf-8");
         if (authException.getClass() == BadCredentialsException.class) {
-            response.getWriter().print("手机号或密码错误！");
+            response.getWriter().print(JSON.toJSONString(Result.error("手机号或密码错误！")));
+//            response.getWriter().print("手机号或密码错误！");
             return;
         }
         if (authException.getClass() == UserAlreadyExistsException.class) {
-            response.getWriter().print("该手机号已被注册！");
+            response.getWriter().print(JSON.toJSONString(Result.error("该手机号已被注册！")));
+//            response.getWriter().print("该手机号已被注册！");
             return;
         }
         if (authException.getClass() == DisabledException.class || authException.getClass() == LockedException.class) {
-            response.getWriter().print("账号已被锁定，请联系管理员！");
+            response.getWriter().print(JSON.toJSONString(Result.error("账号已被锁定，请联系管理员！")));
+//            response.getWriter().print("账号已被锁定，请联系管理员！");
             return;
         }
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
