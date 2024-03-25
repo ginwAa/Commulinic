@@ -23,16 +23,12 @@ instance.interceptors.request.use(function (config) {
 });
 instance.interceptors.response.use(
     res => {
-        if (res.status < 400) {
+        if (res.status < 500) {
             return Promise.resolve(res);
         } else {
             return Promise.reject(res);
         }
     }, error => {
-        if (error.response.status === 401) {
-            console.log('here 401');
-            // window.location.href = '/login';
-        }
         return Promise.reject(error);
     }
 )
@@ -50,48 +46,48 @@ interface Result<T> {
 
 export const get = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
     return instance.get<Result<T>>(url, {params}).then(res => {
-        if (res?.data?.code && res.data.code >= 400) {
+        if (res?.data?.code && res.data.code >= 500) {
             return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,
-                message: res.data.msg,
+                msg: res.data.msg,
             });
         } else {
             return Promise.resolve({
                 data: res.data.data,
                 status: res.data.code,
-                message: res.data.msg,
+                msg: res.data.msg,
             });
         }
     }).catch(err => {
         return Promise.reject({
             data: err.response?.data,
             status: err.response?.status || 500,
-            message: err.message,
+            msg: err.message,
         });
     });
 }
 
 export const post = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
     return instance.post<Result<T>>(url, params).then(res => {
-        if (res?.data?.code && res.data.code >= 400) {
+        if (res?.data?.code && res.data.code >= 500) {
             return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,
-                message: res.data.msg,
+                msg: res.data.msg,
             });
         } else {
             return Promise.resolve({
                 data: res.data.data,
                 status: res.data.code,
-                message: res.data.msg,
+                msg: res.data.msg,
             });
         }
     }).catch(err => {
         return Promise.reject({
             data: err.response?.data,
             status: err.response?.status || 500,
-            message: err.message,
+            msg: err.message,
         });
     });
 }

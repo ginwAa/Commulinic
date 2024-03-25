@@ -91,7 +91,10 @@ const DefaultLayout = (props: MainContentProps) => {
             <Footer style={{textAlign: 'center', height: '1rem', width: '100%'}}>
                 社区医院 ©2023 Created by Communlinic
             </Footer>
-            <MessageCenter open={chatDrawerOpen} setOpen={setChatDrawerOpen}/>
+            {
+                sessionStorage.getItem('token') === null ? <></> :
+                    <MessageCenter open={chatDrawerOpen} setOpen={setChatDrawerOpen}/>
+            }
         </Layout>
     );
 }

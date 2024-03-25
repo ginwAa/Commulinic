@@ -4,9 +4,12 @@ import MedTipBoard from "../components/MedTipBoard.tsx";
 import DefaultLayout from "../layout/DefaultLayout.tsx";
 import Title from "antd/es/typography/Title";
 import {unixSecondToDate} from "../utils/time.ts";
+import MyRegister from "../components/MyRegister.tsx";
+import {useState} from "react";
 
 const Inner = () => {
     const [messageApi, contextHolder] = message.useMessage();
+    const [openMyReg, setOpenMyReg] = useState(false);
     const openDate = new Date();
     return (
         <>
@@ -18,13 +21,15 @@ const Inner = () => {
                         {sessionStorage.getItem('userName') ? sessionStorage.getItem('userName') : '游客'}，
                         今天是 {unixSecondToDate(Date.now() / 1000)}。
                     </Title>
-                    <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2rem'}}>
-                        <Button size={"large"} type={"primary"}>消息中心</Button>
-                        <Button size={"large"} type={"primary"}>我的预约</Button>
-                        <Button size={"large"} type={"primary"}>我的信息</Button>
-                        <Button size={"large"} type={"primary"}>申请坐诊</Button>
-                    </div>
-
+                    {
+                        sessionStorage.getItem('token') === null ? <></> :
+                            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2rem'}}>
+                                <Button size={"large"} type={"primary"}
+                                        onClick={() => setOpenMyReg(true)}>我的预约</Button>
+                                <Button size={"large"} type={"primary"}>我的信息</Button>
+                                <Button size={"large"} type={"primary"}>申请坐诊</Button>
+                            </div>
+                    }
                 </Card>
             </div>
             <div className="notice-board" style={{padding: 24}}>
@@ -37,6 +42,7 @@ const Inner = () => {
                     </Col>
                 </Row>
             </div>
+            <MyRegister open={openMyReg} setOpen={setOpenMyReg}/>
         </>
     );
 }

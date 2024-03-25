@@ -51,10 +51,11 @@ const LoginTab = () => {
         const user: LoginForm = form.getFieldsValue();
         form.validateFields().then(() => {
             authLogin(user).then(res => {
-                const data = res.data;
-                if (data.token != null && data.role != null && data.userId != null && data.userName != null) {
-                } else {
-                    throw new Error("登录信息异常！");
+                const data = res?.data;
+                console.log(res);
+                if (data == null) {
+                    messageApi.error("登录失败！" + res?.msg);
+                    return;
                 }
                 messageApi.success("登录成功");
                 sessionStorage.setItem('token', data.token);
@@ -68,7 +69,8 @@ const LoginTab = () => {
                     window.location.href = '/';
                 }, 1500);
             }).catch(err => {
-                messageApi.error("登录失败" + err.message);
+                console.log(err);
+                messageApi.error("登录失败" + err.data?.msg);
             });
         })
     };
@@ -108,7 +110,6 @@ const RegisterTab = () => {
         form.validateFields().then(() => {
             authRegister(user).then(res => {
                 messageApi.success("注册成功");
-                // sessionStorage.setItem('token', res.data.token);
                 setTimeout(() => {
                     window.location.href = '/login';
                 }, 1500);

@@ -244,3 +244,44 @@ export const EMPTY_SYSTEM_DICT: SystemDict = {
     key: '',
     value: '',
 }
+
+export interface ChatMessage {
+    id?: number,
+    chatId: number,
+    content: string,
+    status: number,
+    createTime: string,
+    byMe: number,
+}
+
+export const EMPTY_CHAT_MESSAGE: ChatMessage = {
+    chatId: 0,
+    content: '',
+    status: 0,
+    createTime: '',
+    byMe: 0
+}
+
+export interface Chat {
+    id?: number,
+    receiverId: number,
+    senderId: number,
+    senderName: string,
+    revId: number,
+    unreadCount: number,
+    lastMessage: ChatMessage
+}
+
+export const EMPTY_CHAT: Chat = {
+    receiverId: 0,
+    senderId: 0,
+    senderName: '',
+    revId: 0,
+    unreadCount: 0,
+    lastMessage: EMPTY_CHAT_MESSAGE
+}
+
+export interface ChatReadDTO {
+    chatId: number,
+    readTime: string
+}
