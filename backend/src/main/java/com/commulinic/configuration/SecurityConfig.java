@@ -48,6 +48,7 @@ public class SecurityConfig {
                         ex -> ex
                                 .authenticationEntryPoint(userAuthenticationEntryPoint)
                                 .accessDeniedHandler(userAccessDeniedHandler)
+
                 )
                 .authenticationProvider(authenticationProvider)
                 .logout(

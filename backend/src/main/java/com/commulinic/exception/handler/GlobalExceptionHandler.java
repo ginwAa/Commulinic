@@ -1,5 +1,6 @@
 package com.commulinic.exception.handler;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.commulinic.constant.MessageConstant;
 import com.commulinic.entity.result.Result;
 import com.commulinic.exception.BaseException;
@@ -49,5 +50,12 @@ public class GlobalExceptionHandler {
         } else {
             return Result.error(MessageConstant.UNKNOWN_ERROR);
         }
+    }
+
+
+    @ExceptionHandler(value = JWTVerificationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Result unauthorizedExceptionHandler(Exception ex) {
+        return Result.error(ex.getMessage());
     }
 }

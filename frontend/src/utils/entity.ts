@@ -250,7 +250,7 @@ export interface ChatMessage {
     chatId: number,
     content: string,
     status: number,
-    createTime: string,
+    createTime?: string,
     byMe: number,
 }
 

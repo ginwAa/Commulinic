@@ -1,5 +1,6 @@
 package com.commulinic.util;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.commulinic.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -13,7 +14,11 @@ public class SecurityUtil {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             return null;
         }
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!(principal instanceof User)) {
+            throw new JWTVerificationException("Invalid JWT token");
+        }
+        return (User) principal;
     }
 
     public static Long getUserId() {

@@ -40,6 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     && jwtProvider.notInBlackList(token)
             ) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
+
                 if (jwtProvider.validateTokenWithUser(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities()

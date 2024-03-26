@@ -24,6 +24,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     @Override
     @Transactional
     public Long add(ChatMessage chatMessage) {
+        chatMessage.setCreateTime(LocalDateTime.now());
         Long added = chatMessageMapper.add(chatMessage);
         Assert.isTrue(added != null && added > 0, "发送失败");
         return added;
