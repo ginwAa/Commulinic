@@ -42,7 +42,10 @@ const Inner = () => {
                     </Col>
                 </Row>
             </div>
-            <MyRegister open={openMyReg} setOpen={setOpenMyReg}/>
+            {
+                sessionStorage.getItem('token') === null ? <></> :
+                    <MyRegister open={openMyReg} setOpen={setOpenMyReg}/>
+            }
         </>
     );
 }

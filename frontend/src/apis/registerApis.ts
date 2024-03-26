@@ -3,8 +3,6 @@ import {PageDTO, PageRes, Register} from "../utils/entity.ts";
 
 export const registerPage = async (page: number, pageSize: number, register: Register, count: boolean) => {
     delete register.id;
-    delete register.userId;
-    delete register.doctorId;
     const dto: PageDTO<Register> = {
         count: count,
         size: pageSize,

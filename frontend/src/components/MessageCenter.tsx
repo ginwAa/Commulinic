@@ -31,7 +31,7 @@ const MessageCenter = (props: Props) => {
                     onClose={() => props.setOpen(false)}>
                 <List dataSource={data} loading={loading} itemLayout="horizontal" renderItem={item =>
                     <List.Item key={item.id} actions={[
-                        <Button type={'primary'}>打开</Button>
+                        <Button type={'primary'}>打开</Button>,
                     ]}>
                         <List.Item.Meta
                             title={<Title level={4}>{item.senderName}</Title>}
@@ -44,8 +44,7 @@ const MessageCenter = (props: Props) => {
                             }/>
                         {item.lastMessage.createTime}
                     </List.Item>
-                }>
-                </List>
+                }/>
             </Drawer>
         </>
     )

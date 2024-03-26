@@ -79,6 +79,7 @@ public class ChatMessageServiceImpl implements ChatMessageService {
         added = chatMapper.selectByUser(chat.getSenderId(), chat.getReceiverId());
         Assert.isTrue(added != null && added > 0, "操作失败4" + added);
         chat.setId(added);
+
         Chat revChat = new Chat();
         revChat.setReceiverId(chat.getSenderId());
         revChat.setSenderId(chat.getReceiverId());
