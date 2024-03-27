@@ -14,6 +14,7 @@ import {
 } from "antd";
 import {useEffect, useState} from "react";
 import {
+    Application,
     APPLICATION_CONSTANT,
     Department,
     DepartmentTreeNode,
@@ -31,7 +32,7 @@ import {DataNode} from "antd/es/tree";
 import DoctorComponent from "./DoctorComponent.tsx";
 import {ModalWarning} from "./TableComponents.tsx";
 import ApplicationComponent from "./ApplicationComponent.tsx";
-import {applicationCount} from "../apis/applicationApis.ts";
+import {applicationCount, applicationUpdate} from "../apis/applicationApis.ts";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -176,7 +177,7 @@ const DepartmentManagement = () => {
             }
             console.log(transform([res.data]));
         }).catch(err => {
-            messageApi.error("部门结构信息加载失败，请检查网络连接！", err.message);
+            messageApi.error("部门结构信息加载失败，请检查网络连接！" + err.message);
         }).finally(() => {
             setLoading(false);
             console.log("tree");
@@ -186,7 +187,7 @@ const DepartmentManagement = () => {
     useEffect(() => {
         setLoading(true);
         getDescription(selectedKey).catch(err => {
-            messageApi.error("部门详细信息加载失败，请检查网络连接！", err.message);
+            messageApi.error("部门详细信息加载失败，请检查网络连接！" + err.message);
         }).finally(() => {
             setLoading(false);
         });
@@ -198,7 +199,7 @@ const DepartmentManagement = () => {
         }).then(res => {
             setUnread(res.data);
         }).catch(err => {
-            messageApi.error("坐镇申请信息加载失败，请检查网络连接！", err.message);
+            messageApi.error("坐镇申请信息加载失败，请检查网络连接！" + err.message);
         })
     }, [editSuccess]);
     const onSelect = (value: number | null, node: DataNode) => {
@@ -224,6 +225,17 @@ const DepartmentManagement = () => {
         }
     };
 
+    const onApplyOpen = () => {
+        setApplyOpen(true);
+        const params: Application = {
+            ...EMPTY_APPLICATION,
+            status: APPLICATION_CONSTANT.STATUS_UNREAD,
+        }
+        applicationUpdate().then(res => {
+
+        })
+    }
+
     return (
         <>
             {contextHolder}
@@ -232,7 +244,7 @@ const DepartmentManagement = () => {
                             dropdownStyle={{maxHeight: 400, overflow: 'auto', width: '10rem'}}
                             placement={"bottomRight"} onSelect={onSelect} value={selectedKey} size={"small"}/>
                 <Badge count={unread} showZero={true} size={"small"}>
-                    <Button size={'small'} type={'primary'} onClick={() => setApplyOpen(true)}>查看坐诊申请</Button>
+                    <Button size={'small'} type={'primary'} onClick={onApplyOpen}>查看坐诊申请</Button>
                 </Badge>
                 <Button.Group size={'small'}>
 

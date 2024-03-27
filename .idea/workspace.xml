@@ -5,17 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/PasswordEncoderConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/MyApply.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/exception/handler/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/exception/handler/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/ApplicationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/UserAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/UserAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ApplicationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ApplicationServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/util/SecurityUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/util/SecurityUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/apis/applicationApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/applicationApis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ApplicationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyRegister.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/TableComponents.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TableComponents.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +37,9 @@
       <list>
         <option value="HTTP Public Environment File" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
         <option value="module-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -342,7 +351,8 @@
       <workItem from="1711286248454" duration="12119000" />
       <workItem from="1711376240666" duration="5331000" />
       <workItem from="1711448261860" duration="2876000" />
-      <workItem from="1711459465661" duration="9065000" />
+      <workItem from="1711459465661" duration="9165000" />
+      <workItem from="1711546799250" duration="11505000" />
     </task>
     <task id="LOCAL-00001" summary="first build">
       <option name="closed" value="true" />
@@ -696,7 +706,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711450900234</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="update(chat): add send msg with chat&#10;&#10;1.add send msg with chat&#10;2.update token expire handler">
+      <option name="closed" value="true" />
+      <created>1711471408273</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1711471408273</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -716,7 +734,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="reconstruct and improve" />
     <MESSAGE value="http filter" />
     <MESSAGE value="add sql" />
     <MESSAGE value="store theme" />
@@ -741,7 +758,8 @@
     <MESSAGE value="update(login): fix login error response&#10;&#10;1.fix login error response" />
     <MESSAGE value="update(register): add self register list&#10;&#10;1.add self register list" />
     <MESSAGE value="update(register): add pay and abort for register&#10;&#10;1.add pay and abort for register" />
-    <option name="LAST_COMMIT_MESSAGE" value="update(register): add pay and abort for register&#10;&#10;1.add pay and abort for register" />
+    <MESSAGE value="update(chat): add send msg with chat&#10;&#10;1.add send msg with chat&#10;2.update token expire handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="update(chat): add send msg with chat&#10;&#10;1.add send msg with chat&#10;2.update token expire handler" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

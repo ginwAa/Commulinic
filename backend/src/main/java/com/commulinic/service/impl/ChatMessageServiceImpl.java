@@ -49,6 +49,9 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     @Override
     public List<Chat> getChatListByUserId(Long receiverId) {
         List<Chat> chats = chatMapper.selectAllByReceiver(receiverId);
+        if (chats.isEmpty()) {
+            return chats;
+        }
         List<ChatMessage> newest = chatMessageMapper.selectNewestByChatIds(chats.stream().map(Chat::getId).toList());
         List<Chat> unread = chatMessageMapper.countUnreadByChatIds(chats.stream().map(Chat::getId).toList());
         chats.forEach(chat -> {

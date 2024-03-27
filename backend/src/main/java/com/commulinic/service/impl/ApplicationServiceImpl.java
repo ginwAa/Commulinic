@@ -4,10 +4,12 @@ import cn.hutool.core.lang.Assert;
 import com.commulinic.entity.Application;
 import com.commulinic.entity.Department;
 import com.commulinic.entity.Doctor;
+import com.commulinic.entity.User;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.ApplicationMapper;
 import com.commulinic.mapper.DoctorMapper;
+import com.commulinic.mapper.UserMapper;
 import com.commulinic.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Autowired
     private DoctorMapper doctorMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Long updateUserName(Long userId, String userName) {
@@ -47,7 +51,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public Long add(Application application) {
         Long added = applicationMapper.add(application);
-        Assert.isTrue(added != null && added > 0, "操作失败");
+//        Assert.isTrue(added != null && added > 0, "操作失败");
         return added;
     }
 
@@ -80,12 +84,19 @@ public class ApplicationServiceImpl implements ApplicationService {
         doctor.setDepartment(application.getDepartment());
         doctor.setStatus(DOCTOR_STATUS_ABSENT);
         doctor.setSeniority((int) (System.currentTimeMillis() / 1000));
+        doctor.setAmStd(0);
+        doctor.setPmStd(0);
         Long added = doctorMapper.add(doctor);
-        Assert.isTrue(added > 0, "操作失败");
+        Assert.isTrue(added > 0, "操作失败1");
+        User user = new User();
+        user.setId(application.getUserId());
+        user.setRole(User.ROLE_DOCTOR);
+        Long updated = userMapper.update(user);
+        Assert.isTrue(updated != null && updated > 0, "操作失败2");
         application.setUpdatedAt(doctor.getSeniority());
         application.setStatus(Application.STATUS_PASS);
-        Long updated = applicationMapper.update(application);
-        Assert.isTrue(updated != null && updated > 0, "操作失败");
+        updated = applicationMapper.update(application);
+        Assert.isTrue(updated != null && updated > 0, "操作失败3");
         return 1L;
     }
 }

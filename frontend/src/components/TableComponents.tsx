@@ -78,3 +78,5 @@ export const PriceInput = ({value, onChange}: formProps<number>) => {
         />
     );
 }
+
+

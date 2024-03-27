@@ -40,7 +40,7 @@ const MyRegister = (props: Props) => {
             ...item,
             status: 2,
         };
-        registerUpdate(reg).then(res => {
+        registerUpdate(reg).then(() => {
             messageApi.success("支付成功");
             setUpdated(updated ^ 1);
         }).catch(err => {
@@ -56,7 +56,7 @@ const MyRegister = (props: Props) => {
             ...item,
             status: 8,
         }
-        registerUpdate(reg).then(res => {
+        registerUpdate(reg).then(() => {
             messageApi.success("取消成功");
             setUpdated(updated ^ 1);
         }).catch(err => {

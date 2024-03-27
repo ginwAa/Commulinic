@@ -47,7 +47,20 @@ public class ApplicationController {
     @PreAuthorize("hasAuthority('admin:update')")
     @PostMapping("/accept")
     public Result<Long> accept(@RequestBody Application application) {
+        application.setStatus(Application.STATUS_PASS);
         Long accepted = applicationService.accept(application);
         return Result.success(accepted);
+    }
+
+    @PostMapping("/cancel")
+    public Result<Long> cancel(@RequestBody Application application) {
+        application.setStatus(Application.STATUS_CANCELED);
+        Long canceled = applicationService.update(application);
+        return Result.success(canceled);
+    }
+
+    @PostMapping("/read")
+    public Result<Long> read() {
+        Application application = new Application();
     }
 }

@@ -95,7 +95,7 @@ const ApplicationComponent = (props: ApplyProps) => {
                         <List.Item.Meta
                             title={item.name}
                             description={
-                                <p>申请部门：{item.department} 最后更新时间:{unixSecondToDate(item.updateAt)}</p>}
+                                <p>申请部门：{item.department} 最后更新时间:{unixSecondToDate(item.updatedAt)}</p>}
                         />
                         描述：{item.description}
 

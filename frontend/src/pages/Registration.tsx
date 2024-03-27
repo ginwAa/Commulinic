@@ -13,15 +13,7 @@ import {
     TreeSelect
 } from "antd";
 import {useEffect, useState} from "react";
-import {
-    Department,
-    DepartmentTreeNode,
-    DoctorRegisterDTO,
-    DoctorVO,
-    EMPTY_DEPARTMENT,
-    EMPTY_DOCTOR_VO,
-    Register,
-} from "../utils/entity.ts";
+import {DepartmentTreeNode, DoctorRegisterDTO, DoctorVO, EMPTY_DOCTOR_VO, Register,} from "../utils/entity.ts";
 import {departmentGetById, departmentTreeReg} from "../apis/departmentApis.ts";
 import {DataNode} from "antd/es/tree";
 import DefaultLayout from "../layout/DefaultLayout.tsx";
@@ -51,19 +43,19 @@ const Inner = () => {
 
     const [data, setData] = useState<DepartmentTreeNode[]>([]);
     const [selectedKey, setSelectedKey] = useState<number>(0);
-    const [selectedNode, setSelectedNode] = useState<Department>(EMPTY_DEPARTMENT);
+    // const [selectedNode, setSelectedNode] = useState<Department>(EMPTY_DEPARTMENT);
     const [loading, setLoading] = useState(false);
     const getDescription = async (key: number) => {
         if (!key) {
             setSelectedKey(0);
             setDescription([]);
-            setSelectedNode(EMPTY_DEPARTMENT);
+            // setSelectedNode(EMPTY_DEPARTMENT);
             return;
         }
         departmentGetById(key).then(res => {
             if (!res || !res.data) {
                 setDescription([]);
-                setSelectedNode(EMPTY_DEPARTMENT);
+                // setSelectedNode(EMPTY_DEPARTMENT);
                 return;
             }
             const node = res.data;
@@ -79,7 +71,7 @@ const Inner = () => {
                     children: node.description ? node.description : '',
                 },
             ]);
-            setSelectedNode(node);
+            // setSelectedNode(node);
         }).catch(err => {
             console.log(err);
             messageApi.error("加载失败，请检查网络连接");
@@ -108,11 +100,10 @@ const Inner = () => {
             setLoading(false);
         });
     }, [selectedKey]);
-    const onSelect = (value: number | null, node: DataNode) => {
+    const onSelect = (value: number | null) => {
         if (value) {
             setSelectedKey(value);
         }
-        console.log("selected ", node);
     }
 
 
@@ -145,7 +136,7 @@ const DoctorList = (props: { deptId: number }) => {
     const [date, setDate] = useState<number>(new Date().getTime() / 1000);
     const [tab, setTab] = useState<number>(1);
     const [page, setPage] = useState<number>(1);
-    const [pageSize, setPageSize] = useState<number>(20);
+    const pageSize = 10;
     const [total, setTotal] = useState<number>(0);
     const [data, setData] = useState<DoctorVO[]>([]);
     const [loading, setLoading] = useState<boolean>(false);

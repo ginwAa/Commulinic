@@ -10,6 +10,7 @@ public class Application implements Serializable {
     public final static Integer STATUS_PASS = 2;
     public final static Integer STATUS_REJECT = 4;
     public final static Integer STATUS_UNREAD = 8;
+    public final static Integer STATUS_CANCELED = 16;
     private Long id;
     private Long userId;
     private Long departmentId;

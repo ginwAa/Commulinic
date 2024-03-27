@@ -141,7 +141,7 @@ export interface Application {
     name: string;
     description: string;
     extra?: string;
-    updateAt: number;
+    updatedAt: number;
     status: number;
 }
 
@@ -150,7 +150,7 @@ export const EMPTY_APPLICATION: Application = {
     department: '',
     name: '',
     description: '',
-    updateAt: 0,
+    updatedAt: 0,
     status: 0
 }
 

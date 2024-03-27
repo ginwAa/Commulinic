@@ -8,8 +8,10 @@ import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.*;
 import com.commulinic.service.UserService;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService {
     @Resource
     private ChatMapper chatMapper;
 
+    @Resource
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Long add(User user) {
         return userMapper.add(user);
@@ -37,20 +42,23 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Long update(User user) {
+        if (ObjectUtils.isNotEmpty(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         Long updated = userMapper.update(user);
-        Assert.isTrue(updated != null && updated > 0, "操作失败");
+        Assert.isTrue(updated != null && updated > 0, "操作失败1");
         if (user.getName() != null && !user.getName().isEmpty()) {
             updated = registerMapper.updateUserName(user.getId(), user.getName());
-            Assert.isTrue(updated != null && updated > 0, "操作失败");
+//            Assert.isTrue(updated != null && updated > 0, "操作失败2");
             updated = applicationMapper.updateUserName(user.getId(), user.getName());
-            Assert.isTrue(updated != null && updated > 0, "操作失败");
+//            Assert.isTrue(updated != null && updated > 0, "操作失败3");
             Doctor doctor = doctorMapper.getByUserId(user.getId());
             if (doctor != null) {
                 updated = registerMapper.updateDoctorName(doctor.getId(), user.getName());
-                Assert.isTrue(updated != null && updated > 0, "操作失败");
+//                Assert.isTrue(updated != null && updated > 0, "操作失败4");
             }
             updated = chatMapper.updateByUsername(user.getUsername(), user.getId());
-            Assert.isTrue(updated != null && updated > 0, "操作失败");
+//            Assert.isTrue(updated != null && updated > 0, "操作失败5");
         }
         return updated;
     }

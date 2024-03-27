@@ -26,5 +26,11 @@ export const applicationCount = async (application: Application) => {
 }
 
 export const applicationAccept = async (application: Application) => {
+    application.status = 2;
     return post<number>('/application/accept', application);
+}
+
+export const applicationCancel = async (application: Application) => {
+    application.status = 16;
+    return post<number>('/application/cancel', application);
 }
