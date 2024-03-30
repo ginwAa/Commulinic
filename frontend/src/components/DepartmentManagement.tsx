@@ -14,7 +14,6 @@ import {
 } from "antd";
 import {useEffect, useState} from "react";
 import {
-    Application,
     APPLICATION_CONSTANT,
     Department,
     DepartmentTreeNode,
@@ -32,7 +31,7 @@ import {DataNode} from "antd/es/tree";
 import DoctorComponent from "./DoctorComponent.tsx";
 import {ModalWarning} from "./TableComponents.tsx";
 import ApplicationComponent from "./ApplicationComponent.tsx";
-import {applicationCount, applicationUpdate} from "../apis/applicationApis.ts";
+import {applicationCount, applicationRead} from "../apis/applicationApis.ts";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -226,14 +225,12 @@ const DepartmentManagement = () => {
     };
 
     const onApplyOpen = () => {
-        setApplyOpen(true);
-        const params: Application = {
-            ...EMPTY_APPLICATION,
-            status: APPLICATION_CONSTANT.STATUS_UNREAD,
-        }
-        applicationUpdate().then(res => {
-
-        })
+        applicationRead().then(() => {
+            setApplyOpen(true);
+            setEditSuccess(!editSuccess);
+        }).catch(err => {
+            messageApi.error("加载失败，请检查网络连接" + err.message);
+        });
     }
 
     return (
@@ -243,7 +240,7 @@ const DepartmentManagement = () => {
                 <TreeSelect treeData={transform(data)} disabled={!data || data.length === 0} treeDefaultExpandAll
                             dropdownStyle={{maxHeight: 400, overflow: 'auto', width: '10rem'}}
                             placement={"bottomRight"} onSelect={onSelect} value={selectedKey} size={"small"}/>
-                <Badge count={unread} showZero={true} size={"small"}>
+                <Badge count={unread} showZero={false} size={"small"}>
                     <Button size={'small'} type={'primary'} onClick={onApplyOpen}>查看坐诊申请</Button>
                 </Badge>
                 <Button.Group size={'small'}>
@@ -276,8 +273,7 @@ const DepartmentManagement = () => {
             <ModalWarning actionName={'删除'} name={selectedNode.name} onOk={() => {
                 setDeleteOpen(false);
                 onDelete(selectedNode.id);
-            }}
-                          open={deleteOpen} onCancel={() => setDeleteOpen(false)}/>
+            }} open={deleteOpen} onCancel={() => setDeleteOpen(false)}/>
         </>
     );
 }

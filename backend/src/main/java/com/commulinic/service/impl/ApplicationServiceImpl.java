@@ -99,4 +99,11 @@ public class ApplicationServiceImpl implements ApplicationService {
         Assert.isTrue(updated != null && updated > 0, "操作失败3");
         return 1L;
     }
+
+    @Override
+    @Transactional
+    public Long read() {
+        Long read = applicationMapper.read();
+        return read;
+    }
 }

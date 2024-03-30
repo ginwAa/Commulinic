@@ -19,4 +19,6 @@ public interface ApplicationService {
     Long accept(Application application);
 
     Long updateUserName(Long userId, String userName);
+
+    Long read();
 }

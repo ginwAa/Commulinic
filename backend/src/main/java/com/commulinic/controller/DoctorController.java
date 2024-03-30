@@ -1,5 +1,7 @@
 package com.commulinic.controller;
 
+import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ObjectUtil;
 import com.commulinic.entity.Doctor;
 import com.commulinic.entity.dto.DoctorRegisterDTO;
 import com.commulinic.entity.dto.PageQueryDTO;
@@ -7,6 +9,7 @@ import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.DoctorVO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.service.DoctorService;
+import com.commulinic.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,4 +49,10 @@ public class DoctorController {
         return Result.success(vo);
     }
 
+    @GetMapping("/entity/me")
+    public Result<DoctorVO> me() {
+        Assert.isTrue(ObjectUtil.isNotEmpty(SecurityUtil.getUserId()), "用户未登录");
+        DoctorVO doctor = doctorService.getById(SecurityUtil.getUserId());
+        return Result.success(doctor);
+    }
 }

@@ -26,4 +26,7 @@ public interface ApplicationMapper {
 
     @Update("update application set name = #{userName} where user_id = #{userId}")
     Long updateUserName(Long userId, String userName);
+
+    @Update("update application set status = 1 where status = 8")
+    Long read();
 }

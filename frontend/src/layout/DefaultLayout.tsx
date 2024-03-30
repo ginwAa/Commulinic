@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {authLogout} from "../apis/authApis.ts";
 import {Content} from "antd/es/layout/layout";
 import MessageCenter from "../components/MessageCenter.tsx";
+import Personality from "../components/Personality.tsx";
 
 const {Header, Footer} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -42,6 +43,7 @@ const DefaultLayout = (props: MainContentProps) => {
     // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const themeToken = theme.useToken();
     const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
+    const [personalOpen, setPersonalOpen] = useState(false);
     // const handleWindowResize = () => {
     //     setWindowWidth(window.innerWidth);
     // };
@@ -79,7 +81,8 @@ const DefaultLayout = (props: MainContentProps) => {
                         <div hidden={sessionStorage.getItem('token') === null} style={{width: 'max-content'}}>
                             <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
                                     onClick={() => setChatDrawerOpen(true)}/>
-                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}/>
+                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}
+                                    onClick={() => setPersonalOpen(true)}/>
                             <Button type={'primary'} onClick={onLogout}>注销</Button>
                         </div>
                     </ButtonGroup>
@@ -93,7 +96,10 @@ const DefaultLayout = (props: MainContentProps) => {
             </Footer>
             {
                 sessionStorage.getItem('token') === null ? <></> :
-                    <MessageCenter open={chatDrawerOpen} setOpen={setChatDrawerOpen}/>
+                    <div>
+                        <MessageCenter open={chatDrawerOpen} setOpen={setChatDrawerOpen}/>
+                        <Personality open={personalOpen} setOpen={setPersonalOpen}/>
+                    </div>
             }
         </Layout>
     );

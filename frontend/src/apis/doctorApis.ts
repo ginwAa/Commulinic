@@ -34,3 +34,7 @@ export const doctorPageReg = async (page: number, pageSize: number, doctor: Doct
     };
     return post<PageRes<DoctorVO>>('/doctor/page/register', dto);
 }
+
+export const doctorMe = async () => {
+    return get<DoctorVO>('/doctor/entity/me');
+}

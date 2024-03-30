@@ -61,6 +61,7 @@ public class ApplicationController {
 
     @PostMapping("/read")
     public Result<Long> read() {
-        Application application = new Application();
+        Long read = applicationService.read();
+        return Result.success(read);
     }
 }

@@ -8,6 +8,8 @@ import {
 } from '@ant-design/icons';
 import {Breadcrumb, Button, Layout, Menu, Space, theme, Typography} from 'antd';
 import siderItems from "../utils/siderSettings.tsx";
+import MessageCenter from "../components/MessageCenter.tsx";
+import Personality from "../components/Personality.tsx";
 
 const {Text} = Typography;
 const {Content, Sider} = Layout;
@@ -25,7 +27,8 @@ interface MainContentProps {
 const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) => {
     const [collapsed, setCollapsed] = useState(localStorage.getItem('admin/siderCollapsed') === 'true');
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+    const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
+    const [personalOpen, setPersonalOpen] = useState(false);
     const themeToken = theme.useToken();
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth);
@@ -73,8 +76,10 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
                             <Breadcrumb items={props.breadcrumbItems}/>
                         </Space>
                         <div>
-                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}></Button>
-                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}></Button>
+                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
+                                    onClick={() => setChatDrawerOpen(true)}></Button>
+                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}} s
+                                    onClick={() => setPersonalOpen(true)}></Button>
                         </div>
                     </Space>
                     <div style={{padding: '0.5rem 0'}}>
@@ -82,6 +87,13 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
                     </div>
                 </Content>
             </Layout>
+            {
+                sessionStorage.getItem('token') === null ? <></> :
+                    <div>
+                        <MessageCenter open={chatDrawerOpen} setOpen={setChatDrawerOpen}/>
+                        <Personality open={personalOpen} setOpen={setPersonalOpen}/>
+                    </div>
+            }
         </Layout>
     );
 };

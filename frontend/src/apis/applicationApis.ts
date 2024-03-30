@@ -34,3 +34,7 @@ export const applicationCancel = async (application: Application) => {
     application.status = 16;
     return post<number>('/application/cancel', application);
 }
+
+export const applicationRead = async () => {
+    return post<number>('/application/read');
+}

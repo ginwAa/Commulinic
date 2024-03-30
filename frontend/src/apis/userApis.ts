@@ -1,5 +1,5 @@
 import {PageDTO, PageRes, User} from "../utils/entity.ts";
-import {post} from "../utils/request.ts";
+import {get, post} from "../utils/request.ts";
 
 export const userAdd = async (user: User) => {
     delete user.id;
@@ -19,3 +19,12 @@ export const userPage = async (user: User, page: number, pageSize: number, count
 export const userUpdate = async (user: User) => {
     return post<number>('/user/update', user);
 };
+
+
+export const userGetById = async (id: number) => {
+    return get<User>(`/user/${id}`);
+}
+
+export const userMe = async () => {
+    return post<User>('/user/me');
+}
