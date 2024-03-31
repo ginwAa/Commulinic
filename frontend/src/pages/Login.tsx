@@ -60,16 +60,15 @@ const LoginTab = () => {
                 messageApi.success("登录成功");
                 sessionStorage.setItem('token', data.token);
                 sessionStorage.setItem('userId', data.userId.toString());
-                sessionStorage.setItem('userName', data.userName);
+                sessionStorage.setItem('phone', data.userName);
                 sessionStorage.setItem('role', data.role.toString());
                 if (user.remember) {
-                    localStorage.setItem('REMEMBERED_USER_PHONE', user.phone);
+                    localStorage.setItem('REMEMBERED_USER_PHONE', data.userName);
                 }
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 1500);
             }).catch(err => {
-                console.log(err);
                 messageApi.error("登录失败" + err.data?.msg);
             });
         })
@@ -108,7 +107,7 @@ const RegisterTab = () => {
         const formData: RegisterForm = form.getFieldsValue();
         const user: User = formData;
         form.validateFields().then(() => {
-            authRegister(user).then(res => {
+            authRegister(user).then(() => {
                 messageApi.success("注册成功");
                 setTimeout(() => {
                     window.location.href = '/login';

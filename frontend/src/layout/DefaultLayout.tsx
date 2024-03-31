@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CopyrightOutlined, MessageOutlined, UserOutlined} from "@ant-design/icons";
 import {Button, Layout, Menu, MenuProps, message, Space, theme} from "antd";
 import ButtonGroup from "antd/es/button/button-group";
@@ -7,6 +7,7 @@ import {authLogout} from "../apis/authApis.ts";
 import {Content} from "antd/es/layout/layout";
 import MessageCenter from "../components/MessageCenter.tsx";
 import Personality from "../components/Personality.tsx";
+import {doctorMe} from "../apis/doctorApis.ts";
 
 const {Header, Footer} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -48,17 +49,29 @@ const DefaultLayout = (props: MainContentProps) => {
     //     setWindowWidth(window.innerWidth);
     // };
 
+    useEffect(() => {
+        if (sessionStorage.getItem('role') !== null && sessionStorage.getItem('role') !== '4') {
+            doctorMe().then(res => {
+                sessionStorage.setItem('doctorId', String(res.data.id));
+                sessionStorage.setItem('userName', res.data.name);
+            }).catch(err => {
+                messageApi.error("获取医生信息失败 + " + err.message);
+            })
+        }
+    }, []);
+
     const onLogout = () => {
         authLogout().then(() => {
             sessionStorage.removeItem('token');
             sessionStorage.removeItem('userId');
             sessionStorage.removeItem('userName');
             sessionStorage.removeItem('role');
+            sessionStorage.removeItem('doctorId');
+            sessionStorage.removeItem('phone')
             setTimeout(() => {
                 window.location.href = '/';
             }, 1500);
         }).catch(err => {
-            console.log(err);
             messageApi.error("退出登录失败 + " + err.message);
         });
     };

@@ -40,25 +40,28 @@ const Inner = (props: Props) => {
             onOk: () => {
                 form.validateFields().then(values => {
                     values.id = data?.id;
+                    if (values.password === '') {
+                        delete values.password;
+                    }
                     userUpdate(values).then(() => {
                         setUpdated(!updated);
-                        if (sessionStorage.getItem('role') !== '4') {
-                            docForm.validateFields().then(values => {
-                                values.id = docData?.id;
-                                doctorUpdate(values).then(() => {
-                                    setUpdated(!updated);
-                                }).catch(err => {
-                                    message.error(err.message);
-                                    return;
-                                })
-                            })
-                        }
-                        message.success('修改成功');
                         props.setOpen(false);
                     }).catch(err => {
                         message.error(err.message);
                         return;
                     })
+                    if (sessionStorage.getItem('role') !== '4') {
+                        docForm.validateFields().then(async values1 => {
+                            values1.id = docData?.id;
+                            await doctorUpdate(values1).then(() => {
+                                setUpdated(!updated);
+                            }).catch(err => {
+                                message.error(err.message);
+                                return;
+                            })
+                        })
+                    }
+                    message.success('修改成功');
                 })
 
             }
@@ -114,7 +117,7 @@ const Inner = (props: Props) => {
                             </Form.Item>
                             <Form.Item label="个人简介" name="description"
                                        rules={[{required: true, message: '请输入个人简介'}]}>
-                                <InputNumber/>
+                                <Input/>
                             </Form.Item>
                         </Form>
                 }

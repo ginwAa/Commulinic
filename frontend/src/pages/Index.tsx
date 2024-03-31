@@ -8,11 +8,13 @@ import MyRegister from "../components/MyRegister.tsx";
 import {useState} from "react";
 import MyApply from "../components/MyApply.tsx";
 import {Link} from "react-router-dom";
+import MyWork from "../components/MyWork.tsx";
 
 const Inner = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [openMyReg, setOpenMyReg] = useState(false);
     const [openMyApply, setOpenMyApply] = useState(false);
+    const [openWork, setOpenWork] = useState(false);
     const openDate = new Date();
     return (
         <>
@@ -30,8 +32,16 @@ const Inner = () => {
                                 <Button size={"large"} type={"primary"}
                                         onClick={() => setOpenMyReg(true)}>我的预约</Button>
                                 <Button size={"large"} type={"primary"}>我的信息</Button>
-                                <Button size={"large"} type={"primary"}
-                                        onClick={() => setOpenMyApply(true)}>坐诊申请</Button>
+                                {
+                                    sessionStorage.getItem('role') !== '4' ? <></> :
+                                        <Button size={"large"} type={"primary"}
+                                                onClick={() => setOpenMyApply(true)}>坐诊申请</Button>
+                                }
+                                {
+                                    sessionStorage.getItem('role') === '4' ? <></> :
+                                        <Button size={"large"} type={"primary"}
+                                                onClick={() => setOpenWork(true)}>接诊管理</Button>
+                                }
                                 {
                                     sessionStorage.getItem('role') === '1' ?
                                         <Button size={"large"} type={"primary"}><Link
@@ -59,6 +69,12 @@ const Inner = () => {
                         <MyApply open={openMyApply} setOpen={setOpenMyApply}/>
                     </div>
 
+            }
+            {
+                sessionStorage.getItem('role') === '4' || sessionStorage.getItem('token') === null ? <></> :
+                    <div>
+                        <MyWork open={openWork} setOpen={setOpenWork}/>
+                    </div>
             }
         </>
     );

@@ -221,7 +221,7 @@ const DoctorList = (props: { deptId: number }) => {
                 </Col>
             </Row>
             <div style={{marginTop: '1rem'}}>
-                <Input placeholder={'搜索申请者'} value={pageProps.name}
+                <Input placeholder={'搜索医生'} value={pageProps.name}
                        onChange={(e) => setPageProps({...pageProps, name: e.target.value})}/>
                 <List dataSource={data} loading={loading} itemLayout={'horizontal'} renderItem={item =>
                     <List.Item key={item.id} actions={[

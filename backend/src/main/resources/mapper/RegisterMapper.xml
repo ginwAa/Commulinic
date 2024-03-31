@@ -7,6 +7,7 @@
         select * from register
         <where>
             <if test="data.userId != null and data.userId != 0">and user_id = #{data.userId}</if>
+            <if test="data.doctorId != null and data.doctorId != 0">and doctor_id = #{data.doctorId}</if>
             <if test="data.status != null and data.status != 0">and status &amp; #{data.status} != 0</if>
             <if test="data.section != null and data.section != 0">and section &amp; #{data.section} != 0</if>
             <if test="data.userName != null and data.userName != ''">and user_name like concat('%', #{data.userName}, '%')</if>
@@ -46,6 +47,7 @@
         select COUNT(1) from register
         <where>
             <if test="userId != null and userId != 0">and user_id = #{userId}</if>
+            <if test="doctorId != null and doctorId != 0">and doctor_id = #{doctorId}</if>
             <if test="status != null and status != 0">and status &amp; #{status} != 0</if>
             <if test="section != null and section != 0">and section &amp; #{section} != 0</if>
             <if test="userName != null and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
