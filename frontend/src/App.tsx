@@ -14,6 +14,8 @@ import Login from "./pages/Login.tsx";
 import CommunityManagementPage from "./pages/admin/CommunityManagementPage.tsx";
 import NotFoundPage from "./pages/common/NotFoundPage.tsx";
 import Registration from "./pages/Registration.tsx";
+import NoticePage from "./pages/NoticePage.tsx";
+import TipPage from "./pages/TipPage.tsx";
 
 const App = () => {
     if (localStorage.getItem('admin/siderCollapsed') === null) {
@@ -54,6 +56,8 @@ const App = () => {
                     <Route path="/admin" element={<OverviewPage/>} key="/admin"/>
                     <Route path="/about" element={<About/>} key="/about"/>
                     <Route path="/user" element={<User/>} key="/user"/>
+                    <Route path="/news" element={<NoticePage/>} key="/news"/>
+                    <Route path="/health" element={<TipPage/>} key="/health"/>
                     <Route path="/admin/departments" element={<DepartmentManagementPage/>} key="/admin/departments"/>
                     <Route path="/admin/users" element={<UserManagementPage/>} key="/admin/users"/>
                     <Route path="/admin/register" element={<RegisterManagementPage/>} key="/admin/register"/>

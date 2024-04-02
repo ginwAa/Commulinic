@@ -267,9 +267,9 @@ export interface Chat {
     receiverId: number,
     senderId: number,
     senderName: string,
-    revId: number,
-    unreadCount: number,
-    lastMessage: ChatMessage
+    revId?: number,
+    unreadCount?: number,
+    lastMessage?: ChatMessage
 }
 
 export const EMPTY_CHAT: Chat = {

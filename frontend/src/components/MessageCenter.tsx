@@ -56,7 +56,7 @@ const MessageCenter = (props: Props) => {
         }
         const sendMsg: ChatMessage = {
             content: inputMsg,
-            chatId: chat.revId,
+            chatId: chat.revId as number,
             status: 2,
             byMe: 0,
         }
@@ -82,11 +82,11 @@ const MessageCenter = (props: Props) => {
                             description={
                                 <div>
                                     <Title level={5}>
-                                        {item.lastMessage.content}
+                                        {item?.lastMessage?.content}
                                     </Title>
                                 </div>
                             }/>
-                        {item.lastMessage.createTime}
+                        {item?.lastMessage?.createTime}
                     </List.Item>
                 }/>
                 <Drawer open={chatOpen} placement={"right"} closable={true} title={chat?.senderName}

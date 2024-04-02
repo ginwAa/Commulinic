@@ -8,6 +8,7 @@ import {Content} from "antd/es/layout/layout";
 import MessageCenter from "../components/MessageCenter.tsx";
 import Personality from "../components/Personality.tsx";
 import {doctorMe} from "../apis/doctorApis.ts";
+import {userMe} from "../apis/userApis.ts";
 
 const {Header, Footer} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -24,11 +25,11 @@ function getItem(
 
 const items: MenuItem[] = [
     getItem(<Link to={"/"}>网站首页</Link>, 1),
-    getItem(<Link to={"/about"}>医院简介</Link>, 2),
+    // getItem(<Link to={"/about"}>医院简介</Link>, 2),
     getItem(<Link to={"/news"}>新闻动态</Link>, 3),
     getItem(<Link to={"/health"}>健康园地</Link>, 4),
-    getItem(<Link to={"/dept"}>科室简介</Link>, 5),
-    getItem(<Link to={"/registration"}>预约挂号</Link>, 6),
+    // getItem(<Link to={"/dept"}>科室简介</Link>, 5),
+    getItem(<Link to={"/registration"}>预约问诊</Link>, 6),
 ];
 
 interface MainContentProps {
@@ -55,8 +56,20 @@ const DefaultLayout = (props: MainContentProps) => {
                 sessionStorage.setItem('doctorId', String(res.data.id));
                 sessionStorage.setItem('userName', res.data.name);
             }).catch(err => {
-                messageApi.error("获取医生信息失败 + " + err.message);
-            })
+                messageApi.error("获取自身信息失败1" + err.message);
+            });
+        } else if (sessionStorage.getItem('role') !== null) {
+            userMe().then(res => {
+                sessionStorage.setItem('userName', res.data.name);
+            }).catch(err => {
+                messageApi.error("获取自身信息失败2" + err.message);
+            });
+        }
+        const queryParams = new URLSearchParams(window.location.search);
+        // 从查询参数中获取特定参数的值
+        const paramValue = queryParams.get('chatOpen');
+        if (paramValue == "1") {
+            setChatDrawerOpen(true);
         }
     }, []);
 

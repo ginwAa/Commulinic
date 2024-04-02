@@ -13,7 +13,7 @@ import {
     TreeSelect
 } from "antd";
 import {useEffect, useState} from "react";
-import {DepartmentTreeNode, DoctorRegisterDTO, DoctorVO, EMPTY_DOCTOR_VO, Register,} from "../utils/entity.ts";
+import {Chat, DepartmentTreeNode, DoctorRegisterDTO, DoctorVO, EMPTY_DOCTOR_VO, Register,} from "../utils/entity.ts";
 import {departmentGetById, departmentTreeReg} from "../apis/departmentApis.ts";
 import {DataNode} from "antd/es/tree";
 import DefaultLayout from "../layout/DefaultLayout.tsx";
@@ -24,6 +24,7 @@ import dayjs from "dayjs";
 import {RangePickerProps} from "antd/es/date-picker";
 import {registerAdd} from "../apis/registerApis.ts";
 import {ModalWarning} from "../components/TableComponents.tsx";
+import {chatAddChat} from "../apis/chatAps.ts";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -105,7 +106,6 @@ const Inner = () => {
             setSelectedKey(value);
         }
     }
-
 
     return (
         <>
@@ -204,6 +204,18 @@ const DoctorList = (props: { deptId: number }) => {
 
     }, [page, pageSize, props, tab, pageProps])
 
+    const onStartChat = (doctor: DoctorVO) => {
+        const chat: Chat = {
+            senderId: doctor.userId,
+            receiverId: Number(sessionStorage.getItem('userId')),
+            senderName: doctor.name,
+        }
+        chatAddChat(chat).then(() => {
+            window.location.href = window.location.origin + '/registration?chatOpen=1';
+        }).catch(err => {
+            message.error("操作失败！" + err.message);
+        })
+    }
     return (
         <>
             {contextHolder}
@@ -226,7 +238,7 @@ const DoctorList = (props: { deptId: number }) => {
                 <List dataSource={data} loading={loading} itemLayout={'horizontal'} renderItem={item =>
                     <List.Item key={item.id} actions={[
                         <Button type={'primary'} onClick={() => onRegisterWarn(item)}>预约</Button>,
-                        <Button type={'primary'}>线上问诊</Button>
+                        <Button type={'primary'} onClick={() => onStartChat(item)}>线上问诊</Button>
                     ]}>
                         <List.Item.Meta
                             title={<Title level={2}>{item.name}</Title>}

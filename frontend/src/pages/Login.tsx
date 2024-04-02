@@ -133,9 +133,6 @@ const RegisterTab = () => {
             <Form.Item label="邮箱" name="email" rules={[{required: true, message: '请输入邮箱', type: 'email'}]}>
                 <Input prefix={<MailOutlined className="site-form-item-icon"/>}/>
             </Form.Item>
-            <Form.Item label="验证码" name="code" rules={[{required: true, message: '请输入验证码'}]}>
-                <Input suffix={<Button size={'small'} type={'primary'}>发送验证码</Button>}/>
-            </Form.Item>
             <Form.Item label="手机号" name="phone" rules={[{required: true, message: '请输入手机号'}]}>
                 <Input prefix={<PhoneOutlined className="site-form-item-icon"/>}/>
             </Form.Item>
@@ -166,11 +163,4 @@ const RegisterTab = () => {
         </Form>
     )
 }
-
-// const ForgetTab = () => {
-//     return (
-//         <></>
-//     );
-// }
-
 export default Login;
