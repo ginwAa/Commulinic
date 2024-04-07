@@ -18,7 +18,7 @@ public class ApplicationController {
     @Resource
     private ApplicationService applicationService;
 
-    //    @PreAuthorize("hasAuthority('admin:read')")
+    @PreAuthorize("hasAuthority('normal:read')")
     @PostMapping("/page")
     public Result<PageVO<Application>> page(@RequestBody PageQueryDTO<Application> application) {
         PageVO<Application> page = applicationService.page(application);
@@ -26,12 +26,13 @@ public class ApplicationController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('normal:create')")
     public Result<Long> add(@RequestBody Application application) {
         Long added = applicationService.add(application);
         return Result.success(added);
     }
 
-    @PreAuthorize("hasAuthority('admin:update')")
+    @PreAuthorize("hasAuthority('normal:update')")
     @PostMapping("/update")
     public Result<Long> update(@RequestBody Application application) {
         Long updated = applicationService.update(application);
@@ -39,6 +40,7 @@ public class ApplicationController {
     }
 
     @PostMapping("/count")
+    @PreAuthorize("hasAuthority('normal:read')")
     public Result<Long> count(@RequestBody Application application) {
         Long count = applicationService.count(application);
         return Result.success(count);
@@ -53,6 +55,7 @@ public class ApplicationController {
     }
 
     @PostMapping("/cancel")
+    @PreAuthorize("hasAuthority('normal:update')")
     public Result<Long> cancel(@RequestBody Application application) {
         application.setStatus(Application.STATUS_CANCELED);
         Long canceled = applicationService.update(application);
@@ -60,6 +63,7 @@ public class ApplicationController {
     }
 
     @PostMapping("/read")
+    @PreAuthorize("hasAuthority('normal:read')")
     public Result<Long> read() {
         Long read = applicationService.read();
         return Result.success(read);

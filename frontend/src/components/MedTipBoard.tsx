@@ -1,4 +1,4 @@
-import {Announcement, EMPTY_ANNOUNCEMENT, EMPTY_MED_TIP, EMPTY_PAGE, MedTip} from "../utils/entity.ts";
+import {EMPTY_MED_TIP, EMPTY_PAGE, MedTip} from "../utils/entity.ts";
 import {useEffect, useState} from "react";
 import {Button, Card, message, Modal, Pagination} from "antd";
 import Title from "antd/es/typography/Title";
@@ -7,7 +7,7 @@ import {unixSecondToDate} from "../utils/time.ts";
 
 const NoticeBoard = () => {
     const [messageApi, contextHolder] = message.useMessage();
-    const [init, setInit] = useState<Announcement[]>(EMPTY_PAGE.records);
+    const [init, setInit] = useState<MedTip[]>(EMPTY_PAGE.records);
     const [data, setData] = useState<MedTip[]>(EMPTY_PAGE.records);
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedData, setSelectedData] = useState<MedTip>(EMPTY_MED_TIP);
@@ -24,7 +24,7 @@ const NoticeBoard = () => {
 
     const initData = () => {
         setLoading(true);
-        medTipPage(1, 6, EMPTY_ANNOUNCEMENT, false).then(res => {
+        medTipPage(1, 6, EMPTY_MED_TIP, false).then(res => {
             setInit(res.data.records);
         }).catch(err => {
             messageApi.error("获取公告列表失败 + " + err.message);

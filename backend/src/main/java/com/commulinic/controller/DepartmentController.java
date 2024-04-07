@@ -5,6 +5,7 @@ import com.commulinic.entity.result.Result;
 import com.commulinic.entity.vo.DepartmentVO;
 import com.commulinic.service.DepartmentService;
 import jakarta.annotation.Resource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,18 +27,21 @@ public class DepartmentController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('admin:create')")
     public Result<Long> add(@RequestBody Department department) {
         Long added = departmentService.add(department);
         return Result.success(added);
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasAuthority('admin:update')")
     public Result<Long> update(@RequestBody Department department) {
         Long updated = departmentService.update(department);
         return Result.success(updated);
     }
 
     @PostMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('admin:delete')")
     public Result<Long> delete(@PathVariable Long id) {
         Long deleted = departmentService.delete(id);
         return Result.success(deleted);

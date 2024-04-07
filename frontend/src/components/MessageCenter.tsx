@@ -78,7 +78,7 @@ const MessageCenter = (props: Props) => {
                         <Button type={'primary'} onClick={() => onChatOpen(item)}>打开</Button>,
                     ]}>
                         <List.Item.Meta
-                            title={<Title level={4}>{item.senderName}</Title>}
+                            title={<Title level={3}>{item.senderName}</Title>}
                             description={
                                 <div>
                                     <Title level={5}>

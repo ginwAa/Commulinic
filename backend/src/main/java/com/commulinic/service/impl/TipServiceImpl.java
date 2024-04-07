@@ -5,16 +5,16 @@ import com.commulinic.entity.MedTip;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.MedTipMapper;
-import com.commulinic.service.MedTipService;
+import com.commulinic.service.TipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MedTipServiceImpl implements MedTipService {
+public class TipServiceImpl implements TipService {
     @Autowired
-    MedTipMapper medTipMapper;
+    public MedTipMapper medTipMapper;
 
     @Override
     public Long add(MedTip tip) {

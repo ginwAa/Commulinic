@@ -20,14 +20,14 @@ public class AnnouncementController {
     @Autowired
     private AnnouncementService announcementService;
 
-    @PreAuthorize("hasAnyAuthority('admin:create', 'doctor:create')")
+    @PreAuthorize("hasAnyAuthority('admin:create')")
     @PostMapping("/add")
     public Result<Long> add(@RequestBody Announcement announcement) {
         Long added = announcementService.add(announcement);
         return Result.success(added);
     }
 
-    @PreAuthorize("hasAnyAuthority('admin:update', 'doctor:update')")
+    @PreAuthorize("hasAnyAuthority('admin:update')")
     @PostMapping("/update")
     public Result<Long> update(@RequestBody Announcement announcement) {
         Long updated = announcementService.update(announcement);
@@ -46,7 +46,7 @@ public class AnnouncementController {
         return Result.success(count);
     }
 
-    @PreAuthorize("hasAnyAuthority('admin:delete', 'doctor:delete')")
+    @PreAuthorize("hasAnyAuthority('admin:delete')")
     @PostMapping("/delete")
     public Result<Long> delete(@RequestBody Announcement announcement) {
         Long deleted = announcementService.delete(announcement);

@@ -4,7 +4,7 @@ import com.commulinic.entity.MedTip;
 import com.commulinic.entity.dto.PageQueryDTO;
 import com.commulinic.entity.vo.PageVO;
 
-public interface MedTipService {
+public interface TipService {
     Long add(MedTip tip);
 
     Long update(MedTip tip);
