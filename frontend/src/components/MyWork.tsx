@@ -1,5 +1,5 @@
 import {Button, Drawer, List, message, Segmented} from "antd";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {EMPTY_REGISTER, Register} from "../utils/entity.ts";
 import Title from "antd/es/typography/Title";
 import {unixSecondToDate} from "../utils/time.ts";
@@ -54,6 +54,15 @@ const MyWork = (props: Props) => {
         });
     }
 
+    const renderRegisterActions = (item: Register) => {
+        const ret: React.ReactNode[] = [];
+        if (item.status !== 4) {
+            ret.push(<Button onClick={() => onAccept(item)}
+                             type={'primary'}>完成</Button>);
+        }
+        return ret;
+    }
+
     return (
         <div>
             {contextHolder}
@@ -68,10 +77,7 @@ const MyWork = (props: Props) => {
                 <List dataSource={data} loading={loading} itemLayout="horizontal" style={{height: '100%'}}
                       pagination={{pageSize: pageSize, current: page, total: total, onChange: setPage, size: 'small'}}
                       renderItem={(item) =>
-                          <List.Item key={item.id} actions={[
-                              <Button hidden={item.status === 4} onClick={() => onAccept(item)}
-                                      type={'primary'}>已处理</Button>
-                          ]}>
+                          <List.Item key={item.id} actions={renderRegisterActions(item)}>
                               <List.Item.Meta
                                   title={<Title level={4}>{item.userName}</Title>}
                                   description={
@@ -82,7 +88,7 @@ const MyWork = (props: Props) => {
                               创建时间： {unixSecondToDate(item.createTime)} 订单状态：
                               {
                                   item.status === 1 ? "未支付" :
-                                      item.status === 2 ? "已支付" :
+                                      item.status === 2 ? "未处理" :
                                           item.status === 3 ? "已完成" : "已取消"
                               }
                           </List.Item>

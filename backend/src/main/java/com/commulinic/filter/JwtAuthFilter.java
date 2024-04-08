@@ -38,7 +38,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             phone = jwtProvider.extractPhone(token);
             if (phone != null
                     && SecurityContextHolder.getContext().getAuthentication() == null
-                    && jwtProvider.notInBlackList(token)
+//                    && jwtProvider.notInBlackList(token)
             ) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(phone);
 

@@ -23,7 +23,7 @@ const Inner = () => {
                 <Card title={null} bordered={false} style={{paddingLeft: '4rem', paddingRight: '4rem'}}>
                     <Title level={2}>
                         {openDate.getHours() < 12 ? '上午' : '下午'}好，
-                        {sessionStorage.getItem('userName') ? sessionStorage.getItem('userName') : '游客'}，
+                        {sessionStorage.getItem('userName') !== null ? sessionStorage.getItem('userName') : '游客'}，
                         今天是 {unixSecondToDate(Date.now() / 1000)}。
                     </Title>
                     {
@@ -31,7 +31,6 @@ const Inner = () => {
                             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '2rem'}}>
                                 <Button size={"large"} type={"primary"}
                                         onClick={() => setOpenMyReg(true)}>我的预约</Button>
-                                <Button size={"large"} type={"primary"}>我的信息</Button>
                                 {
                                     sessionStorage.getItem('role') !== '4' ? <></> :
                                         <Button size={"large"} type={"primary"}
@@ -45,7 +44,7 @@ const Inner = () => {
                                 {
                                     sessionStorage.getItem('role') === '1' ?
                                         <Button size={"large"} type={"primary"}><Link
-                                            to={"/admin"}>后台管理</Link></Button>
+                                            to={"/admin/departments"}>后台管理</Link></Button>
                                         : <></>
                                 }
                             </div>

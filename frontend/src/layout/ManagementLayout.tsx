@@ -6,10 +6,11 @@ import {
     MessageOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import {Breadcrumb, Button, Layout, Menu, Space, theme, Typography} from 'antd';
+import {Badge, Breadcrumb, Button, Layout, Menu, message, Space, theme, Typography} from 'antd';
 import siderItems from "../utils/siderSettings.tsx";
 import MessageCenter from "../components/MessageCenter.tsx";
 import Personality from "../components/Personality.tsx";
+import {chatList} from "../apis/chatAps.ts";
 
 const {Text} = Typography;
 const {Content, Sider} = Layout;
@@ -25,6 +26,7 @@ interface MainContentProps {
 
 
 const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) => {
+    const [messageApi, contextHolder] = message.useMessage();
     const [collapsed, setCollapsed] = useState(localStorage.getItem('admin/siderCollapsed') === 'true');
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
@@ -33,7 +35,25 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
     const handleWindowResize = () => {
         setWindowWidth(window.innerWidth);
     };
-
+    const [unread, setUnread] = useState(0);
+    useEffect(() => {
+        if (sessionStorage.getItem('token') !== null) {
+            const msgTask = setInterval(() => {
+                chatList().then(res => {
+                    let cnt = 0;
+                    res.data.forEach(chat => {
+                        cnt += chat.unreadCount !== undefined ? chat.unreadCount : 0;
+                    })
+                    setUnread(cnt);
+                }).catch(err => {
+                    messageApi.error("加载消息失败，请检查网络连接！" + err.message);
+                })
+            }, 2000);
+            return () => {
+                clearInterval(msgTask);
+            }
+        }
+    }, []);
     useEffect(() => {
         localStorage.setItem('admin/siderCollapsed', String(collapsed));
     }, [collapsed]);
@@ -48,6 +68,7 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
 
     return (
         <Layout style={{minHeight: '100vh', width: '100vw'}}>
+            {contextHolder}
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}
                    defaultCollapsed={false}
                    width='10rem' collapsedWidth={windowWidth <= 750 ? '0' : '4rem'} trigger={null} theme='light'
@@ -76,9 +97,11 @@ const ManagementLayout: React.FC<MainContentProps> = (props: MainContentProps) =
                             <Breadcrumb items={props.breadcrumbItems}/>
                         </Space>
                         <div>
-                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
-                                    onClick={() => setChatDrawerOpen(true)}></Button>
-                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}} s
+                            <Badge count={unread}>
+                                <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
+                                        onClick={() => setChatDrawerOpen(true)}></Button>
+                            </Badge>
+                            <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}
                                     onClick={() => setPersonalOpen(true)}></Button>
                         </div>
                     </Space>

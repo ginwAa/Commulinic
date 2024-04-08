@@ -40,7 +40,7 @@ public class User implements Serializable, UserDetails {
         } else if (Objects.equals(role, ROLE_DOCTOR)) {
             roleEnum = Role.DOCTOR;
         }
-        log.info("roleEnum: {}", roleEnum);
+        log.info("roleEnum: {} {}", roleEnum, roleEnum.getAuthorities());
         return roleEnum.getAuthorities();
     }
 

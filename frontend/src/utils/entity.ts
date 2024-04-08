@@ -283,5 +283,5 @@ export const EMPTY_CHAT: Chat = {
 
 export interface ChatReadDTO {
     chatId: number,
-    readTime: string
+    readTime?: string
 }

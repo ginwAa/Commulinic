@@ -15,6 +15,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @GetMapping("/tree/{type}")
+    @PreAuthorize("hasAuthority('normal:read')")
     public Result<DepartmentVO> tree(@PathVariable Integer type) {
         DepartmentVO tree = departmentService.tree(type);
         return Result.success(tree);

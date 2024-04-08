@@ -1,5 +1,5 @@
 import {Button, Drawer, List, message} from "antd";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {EMPTY_REGISTER, Register} from "../utils/entity.ts";
 import Title from "antd/es/typography/Title";
 import {unixSecondToDate} from "../utils/time.ts";
@@ -66,6 +66,17 @@ const MyRegister = (props: Props) => {
         });
     }
 
+    const renderRegisterActions = (item: Register) => {
+        const ret: React.ReactNode[] = [];
+        if (item.status !== 1 && item.status !== 2 && item.status !== 8) {
+            ret.push(<Button onClick={() => onPay(item)} type={'primary'}>支付</Button>);
+        }
+        if (item.status !== 2 && item.status !== 8 && item.status !== 4) {
+            ret.push(<Button onClick={() => onAbort(item)} type={'primary'}>取消</Button>);
+        }
+        return ret;
+    }
+
     return (
         <div>
             {contextHolder}
@@ -74,12 +85,7 @@ const MyRegister = (props: Props) => {
                 <List dataSource={data} loading={loading} itemLayout="horizontal" style={{height: '100%'}}
                       pagination={{pageSize: pageSize, current: page, total: total, onChange: setPage, size: 'small'}}
                       renderItem={(item) =>
-                          <List.Item key={item.id} actions={[
-                              <Button hidden={item.status !== 1} onClick={() => onPay(item)}
-                                      type={'primary'}>支付</Button>,
-                              <Button hidden={item.status !== 2} onClick={() => onAbort(item)}
-                                      type={'primary'}>取消</Button>,
-                    ]}>
+                          <List.Item key={item.id} actions={renderRegisterActions(item)}>
                         <List.Item.Meta
                             title={<Title level={4}>{item.doctorName}</Title>}
                             description={
@@ -100,5 +106,6 @@ const MyRegister = (props: Props) => {
         </div>
     )
 }
+
 
 export default MyRegister;

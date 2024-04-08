@@ -28,7 +28,7 @@ public class DoctorController {
     }
 
     @PostMapping("/page/register")
-    @PreAuthorize("hasAuthority('normal:read')")
+//    @PreAuthorize("hasAuthority('normal:read')")
     public Result<PageVO<DoctorVO>> pageRegister(@RequestBody PageQueryDTO<DoctorRegisterDTO> dto) {
         PageVO<DoctorVO> page = doctorService.pageRegister(dto);
         return Result.success(page);
@@ -55,7 +55,7 @@ public class DoctorController {
     }
 
     @GetMapping("/entity/me")
-    @PreAuthorize("hasAuthority('doctor:raed')")
+    @PreAuthorize("hasAuthority('doctor:read')")
     public Result<DoctorVO> me() {
         Assert.isTrue(ObjectUtil.isNotEmpty(SecurityUtil.getUserId()), "用户未登录");
         DoctorVO doctor = doctorService.getById(SecurityUtil.getUserId());

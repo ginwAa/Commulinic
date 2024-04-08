@@ -1,7 +1,7 @@
-import {Button, Drawer, Input, List, message} from "antd";
+import {Avatar, Badge, Button, Drawer, Input, List, message} from "antd";
 import {useEffect, useState} from "react";
-import {Chat, ChatMessage} from "../utils/entity.ts";
-import {chatAll, chatList, chatSend} from "../apis/chatAps.ts";
+import {Chat, ChatMessage, ChatReadDTO} from "../utils/entity.ts";
+import {chatAll, chatList, chatRead, chatSend} from "../apis/chatAps.ts";
 import Title from "antd/es/typography/Title";
 
 interface Props {
@@ -32,9 +32,6 @@ const MessageCenter = (props: Props) => {
     useEffect(() => {
         if (chat) {
             chatAll(chat).then(res => {
-                // for (let i = 0; i < 10; ++i) {
-                //     res.data.push(res.data[0]);
-                // }
                 res.data.reverse();
                 setMessages(res.data);
             }).catch(err => {
@@ -46,8 +43,15 @@ const MessageCenter = (props: Props) => {
 
 
     const onChatOpen = (chat: Chat) => {
+        chat.unreadCount = 0;
+        const chatDTO: ChatReadDTO = {
+            chatId: chat.id as number,
+        }
         setChat(chat);
         setChatOpen(true);
+        chatRead(chatDTO).then().catch(err => {
+            messageApi.error("读取消息失败，请检查网络连接！" + err.message);
+        });
     };
 
     const onSendMsg = () => {
@@ -63,6 +67,8 @@ const MessageCenter = (props: Props) => {
         chatSend(sendMsg).then(() => {
             setInputMsg("");
             messageApi.success("发送成功！");
+            chat.lastMessage = sendMsg;
+            setMessages([...messages, sendMsg]);
         }).catch(err => {
             messageApi.error("发送失败，请检查网络连接！" + err.message);
         });
@@ -75,7 +81,8 @@ const MessageCenter = (props: Props) => {
                     onClose={() => props.setOpen(false)}>
                 <List dataSource={data} loading={loading} itemLayout="horizontal" renderItem={item =>
                     <List.Item key={item.id} actions={[
-                        <Button type={'primary'} onClick={() => onChatOpen(item)}>打开</Button>,
+                        <Badge count={item.unreadCount}><Button type={'primary'}
+                                                                onClick={() => onChatOpen(item)}>打开</Button></Badge>,
                     ]}>
                         <List.Item.Meta
                             title={<Title level={3}>{item.senderName}</Title>}
@@ -97,7 +104,9 @@ const MessageCenter = (props: Props) => {
                 }>
                     <List dataSource={messages} itemLayout="horizontal" renderItem={item =>
                         <List.Item key={item.id}>
-                            <List.Item.Meta title={item.byMe ? "我" : "对方"}/>
+                            <List.Item.Meta title={item.byMe ? "我" : "对方"}
+                                            avatar={<Avatar size={"small"}>{item.byMe ? "我" : chat?.senderName.at(0)}
+                                            </Avatar>}/>
                             {item.content}
                             <List.Item.Meta description={<div
                                 style={{display: "flex", justifyContent: "flex-end"}}>{item.createTime}</div>}/>

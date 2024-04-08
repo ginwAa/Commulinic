@@ -52,7 +52,6 @@ const LoginTab = () => {
         form.validateFields().then(() => {
             authLogin(user).then(res => {
                 const data = res?.data;
-                console.log(res);
                 if (data == null) {
                     messageApi.error("登录失败！" + res?.msg);
                     return;
@@ -67,7 +66,7 @@ const LoginTab = () => {
                 }
                 setTimeout(() => {
                     window.location.href = '/';
-                }, 1500);
+                }, 2000);
             }).catch(err => {
                 messageApi.error("登录失败" + err.data?.msg);
             });

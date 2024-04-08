@@ -63,7 +63,7 @@ const App = () => {
                     <Route path="/admin/register" element={<RegisterManagementPage/>} key="/admin/register"/>
                     <Route path="/admin/community" element={<CommunityManagementPage/>} key="/admin/community"/>
                     <Route path="/registration" element={<Registration/>} key="/registration"/>
-                    <Route path="/*" element={<NotFoundPage/>} key="404"/>
+                    <Route path="/*" element={<NotFoundPage/>} key="/404"/>
                 </Routes>
             </Router>
             <FloatButton.Group shape="square" style={{right: '1rem', bottom: '1rem',}}>

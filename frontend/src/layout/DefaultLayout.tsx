@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {CopyrightOutlined, MessageOutlined, UserOutlined} from "@ant-design/icons";
-import {Button, Layout, Menu, MenuProps, message, Space, theme} from "antd";
+import {Badge, Button, Layout, Menu, MenuProps, message, Space, theme} from "antd";
 import ButtonGroup from "antd/es/button/button-group";
 import {Link} from "react-router-dom";
 import {authLogout} from "../apis/authApis.ts";
@@ -9,6 +9,7 @@ import MessageCenter from "../components/MessageCenter.tsx";
 import Personality from "../components/Personality.tsx";
 import {doctorMe} from "../apis/doctorApis.ts";
 import {userMe} from "../apis/userApis.ts";
+import {chatList} from "../apis/chatAps.ts";
 
 const {Header, Footer} = Layout;
 type MenuItem = Required<MenuProps>['items'][number];
@@ -46,9 +47,25 @@ const DefaultLayout = (props: MainContentProps) => {
     const themeToken = theme.useToken();
     const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
     const [personalOpen, setPersonalOpen] = useState(false);
-    // const handleWindowResize = () => {
-    //     setWindowWidth(window.innerWidth);
-    // };
+    const [unread, setUnread] = useState(0);
+    useEffect(() => {
+        if (sessionStorage.getItem('token') !== null) {
+            const msgTask = setInterval(() => {
+                chatList().then(res => {
+                    let cnt = 0;
+                    res.data.forEach(chat => {
+                        cnt += chat.unreadCount !== undefined ? chat.unreadCount : 0;
+                    })
+                    setUnread(cnt);
+                }).catch(err => {
+                    messageApi.error("加载消息失败，请检查网络连接！" + err.message);
+                })
+            }, 2000);
+            return () => {
+                clearInterval(msgTask);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         if (sessionStorage.getItem('role') !== null && sessionStorage.getItem('role') !== '4') {
@@ -105,8 +122,10 @@ const DefaultLayout = (props: MainContentProps) => {
                             <Button type={'primary'}>登录 注册</Button>
                         </Link>
                         <div hidden={sessionStorage.getItem('token') === null} style={{width: 'max-content'}}>
-                            <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
-                                    onClick={() => setChatDrawerOpen(true)}/>
+                            <Badge count={unread}>
+                                <Button type={'text'} icon={<MessageOutlined/>} style={{border: 'none'}}
+                                        onClick={() => setChatDrawerOpen(true)}/>
+                            </Badge>
                             <Button type={'text'} icon={<UserOutlined/>} style={{border: 'none'}}
                                     onClick={() => setPersonalOpen(true)}/>
                             <Button type={'primary'} onClick={onLogout}>注销</Button>

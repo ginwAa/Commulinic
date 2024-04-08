@@ -29,15 +29,6 @@ instance.interceptors.response.use(
             return Promise.reject(res);
         }
     }, error => {
-        if (error?.response?.status === 401 && sessionStorage.getItem('token') !== null) {
-            sessionStorage.removeItem('token');
-            sessionStorage.removeItem('userId');
-            sessionStorage.removeItem('userName');
-            sessionStorage.removeItem('role');
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 1500);
-        }
         return Promise.reject(error);
     }
 )

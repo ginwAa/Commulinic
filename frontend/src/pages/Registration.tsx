@@ -216,6 +216,17 @@ const DoctorList = (props: { deptId: number }) => {
             message.error("操作失败！" + err.message);
         })
     }
+
+    const renderItenActions = (item: DoctorVO) => {
+        if (sessionStorage.getItem('token') !== null) {
+            return [
+                <Button type={'primary'} onClick={() => onRegisterWarn(item)}>预约</Button>,
+                <Button type={'primary'} onClick={() => onStartChat(item)}>线上问诊</Button>
+            ]
+        } else {
+            return [];
+        }
+    }
     return (
         <>
             {contextHolder}
@@ -236,10 +247,7 @@ const DoctorList = (props: { deptId: number }) => {
                 <Input placeholder={'搜索医生'} value={pageProps.name}
                        onChange={(e) => setPageProps({...pageProps, name: e.target.value})}/>
                 <List dataSource={data} loading={loading} itemLayout={'horizontal'} renderItem={item =>
-                    <List.Item key={item.id} actions={[
-                        <Button type={'primary'} onClick={() => onRegisterWarn(item)}>预约</Button>,
-                        <Button type={'primary'} onClick={() => onStartChat(item)}>线上问诊</Button>
-                    ]}>
+                    <List.Item key={item.id} actions={renderItenActions(item)}>
                         <List.Item.Meta
                             title={<Title level={2}>{item.name}</Title>}
                             description={

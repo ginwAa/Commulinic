@@ -6,21 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/AnnouncementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ApplicationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DepartmentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DoctorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/MedTipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/MedTipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/TipService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/MedTipServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/TipServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/MedTipBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MedTipBoard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyRegister.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyWork.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyWork.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layout/ManagementLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/ManagementLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/siderSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/siderSettings.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,15 +362,8 @@
       <workItem from="1711982684589" duration="1378000" />
       <workItem from="1712068731281" duration="7477000" />
       <workItem from="1712419483190" duration="1462000" />
-      <workItem from="1712503697459" duration="6918000" />
-    </task>
-    <task id="LOCAL-00001" summary="first build">
-      <option name="closed" value="true" />
-      <created>1702311465716</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1702311465716</updated>
+      <workItem from="1712503697459" duration="7053000" />
+      <workItem from="1712583340132" duration="7302000" />
     </task>
     <task id="LOCAL-00002" summary="router set">
       <option name="closed" value="true" />
@@ -753,7 +749,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712076693784</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="update(security): add security authorization for apis&#10;&#10;1.add security authorization for apis">
+      <option name="closed" value="true" />
+      <created>1712510750847</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1712510750847</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -773,7 +777,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="redis add" />
     <MESSAGE value="community management" />
     <MESSAGE value="register api" />
     <MESSAGE value="register management apis" />
@@ -798,7 +801,8 @@
     <MESSAGE value="update(application): add personal data modify&#10;&#10;1.add personal data modify" />
     <MESSAGE value="update(register): add doctor register read&#10;&#10;1.add doctor register read" />
     <MESSAGE value="update(chat): add new chat&#10;&#10;1. add new chat" />
-    <option name="LAST_COMMIT_MESSAGE" value="update(chat): add new chat&#10;&#10;1. add new chat" />
+    <MESSAGE value="update(security): add security authorization for apis&#10;&#10;1.add security authorization for apis" />
+    <option name="LAST_COMMIT_MESSAGE" value="update(security): add security authorization for apis&#10;&#10;1.add security authorization for apis" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

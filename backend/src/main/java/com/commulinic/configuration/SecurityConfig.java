@@ -24,12 +24,11 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 public class SecurityConfig {
     private static final String[] WHITE_LIST_URL = {
             "/medTip/**",
-            "/department/tree/**",
-            "department/getById/**",
-            "auth/**",
-            "/auth/register",
+            "/department/tree/register",
+            "/department/getById/**",
+            "/auth/**",
             "/announcement/page",
-//            "/**"
+            "/doctor/page/register"
     };
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final AuthenticationProvider authenticationProvider;

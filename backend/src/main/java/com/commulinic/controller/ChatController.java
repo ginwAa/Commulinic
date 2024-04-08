@@ -11,6 +11,7 @@ import jakarta.annotation.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class ChatController {
     @PostMapping("/read")
     @PreAuthorize("hasAuthority('normal:update')")
     public Result<Long> read(@RequestBody ChatReadDTO dto) {
-        Long updated = chatMessageService.read(dto.getChatId(), dto.getReadTime());
+        Long updated = chatMessageService.read(dto.getChatId(), LocalDateTime.now());
         Assert.isTrue(updated != null && updated > 0, "读取失败");
         return Result.success(updated);
     }
