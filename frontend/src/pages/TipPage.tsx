@@ -7,7 +7,7 @@ import {unixSecondToDate} from "../utils/time.ts";
 import Title from "antd/es/typography/Title";
 
 const Inner = () => {
-    const {message, notification, modal} = App.useApp();
+    const {message} = App.useApp();
     const [data, setData] = useState<MedTip[]>(EMPTY_PAGE.records);
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedData, setSelectedData] = useState<MedTip>(EMPTY_MED_TIP);

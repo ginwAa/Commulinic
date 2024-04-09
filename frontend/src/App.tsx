@@ -1,6 +1,5 @@
 import Index from "./pages/Index.tsx";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import About from "./pages/About.tsx";
 import User from "./pages/User.tsx";
 import {ColorPicker, ConfigProvider, FloatButton, theme} from "antd";
 import {FormatPainterOutlined, SkinOutlined} from "@ant-design/icons";
@@ -54,7 +53,7 @@ const App = () => {
                     <Route path="/" element={<Index/>} key="/index"/>
                     <Route path="/login" element={<Login/>} key="/login"/>
                     <Route path="/admin" element={<OverviewPage/>} key="/admin"/>
-                    <Route path="/about" element={<About/>} key="/about"/>
+                    {/*<Route path="/about" element={<About/>} key="/about"/>*/}
                     <Route path="/user" element={<User/>} key="/user"/>
                     <Route path="/news" element={<NoticePage/>} key="/news"/>
                     <Route path="/health" element={<TipPage/>} key="/health"/>

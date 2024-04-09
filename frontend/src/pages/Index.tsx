@@ -1,4 +1,4 @@
-import {Button, Card, Col, message, Row} from 'antd';
+import {Button, Card, Col, Row} from 'antd';
 import NoticeBoard from "../components/NoticeBoard.tsx";
 import MedTipBoard from "../components/MedTipBoard.tsx";
 import DefaultLayout from "../layout/DefaultLayout.tsx";
@@ -11,14 +11,12 @@ import {Link} from "react-router-dom";
 import MyWork from "../components/MyWork.tsx";
 
 const Inner = () => {
-    const [messageApi, contextHolder] = message.useMessage();
     const [openMyReg, setOpenMyReg] = useState(false);
     const [openMyApply, setOpenMyApply] = useState(false);
     const [openWork, setOpenWork] = useState(false);
     const openDate = new Date();
     return (
         <>
-            {contextHolder}
             <div style={{padding: 24}}>
                 <Card title={null} bordered={false} style={{paddingLeft: '4rem', paddingRight: '4rem'}}>
                     <Title level={2}>

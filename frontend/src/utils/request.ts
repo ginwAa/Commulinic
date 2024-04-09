@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:5173/api',
+    baseURL: '/api',
 });
 instance.defaults.timeout = 5000;
 

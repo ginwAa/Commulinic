@@ -5,6 +5,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import java.io.IOException;
 
 
 @Component
+@Slf4j
 public class JwtAuthFilter extends OncePerRequestFilter {
     @Resource
     private JwtProvider jwtProvider;
@@ -31,6 +33,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        log.info("doFilterAuth");
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String phone;
         if (header != null && header.startsWith("Bearer ")) {

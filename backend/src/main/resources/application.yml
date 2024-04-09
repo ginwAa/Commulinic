@@ -21,8 +21,8 @@ logging:
     com:
       commulinic:
         mapper: debug
-        service: info
-        controller: info
+        service: debug
+        controller: debug
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:

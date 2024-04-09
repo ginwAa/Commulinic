@@ -28,7 +28,7 @@ interface Props {
 }
 
 const Inner = (props: Props) => {
-    const {message, notification, modal} = App.useApp();
+    const {message, modal} = App.useApp();
     const [data, setData] = useState<Application[]>([]);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);

@@ -41,14 +41,15 @@ export const ModalWarning = (props: DeleteInfo) => {
 
 interface formProps<T> {
     value: T;
-    onChange: (value: T) => void;
+    onChange: (value: T | null) => void;
 }
 
-export const MyDatePicker = ({value, onChange}: formProps<number>, beforeDisabled: boolean) => {
+export const MyDatePicker = ({value, onChange}: formProps<number>) => {
+    const beforeDisabled = true;
     const [number, setNumber] = useState<number>(value);
-    const onChangeHandler = (value: Dayjs) => {
-        setNumber(value.unix());
-        onChange(value.unix());
+    const onChangeHandler = (value: Dayjs | null) => {
+        setNumber(value ? value.unix() : 0);
+        onChange(value ? value.unix() : 0);
     }
     const beforeTodayDate: RangePickerProps['disabledDate'] = (current) => {
         // Can not select days before today and today
@@ -66,9 +67,9 @@ export const MyDatePicker = ({value, onChange}: formProps<number>, beforeDisable
 
 export const PriceInput = ({value, onChange}: formProps<number>) => {
     const [number, setNumber] = useState<number>(value);
-    const onChangeHandler = (value: number) => {
-        setNumber(value * 100);
-        onChange(value * 100);
+    const onChangeHandler = (value: number | null) => {
+        setNumber(value ? value * 100 : 0);
+        onChange(value ? value * 100 : 0);
     }
     return (
         <InputNumber

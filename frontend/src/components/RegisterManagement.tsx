@@ -51,10 +51,12 @@ const EditModal = (props: EditProps) => {
                       size={"small"} layout={'horizontal'}>
                     <Space direction={"horizontal"}>
                         <Form.Item label="日期" name="date" rules={[{required: true, message: '请输入日期'}]}>
-                            <MyDatePicker beforeDisabled={true}/>
+                            <MyDatePicker onChange={() => {
+                            }} value={0}/>
                         </Form.Item>
                         <Form.Item label="金额" name="price" rules={[{required: true, message: '请输入金额'}]}>
-                            <PriceInput/>
+                            <PriceInput onChange={() => {
+                            }} value={0}/>
                         </Form.Item>
                     </Space>
                     <Space direction={'horizontal'}>

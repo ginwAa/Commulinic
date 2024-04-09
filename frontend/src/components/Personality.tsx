@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Inner = (props: Props) => {
-    const {message, notification, modal} = App.useApp();
+    const {message, modal} = App.useApp();
     const [data, setData] = useState<User>();
     const [docData, setDocData] = useState<DoctorVO>();
     const [updated, setUpdated] = useState(false);
