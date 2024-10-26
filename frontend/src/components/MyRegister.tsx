@@ -68,7 +68,7 @@ const MyRegister = (props: Props) => {
 
     const renderRegisterActions = (item: Register) => {
         const ret: React.ReactNode[] = [];
-        if (item.status !== 1 && item.status !== 2 && item.status !== 8) {
+        if (item.status !== 4 && item.status !== 2 && item.status !== 8) {
             ret.push(<Button onClick={() => onPay(item)} type={'primary'}>支付</Button>);
         }
         if (item.status !== 2 && item.status !== 8 && item.status !== 4) {

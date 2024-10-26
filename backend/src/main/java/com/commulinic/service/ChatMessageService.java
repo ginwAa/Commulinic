@@ -6,6 +6,7 @@ import com.commulinic.entity.ChatMessage;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 public interface ChatMessageService {
     Long add(ChatMessage chatMessage);
 

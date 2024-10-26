@@ -34,7 +34,6 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     @Transactional
     public Long update(ChatMessage chatMessage) {
         Long updated = chatMessageMapper.update(chatMessage);
-        Assert.isTrue(updated != null && updated > 0, "更新失败");
         return updated;
     }
 
@@ -42,7 +41,6 @@ public class ChatMessageServiceImpl implements ChatMessageService {
     @Transactional
     public Long read(Long chatId, LocalDateTime time) {
         Long updated = chatMessageMapper.readByChat(chatId, time);
-        Assert.isTrue(updated != null && updated > 0, "更新信息状态失败");
         return updated;
     }
 

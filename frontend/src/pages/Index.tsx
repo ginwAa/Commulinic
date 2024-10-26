@@ -21,7 +21,6 @@ const Inner = () => {
                 <Card title={null} bordered={false} style={{paddingLeft: '4rem', paddingRight: '4rem'}}>
                     <Title level={2}>
                         {openDate.getHours() < 12 ? '上午' : '下午'}好，
-                        {sessionStorage.getItem('userName') !== null ? sessionStorage.getItem('userName') : '游客'}，
                         今天是 {unixSecondToDate(Date.now() / 1000)}。
                     </Title>
                     {
@@ -79,7 +78,7 @@ const Inner = () => {
 
 const Index = () => {
     return (
-        <DefaultLayout component={Inner} tabKey={1} breadcrumbItems={[]}/>
+        <DefaultLayout component={Inner} tabKey={1} breadcrumbItems={[]} chatOpen={0}/>
     )
 };
 export default Index;

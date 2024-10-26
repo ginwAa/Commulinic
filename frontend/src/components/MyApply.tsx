@@ -1,8 +1,8 @@
 import {App, Button, Drawer, Input, List, TreeSelect} from "antd";
 import Title from "antd/es/typography/Title";
 import {unixSecondToDate} from "../utils/time.ts";
-import {Application, Department, DepartmentTreeNode, EMPTY_APPLICATION, EMPTY_DEPARTMENT} from "../utils/entity.ts";
-import {useEffect, useState} from "react";
+import {Application, Department, DepartmentTreeNode, EMPTY_APPLICATION, EMPTY_DEPARTMENT,} from "../utils/entity.ts";
+import React, {useEffect, useState} from "react";
 import {applicationAdd, applicationCancel, applicationPage} from "../apis/applicationApis.ts";
 import {departmentTree} from "../apis/departmentApis.ts";
 import {DataNode} from "antd/es/tree";
@@ -13,7 +13,6 @@ const transform = (data: DepartmentTreeNode[]): DataNode[] => {
             key: item.value,
             title: item.title,
             value: item.value,
-            type: item.type == 0 ? '医院' : item.type == 1 ? '医辅部门' : '医疗部门',
             parentId: item.parentId,
             description: item.description,
             children: item.children ? transform(item.children) : [],
@@ -140,6 +139,15 @@ const Inner = (props: Props) => {
         }
     }
 
+    const renderWorkActions = (item: Application) => {
+        const ret: React.ReactNode[] = [];
+        if (item.status !== 2 && item.status !== 4 && item.status !== 16) {
+            ret.push(<Button onClick={() => onAbort(item)}
+                             type={'primary'}>撤销</Button>);
+        }
+        return ret;
+    }
+
     return (
         <>
             <Drawer open={props.open} placement={"right"} closable={true} title={"我的坐诊申请"}
@@ -164,13 +172,10 @@ const Inner = (props: Props) => {
                 <List dataSource={data} loading={loading} itemLayout="horizontal" style={{height: '100%'}}
                       pagination={{pageSize: pageSize, current: page, total: total, onChange: setPage, size: 'small'}}
                       renderItem={(item) =>
-                          <List.Item key={item.id} actions={[
-                              <Button hidden={item.status !== 2 && item.status !== 3} onClick={() => onAbort(item)}
-                                      type={'primary'}>撤销</Button>,
-                          ]}>
+                          <List.Item key={item.id} actions={renderWorkActions(item)}>
                               <List.Item.Meta
                                   title={<Title
-                                      level={4}>{item.status === 2 ? "已通过" : item.status == 3 ? "已拒绝" : item.status === 16 ? "已撤销" : "审核中"}</Title>}
+                                      level={4}>{item.status === 2 ? "已通过" : item.status == 4 ? "已拒绝" : item.status === 16 ? "已撤销" : "审核中"}</Title>}
                                   description={
                                       <div style={{width: 'max-content'}}>
                                           申请理由：{item.description}

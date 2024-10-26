@@ -33,6 +33,6 @@
     </select>
 
     <update id="updateDepartment">
-        update application set department = #{name} where department_id = #{id} and status = ${@com.commulinic.constant.ApplicationConstant.STATUS_WAIT}
+        update application set department = #{name} where department_id = #{id}
     </update>
 </mapper>

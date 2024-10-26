@@ -81,7 +81,7 @@ const Inner = () => {
 const TipPage = () => {
     return (
         <App>
-            <DefaultLayout component={Inner} tabKey={4} breadcrumbItems={[]}/>
+            <DefaultLayout component={Inner} tabKey={4} breadcrumbItems={[]} chatOpen={0}/>
         </App>
     )
 }

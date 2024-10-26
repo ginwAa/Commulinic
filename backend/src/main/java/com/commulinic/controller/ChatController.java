@@ -45,7 +45,6 @@ public class ChatController {
     @PreAuthorize("hasAuthority('normal:update')")
     public Result<Long> read(@RequestBody ChatReadDTO dto) {
         Long updated = chatMessageService.read(dto.getChatId(), LocalDateTime.now());
-        Assert.isTrue(updated != null && updated > 0, "读取失败");
         return Result.success(updated);
     }
 

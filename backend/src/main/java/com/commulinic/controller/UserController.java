@@ -25,7 +25,7 @@ public class UserController {
         return Result.success(result);
     }
 
-    @PreAuthorize("hasAuthority('admin:update')")
+    @PreAuthorize("hasAuthority('normal:update')")
     @PostMapping("/update")
     public Result<Long> update(@RequestBody User user) {
         Long updated = userService.update(user);

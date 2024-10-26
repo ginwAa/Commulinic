@@ -4,7 +4,7 @@ import {EMPTY_REGISTER, Register} from "../utils/entity.ts";
 import {registerPage, registerUpdate} from "../apis/registerApis.ts";
 import {SorterResult} from "antd/es/table/interface";
 import {SearchOutlined} from "@ant-design/icons";
-import {FilterSearch, MyDatePicker, PriceInput} from "./TableComponents.tsx";
+import {FilterSearch, MyDatePicker} from "./TableComponents.tsx";
 import {unixSecondToDate} from "../utils/time.ts";
 
 interface EditProps {
@@ -54,10 +54,10 @@ const EditModal = (props: EditProps) => {
                             <MyDatePicker onChange={() => {
                             }} value={0}/>
                         </Form.Item>
-                        <Form.Item label="金额" name="price" rules={[{required: true, message: '请输入金额'}]}>
-                            <PriceInput onChange={() => {
-                            }} value={0}/>
-                        </Form.Item>
+                        {/*<Form.Item label="金额" name="price" rules={[{required: true, message: '请输入金额'}]}>*/}
+                        {/*    <PriceInput onChange={() => {*/}
+                        {/*    }} value={0}/>*/}
+                        {/*</Form.Item>*/}
                     </Space>
                     <Space direction={'horizontal'}>
                         <Form.Item label="预约时段" name="section" rules={[{required: true, message: '请输入时段'}]}>
@@ -190,8 +190,8 @@ const RegisterManagement = () => {
                               }/>
                 <Table.Column title="创建时间" dataIndex="createTime" key="createTime" width={'10rem'}
                               render={unixSecondToDate}/>
-                <Table.Column title="金额" dataIndex="price" key="price" sorter={true} width={'5rem'}
-                              render={(price: number) => price / 100}/>
+                {/*<Table.Column title="金额" dataIndex="price" key="price" sorter={true} width={'5rem'}*/}
+                {/*              render={(price: number) => price / 100}/>*/}
                 <Table.Column title="预约日期" dataIndex="date" key="date" width={'8rem'} render={unixSecondToDate}/>
             </Table>
             <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow}

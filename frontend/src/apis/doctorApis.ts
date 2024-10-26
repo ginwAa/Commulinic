@@ -18,6 +18,7 @@ export const doctorPage = async (page: number, pageSize: number, doctor: DoctorV
 }
 
 export const doctorUpdate = async (doctor: Doctor) => {
+    console.log("update api", doctor);
     return post<number>('/doctor/update', doctor);
 }
 

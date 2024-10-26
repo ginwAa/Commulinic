@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long add(User user) {
+
         return userMapper.add(user);
     }
 
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
                 updated = registerMapper.updateDoctorName(doctor.getId(), user.getName());
 //                Assert.isTrue(updated != null && updated > 0, "操作失败4");
             }
-            updated = chatMapper.updateByUsername(user.getUsername(), user.getId());
+            updated = chatMapper.updateByUsername(user.getName(), user.getId());
 //            Assert.isTrue(updated != null && updated > 0, "操作失败5");
         }
         return updated;

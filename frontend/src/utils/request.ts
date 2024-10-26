@@ -70,7 +70,7 @@ export const get = async <T>(url: string, params?: Record<string, any>): Promise
 
 export const post = async <T>(url: string, params?: Record<string, any>): Promise<ApiResponse<T>> => {
     return instance.post<Result<T>>(url, params).then(res => {
-        if (res?.data?.code && res.data.code >= 500) {
+        if (res?.data?.code && res.data.code >= 500 || res.data.code === 0) {
             return Promise.reject({
                 data: res.data.data,
                 status: res.data.code,

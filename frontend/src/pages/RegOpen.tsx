@@ -25,7 +25,7 @@ import {RangePickerProps} from "antd/es/date-picker";
 import {registerAdd} from "../apis/registerApis.ts";
 import {ModalWarning} from "../components/TableComponents.tsx";
 import {chatAddChat} from "../apis/chatAps.ts";
-import MessageCenter from "../components/MessageCenter.tsx";
+import {useNavigate} from "react-router-dom";
 
 const transform = (data: DepartmentTreeNode[]): DataNode[] => {
     return data.map((item) => {
@@ -137,8 +137,8 @@ const DoctorList = (props: { deptId: number }) => {
     const [date, setDate] = useState<number>(new Date().getTime() / 1000);
     const [tab, setTab] = useState<number>(1);
     const [page, setPage] = useState<number>(1);
-    const [chatOpen, setChatOpen] = useState<boolean>(false);
-    const pageSize = 10;
+    const pageSize = 10
+    const navi = useNavigate();
     const [total, setTotal] = useState<number>(0);
     const [data, setData] = useState<DoctorVO[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -166,7 +166,7 @@ const DoctorList = (props: { deptId: number }) => {
     }
 
     const onRegister = () => {
-        console.log("时间" + date + "现在：" + new Date().getTime() / 1000);
+        console.log("预约医生：" + doctor.name);
         const registerForm: Register = {
             doctorId: doctor.userId,
             doctorName: doctor.name,
@@ -191,6 +191,7 @@ const DoctorList = (props: { deptId: number }) => {
     };
 
     useEffect(() => {
+        console.log("dept id: " + props.deptId);
         setLoading(true);
         doctorPageReg(page, pageSize, {...pageProps, departmentId: props.deptId, beginDate: date}, true)
             .then(res => {
@@ -213,8 +214,7 @@ const DoctorList = (props: { deptId: number }) => {
         }
         chatAddChat(chat).then(() => {
             // window.location.href = window.location.origin + '/registration/1';
-            // navi('/regOpen', );
-            setChatOpen(true);
+            navi('/regOpen');
         }).catch(err => {
             message.error("操作失败！" + err.message);
         })
@@ -267,19 +267,14 @@ const DoctorList = (props: { deptId: number }) => {
                               open={warnOpen} actionName={'预约'} onCancel={() => {
                     setWarnOpen(false)
                 }}/>
-                <MessageCenter open={chatOpen} setOpen={setChatOpen}/>
             </div>
         </>
     )
 }
 
-interface Props {
-    open: number
-}
-
-const Registration = (props: Props) => {
+const RegOpen = () => {
     return (
-        <DefaultLayout component={Inner} tabKey={6} breadcrumbItems={[]} chatOpen={props.open}/>
+        <DefaultLayout component={Inner} tabKey={6} breadcrumbItems={[]} chatOpen={1}/>
     )
 }
-export default Registration;
+export default RegOpen;

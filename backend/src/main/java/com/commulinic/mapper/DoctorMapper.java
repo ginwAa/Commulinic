@@ -16,9 +16,9 @@ import java.util.List;
 public interface DoctorMapper {
     List<DoctorVO> page(PageQueryDTO<DoctorVO> dto);
 
-    List<DoctorVO> pageWithStock(PageQueryDTO<DoctorRegisterDTO> dto);
+    List<DoctorVO> pageWithStock(PageQueryDTO<DoctorRegisterDTO> dto, Integer aSection);
 
-    Long countWithStock(DoctorRegisterDTO dto);
+    Long countWithStock(DoctorRegisterDTO dto, Integer aSection);
 
     Long update(Doctor doctor);
 
@@ -31,9 +31,10 @@ public interface DoctorMapper {
     @Select("select * from doctor where id = #{id}")
     Doctor getById(Long id);
 
+
     @Select("select * from doctor where user_id = #{id}")
     Doctor getByUserId(Long id);
 
-    @Update("update doctor set department = #{department} where department_id = #{id}")
+    @Update("update doctor set department = #{name} where department_id = #{id}")
     Long updateDepartment(Department department);
 }

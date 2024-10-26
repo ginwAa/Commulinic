@@ -18,7 +18,7 @@ const MyWork = (props: Props) => {
     const [updated, setUpdated] = useState(0);
     const pageSize = 10;
     const [total, setTotal] = useState(0);
-    const [tab, setTab] = useState(0);
+    const [tab, setTab] = useState(1);
     const [regStatus, setRegStatus] = useState(2);
     useEffect(() => {
         setLoading(true);
@@ -69,7 +69,7 @@ const MyWork = (props: Props) => {
             <Drawer open={props.open} placement={"right"} closable={true} title={"接诊管理"}
                     onClose={() => props.setOpen(false)} style={{height: '100%'}}>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Segmented options={[{label: "上午", value: 0}, {label: "下午", value: 1}]}
+                    <Segmented options={[{label: "上午", value: 1}, {label: "下午", value: 2}]}
                                onChange={value => setTab(Number(value))} value={tab}/>
                     <Segmented options={[{label: "未处理", value: 2}, {label: "已处理", value: 4}]}
                                onChange={value => setRegStatus(Number(value))} value={regStatus}/>
@@ -89,7 +89,7 @@ const MyWork = (props: Props) => {
                               {
                                   item.status === 1 ? "未支付" :
                                       item.status === 2 ? "未处理" :
-                                          item.status === 3 ? "已完成" : "已取消"
+                                          item.status === 4 ? "已完成" : "已取消"
                               }
                           </List.Item>
                       }>

@@ -96,7 +96,7 @@ export interface DoctorVO {
     amStd?: number,
     pmStd?: number,
     stock?: number,
-    desc: string,
+    description: string,
 }
 
 export const EMPTY_DOCTOR: Doctor = {
@@ -114,7 +114,7 @@ export const EMPTY_DOCTOR_VO: DoctorVO = {
     gender: 0,
     phone: '',
     email: '',
-    desc: '',
+    description: '',
 }
 
 export interface DoctorRegisterDTO {

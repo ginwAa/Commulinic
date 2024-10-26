@@ -32,6 +32,7 @@ const EditModal = (props: EditProps) => {
     const [form] = Form.useForm<User>();
 
     const closeEditModal = (changed: boolean) => {
+        console.log("里面 ", props.record);
         if (!changed) {
             props.setEditOpen(false);
             return;
@@ -154,6 +155,7 @@ const UserManagement = () => {
         onChange: (selectedRowKeys: React.Key[], selectedRows: User[]) => {
             setSelectedKey(selectedRowKeys[0] as number);
             setSelectedRow(selectedRows[0]);
+            console.log("row ", selectedRows[0]);
         },
     };
 
@@ -251,8 +253,12 @@ const UserManagement = () => {
                                       (value: string) => setPageProps({...pageProps, email: value})
                               })}/>
             </Table>
-            <EditModal editOpen={editOpen} setEditOpen={setEditOpen} record={selectedRow} adding={adding}
-                       onSuccess={() => setEditSuccess(!editSuccess)}/>
+            {
+                editOpen ? <EditModal editOpen={true} setEditOpen={setEditOpen} record={selectedRow} adding={adding}
+                                      onSuccess={() => setEditSuccess(!editSuccess)}/>
+                    : <></>
+            }
+
         </>
     );
 }

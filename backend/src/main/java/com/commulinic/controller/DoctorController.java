@@ -58,7 +58,7 @@ public class DoctorController {
     @PreAuthorize("hasAuthority('doctor:read')")
     public Result<DoctorVO> me() {
         Assert.isTrue(ObjectUtil.isNotEmpty(SecurityUtil.getUserId()), "用户未登录");
-        DoctorVO doctor = doctorService.getById(SecurityUtil.getUserId());
+        DoctorVO doctor = doctorService.getByUserId(SecurityUtil.getUserId());
         return Result.success(doctor);
     }
 }

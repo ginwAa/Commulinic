@@ -52,8 +52,12 @@ const Inner = (props: Props) => {
                     })
                     if (sessionStorage.getItem('role') !== '4') {
                         docForm.validateFields().then(async values1 => {
-                            values1.id = docData?.id;
-                            await doctorUpdate(values1).then(() => {
+                            const values2 = {
+                                id: docData?.id,
+                                ...values1
+                            };
+                            console.log(values2);
+                            await doctorUpdate(values2).then(() => {
                                 setUpdated(!updated);
                             }).catch(err => {
                                 message.error(err.message);
@@ -106,14 +110,6 @@ const Inner = (props: Props) => {
                             <Form.Item label="就诊室" name="position"
                                        rules={[{required: true, message: '请输入就诊室'}]}>
                                 <Input/>
-                            </Form.Item>
-                            <Form.Item label="上午最大接诊数" name="amStd"
-                                       rules={[{required: true, message: '请输入上午最大接诊数'}]}>
-                                <InputNumber/>
-                            </Form.Item>
-                            <Form.Item label="下午最大接诊数" name="pmStd"
-                                       rules={[{required: true, message: '请输入下午最大接诊数'}]}>
-                                <InputNumber/>
                             </Form.Item>
                             <Form.Item label="个人简介" name="description"
                                        rules={[{required: true, message: '请输入个人简介'}]}>

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
+
 @Mapper
 public interface ChatMapper {
     @Insert("insert into chat (sender_id, receiver_id, sender_name, rev_id) " +

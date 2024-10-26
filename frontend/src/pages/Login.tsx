@@ -4,7 +4,7 @@ import {AlertOutlined, HomeOutlined, LockOutlined, MailOutlined, PhoneOutlined, 
 import {User} from "../utils/entity.ts";
 import {Content, Header} from "antd/es/layout/layout";
 import {authLogin, authRegister} from "../apis/authApis.ts";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 interface RegisterForm extends User {
     agreement: boolean;
@@ -57,9 +57,9 @@ const LoginTab = () => {
                     return;
                 }
                 messageApi.success("登录成功");
+                sessionStorage.setItem('phone', data.userName);
                 sessionStorage.setItem('token', data.token);
                 sessionStorage.setItem('userId', data.userId.toString());
-                sessionStorage.setItem('phone', data.userName);
                 sessionStorage.setItem('role', data.role.toString());
                 if (user.remember) {
                     localStorage.setItem('REMEMBERED_USER_PHONE', data.userName);
@@ -101,6 +101,7 @@ const LoginTab = () => {
 const RegisterTab = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [form] = Form.useForm<RegisterForm>();
+    const navi = useNavigate();
 
     const onRegisterClick = () => {
         const formData: RegisterForm = form.getFieldsValue();
@@ -109,7 +110,8 @@ const RegisterTab = () => {
             authRegister(user).then(() => {
                 messageApi.success("注册成功");
                 setTimeout(() => {
-                    window.location.href = '/login';
+                    // window.location.href = '/login';
+                    navi('/login');
                 }, 1500);
             }).catch(err => {
                 messageApi.error("注册失败" + err.message);

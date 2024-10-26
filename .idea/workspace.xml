@@ -4,24 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="update(chat): add chat unread tip&#10;&#10;1.add chat unread tip">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/CorsConfig.java" afterDir="false" />
+    <list default="true" id="c302e652-6c2e-4bfc-812a-4178a883647c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/RegOpen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/filter/JwtAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ChatMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/ChatMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DoctorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/DoctorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/MedTipMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/mapper/MedTipMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ChatMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/ChatMessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/ChatMessageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/DoctorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/RegisterServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/RegisterServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/commulinic/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/AppliactionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/mapper/DoctorMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/mapper/DoctorMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/apis/doctorApis.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/apis/doctorApis.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DepartmentManagement.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/DoctorComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DoctorComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MessageCenter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/MyApply.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyApply.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyRegister.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyRegister.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/MyWork.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/MyWork.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Personality.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Personality.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/RegisterManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegisterManagement.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/TableComponents.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TableComponents.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/About.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/About.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/UserManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layout/DefaultLayout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/NoticePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/NoticePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Registration.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/TipPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/TipPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/utils/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +98,7 @@
     <option name="skipTests" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -115,7 +132,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
     &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CodeFields/Code_Java/Commulinic/Commulinic/backend/src/main/resources/mapper&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CodeFields/Code_Java/fire_mall_web-master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -128,7 +145,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;b43fdd98b1fd705ae4c3a10cf25aad8a&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\CodeFields\\Code_Java\\Commulinic\\Commulinic\\frontend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -364,15 +381,27 @@
       <workItem from="1712583340132" duration="11544000" />
       <workItem from="1712596188382" duration="445000" />
       <workItem from="1712598850457" duration="4270000" />
-      <workItem from="1712675944111" duration="10402000" />
-    </task>
-    <task id="LOCAL-00003" summary="edit README.md">
-      <option name="closed" value="true" />
-      <created>1702393845693</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1702393845693</updated>
+      <workItem from="1712675944111" duration="11072000" />
+      <workItem from="1713012032099" duration="1079000" />
+      <workItem from="1713110336703" duration="137000" />
+      <workItem from="1713284805629" duration="2314000" />
+      <workItem from="1713371169300" duration="524000" />
+      <workItem from="1713372105954" duration="528000" />
+      <workItem from="1713372713008" duration="328000" />
+      <workItem from="1713373154967" duration="23000" />
+      <workItem from="1713373456133" duration="601000" />
+      <workItem from="1713374083986" duration="1542000" />
+      <workItem from="1713375954824" duration="990000" />
+      <workItem from="1713377325453" duration="2721000" />
+      <workItem from="1713448880600" duration="8013000" />
+      <workItem from="1713599873871" duration="6033000" />
+      <workItem from="1713643129467" duration="24278000" />
+      <workItem from="1713720193051" duration="1979000" />
+      <workItem from="1713798493825" duration="2980000" />
+      <workItem from="1714136801354" duration="13000" />
+      <workItem from="1714834716325" duration="317000" />
+      <workItem from="1716570494018" duration="136000" />
+      <workItem from="1729966088354" duration="844000" />
     </task>
     <task id="LOCAL-00004" summary="theme &amp; responsive layout">
       <option name="closed" value="true" />
@@ -758,7 +787,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712590756901</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="update(startup): modify startup config&#10;&#10;1.modify startup config">
+      <option name="closed" value="true" />
+      <created>1712688234919</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1712688234919</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -778,7 +815,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="register api" />
     <MESSAGE value="register management apis" />
     <MESSAGE value="add security" />
     <MESSAGE value="bug fix" />
@@ -803,7 +839,8 @@
     <MESSAGE value="update(chat): add new chat&#10;&#10;1. add new chat" />
     <MESSAGE value="update(security): add security authorization for apis&#10;&#10;1.add security authorization for apis" />
     <MESSAGE value="update(chat): add chat unread tip&#10;&#10;1.add chat unread tip" />
-    <option name="LAST_COMMIT_MESSAGE" value="update(chat): add chat unread tip&#10;&#10;1.add chat unread tip" />
+    <MESSAGE value="update(startup): modify startup config&#10;&#10;1.modify startup config" />
+    <option name="LAST_COMMIT_MESSAGE" value="update(startup): modify startup config&#10;&#10;1.modify startup config" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

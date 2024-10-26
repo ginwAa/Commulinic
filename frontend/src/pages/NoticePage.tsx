@@ -81,7 +81,7 @@ const Inner = () => {
 const NoticePage = () => {
     return (
         <App>
-            <DefaultLayout component={Inner} tabKey={3} breadcrumbItems={[]}/>
+            <DefaultLayout component={Inner} tabKey={3} breadcrumbItems={[]} chatOpen={0}/>
         </App>
     )
 }

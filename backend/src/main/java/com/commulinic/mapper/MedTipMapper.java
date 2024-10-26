@@ -12,7 +12,7 @@ import java.util.List;
 public interface MedTipMapper {
     List<MedTip> page(PageQueryDTO<MedTip> dto);
 
-    @Insert("insert into medical_tip (content, title, updated_at) values (#{content}, #{title}, #{updated_at} )")
+    @Insert("insert into medical_tip (content, title, updated_at) values (#{content}, #{title}, #{updatedAt} )")
     Long add(MedTip tip);
 
     Long update(MedTip tip);

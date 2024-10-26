@@ -11,19 +11,22 @@ import com.commulinic.entity.vo.PageVO;
 import com.commulinic.mapper.DoctorMapper;
 import com.commulinic.mapper.UserMapper;
 import com.commulinic.service.DoctorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.commulinic.entity.Department.ROOT_DEPT_ID;
 import static com.commulinic.entity.Doctor.DOCTOR_STATUS_ACTIVE;
-import static com.commulinic.entity.Register.SECTION_MORNING;
 import static com.commulinic.entity.User.ROLE_DOCTOR;
 
 @Service
+@Slf4j
 public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorMapper doctorMapper;
@@ -35,12 +38,15 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorMapper.getByUserId(id);
         User user = userMapper.getById(doctor.getUserId());
         DoctorVO vo = new DoctorVO();
-        BeanUtils.copyProperties(doctor, vo);
         BeanUtils.copyProperties(user, vo);
+        BeanUtils.copyProperties(doctor, vo);
         return vo;
     }
 
     public PageVO<DoctorVO> page(PageQueryDTO<DoctorVO> dto) {
+        if (dto.getData().getDepartmentId().equals(ROOT_DEPT_ID)) {
+            dto.getData().setDepartmentId(null);
+        }
         List<DoctorVO> page = doctorMapper.page(dto);
         PageVO<DoctorVO> result = new PageVO<DoctorVO>();
         result.setRecords(page);
@@ -74,7 +80,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     public Long add(Doctor doctor) {
         Long added = doctorMapper.add(doctor);
-        Assert.isTrue(added != null && added > 0, "操作失败");
         return added;
     }
 
@@ -85,17 +90,15 @@ public class DoctorServiceImpl implements DoctorService {
         }
         dto.getData().setStatus(DOCTOR_STATUS_ACTIVE);
         dto.getData().setRole(ROLE_DOCTOR);
+        dto.getData().setBeginDate((int) LocalDateTime.ofEpochSecond(dto.getData().getBeginDate(), 0, ZoneOffset.UTC).toLocalDate().atStartOfDay().toEpochSecond(ZoneOffset.UTC));
         dto.getData().setEndDate(dto.getData().getBeginDate() + 86400);
-        List<DoctorVO> page = doctorMapper.pageWithStock(dto);
+        List<DoctorVO> page = doctorMapper.pageWithStock(dto, dto.getData().getSection());
         PageVO<DoctorVO> result = new PageVO<DoctorVO>();
         result.setRecords(page);
         if (dto.getCount()) {
-            result.setTotal(doctorMapper.countWithStock(dto.getData()));
+            result.setTotal(doctorMapper.countWithStock(dto.getData(), dto.getData().getSection()));
         }
-        List<DoctorVO> vos = result.getRecords().stream()
-                .peek(v -> v.setStock(
-                        (v.getStock().equals(SECTION_MORNING) ? v.getAmStd() : v.getPmStd()) - v.getStock())
-                ).collect(Collectors.toList());
+        List<DoctorVO> vos = new ArrayList<>(result.getRecords());
         result.setRecords(vos);
         return result;
     }

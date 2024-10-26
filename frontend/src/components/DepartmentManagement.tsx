@@ -7,7 +7,6 @@ import {
     Input,
     message,
     Modal,
-    Select,
     Space,
     Spin,
     TreeSelect
@@ -39,7 +38,7 @@ const transform = (data: DepartmentTreeNode[]): DataNode[] => {
             key: item.value,
             title: item.title,
             value: item.value,
-            type: item.type == 0 ? '医院' : item.type == 1 ? '医辅部门' : '医疗部门',
+            // type: item.type == 0 ? '医院' : item.type == 1 ? '医辅部门' : '医疗部门',
             parentId: item.parentId,
             description: item.description,
             children: item.children ? transform(item.children) : [],
@@ -105,9 +104,9 @@ const EditModal = (props: EditProps) => {
                     <Form.Item name="description" label="部门描述">
                         <Input.TextArea/>
                     </Form.Item>
-                    <Form.Item name="type" label="部门类型" hidden={props.record.type === 0}>
-                        <Select options={[{value: 1, label: '医辅部门'}, {value: 2, label: '医疗部门'}]}/>
-                    </Form.Item>
+                    {/*<Form.Item name="type" label="部门类型" hidden={props.record.type === 0}>*/}
+                    {/*    <Select options={[{value: 1, label: '医辅部门'}, {value: 2, label: '医疗部门'}]}/>*/}
+                    {/*</Form.Item>*/}
                 </Form>
             </Modal>
         </>
@@ -153,11 +152,6 @@ const DepartmentManagement = () => {
                     key: '2',
                     label: '部门描述',
                     children: node.description ? node.description : '',
-                },
-                {
-                    key: '3',
-                    label: '部门类型',
-                    children: node.type === 1 ? '医辅部门' : '医疗部门',
                 }
             ]);
             setSelectedNode(node);

@@ -5,7 +5,6 @@ import React, {useEffect, useState} from "react";
 import {FormOutlined, SearchOutlined} from "@ant-design/icons";
 import {FilterSearch} from "./TableComponents.tsx";
 import {DataNode} from "antd/es/tree";
-import {unixSecondToYear} from "../utils/time.ts";
 import {FilterValue, SorterResult, TableCurrentDataSource} from "antd/es/table/interface";
 
 const fetchData = doctorPage;
@@ -162,8 +161,8 @@ const DoctorComponent = (props: Props) => {
                                       {text: '休假', value: 1},
                                   ]
                               }/>
-                <Table.Column title="工龄" dataIndex="seniority" key="seniority" sorter={true} width={'5rem'}
-                              render={(seniority: number) => unixSecondToYear(Date.now() / 1000 - seniority) + '年'}/>
+                {/*<Table.Column title="工龄" dataIndex="seniority" key="seniority" sorter={true} width={'5rem'}*/}
+                {/*              render={(seniority: number) => unixSecondToYear(Date.now() / 1000 - seniority) + '年'}/>*/}
                 <Table.Column title="科室" dataIndex="position" key="position" width={'10rem'}/>
                 <Table.Column title="手机号" dataIndex="phone" key="phone" filterIcon={<SearchOutlined/>} width={'8rem'}
                               filterDropdown={FilterSearch({

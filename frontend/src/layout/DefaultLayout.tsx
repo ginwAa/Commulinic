@@ -39,13 +39,14 @@ interface MainContentProps {
     breadcrumbItems: {
         title: string;
     }[];
+    chatOpen: number;
 }
 
 const DefaultLayout = (props: MainContentProps) => {
     const [messageApi, contextHolder] = message.useMessage();
     // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const themeToken = theme.useToken();
-    const [chatDrawerOpen, setChatDrawerOpen] = useState(false);
+    const [chatDrawerOpen, setChatDrawerOpen] = useState<boolean>(props.chatOpen === 1);
     const [personalOpen, setPersonalOpen] = useState(false);
     const [unread, setUnread] = useState(0);
     useEffect(() => {
@@ -82,10 +83,11 @@ const DefaultLayout = (props: MainContentProps) => {
                 messageApi.error("获取自身信息失败2" + err.message);
             });
         }
-        const queryParams = new URLSearchParams(window.location.search);
-        // 从查询参数中获取特定参数的值
-        const paramValue = queryParams.get('chatOpen');
-        if (paramValue == "1") {
+        // const queryParams = new URLSearchParams(window.location.search);
+        // // 从查询参数中获取特定参数的值
+        // const paramValue = queryParams.get('chatOpen');
+        console.log("params: ", props.chatOpen);
+        if (props.chatOpen == 1) {
             setChatDrawerOpen(true);
         }
     }, []);

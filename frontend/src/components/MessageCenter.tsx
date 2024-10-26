@@ -22,8 +22,7 @@ const MessageCenter = (props: Props) => {
         setLoading(true);
         chatList().then(res => {
             setData(res.data);
-        }).catch(err => {
-            messageApi.error("加载消息列表失败，请检查网络连接！" + err.message);
+        }).catch(() => {
         }).finally(() => {
             setLoading(false);
         })
@@ -34,9 +33,8 @@ const MessageCenter = (props: Props) => {
             chatAll(chat).then(res => {
                 res.data.reverse();
                 setMessages(res.data);
-            }).catch(err => {
+            }).catch(() => {
                 setChatOpen(false);
-                messageApi.error("加载消息失败，请检查网络连接！" + err.message);
             });
         }
     }, [chatOpen]);
@@ -67,6 +65,7 @@ const MessageCenter = (props: Props) => {
         chatSend(sendMsg).then(() => {
             setInputMsg("");
             messageApi.success("发送成功！");
+            sendMsg.byMe = 1;
             chat.lastMessage = sendMsg;
             setMessages([...messages, sendMsg]);
         }).catch(err => {
